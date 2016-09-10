@@ -26,8 +26,17 @@ public class GetPostingTask extends AsyncTask <String, Void, Posting> {
         this.activity = activity;
     }
 
+    /**
+     * Get a Posting by it's PostingID.
+     * @param requestedID An array of only one PostingID.
+     * @return The requested Posting or null.
+     */
     @Override
     protected Posting doInBackground(String... requestedID) {
+
+        if (requestedID.length != 1) {
+            return null;
+        }
 
         Posting posting = null;
         if (requestedID.length == 0) {

@@ -25,12 +25,21 @@ import codebusters.laddr.data.User;
 
 /**
  * Created by greg on 5/3/2016.
+ *
+ * The Utility class makes HTTP requests to the API. It has methods for GET requests (with and without
+ * parameters) and POST requests, as well as specific methods that get one user, get all postings,
+ * add an organization, etc.
+ *
+ * I used AbstractMap.SimpleEntry<String, String> a lot here. It's just a Key Value pair, which comes
+ * up often when making HTTP requests, setting headers and parameters. Maybe we should write our own
+ * simple KeyValuePair class.
  */
 public class Utility {
 
     /**
      * A GET request to the specified URL.
-     * @param url
+     * @param activity  The calling activity, included to get reference to GlobalState
+     * @param urlString The URL we're requesting
      * @return A JSONArray or JSONObject read from the URL.
      * @throws IOException
      * @throws JSONException
@@ -73,6 +82,7 @@ public class Utility {
 
     /**
      * A GET request to the specified URL, with GET parameters as a Key,Value pairs
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param url
      * @param params
      * @return
@@ -96,6 +106,7 @@ public class Utility {
 
     /**
      * A POST request to the specified URL.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param urlString The requested URL
      * @param params SimpleEntries as Key Value pairs, to be used as POST parameters and values.
      * @return A JSON array read from the URL.
@@ -155,6 +166,7 @@ public class Utility {
 
     /**
      * Gets all the active Postings from the database.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @return A JSON array of all active postings
      * @throws IOException
      * @throws JSONException
@@ -167,6 +179,7 @@ public class Utility {
 
     /**
      * Gets a specified User from the database.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param id ID of the specified User.
      * @return A JSON array containing the specified User.
      * @throws IOException
@@ -180,6 +193,7 @@ public class Utility {
 
     /**
      * Gets a specified Organization from the database.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param id ID of the specified Organization
      * @return A JSON array containing the specified Organization
      * @throws IOException
@@ -193,6 +207,7 @@ public class Utility {
 
     /**
      * Gets a specified posting
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param id ID of the specified posting.
      * @return A JSON array containing the specified posting.
      * @throws IOException
@@ -206,6 +221,7 @@ public class Utility {
 
     /**
      * Adds a user to the database.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param user The User object to add.
      * @return Success as a boolean value.
      * @throws IOException
@@ -241,6 +257,7 @@ public class Utility {
 
     /**
      * Adds an Organization to the database.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param organization The Organization object to add
      * @return Success as a boolean value.
      * @throws IOException
@@ -280,6 +297,7 @@ public class Utility {
 
     /**
      * Adds a Posting object to the database.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param posting The posting to add to the database.
      * @return Success or failure of database operation.
      * @throws IOException
@@ -308,6 +326,7 @@ public class Utility {
 
     /**
      * Logs in either a User or Organization.
+     * @param activity  The calling activity, included to get reference to GlobalState
      * @param u The username of the user
      * @param p The password of the user.
      * @return A JSON Array containing the information about the logged in user.

@@ -7,25 +7,31 @@ import org.json.JSONException;
 
 import java.io.IOException;
 
-import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.User;
 
 /**
  * Created by greg on 5/17/2016.
+ *
+ * HTTP requests cannot be made on the main UI thread, so must be made asynchronously using
+ * AsyncTasks. This task adds a User to the database
  */
 public class AddUserTask extends AsyncTask<User, Void, Boolean> {
 
-    private static GlobalState globalState;
     private Activity activity;
 
     public AddUserTask(Activity activity) {
         this.activity = activity;
     }
 
+    /**
+     * Add a user to the database.
+     * @param params An array of exactly one User.
+     * @return Success as a boolean
+     */
     @Override
     protected Boolean doInBackground(User... params) {
 
-        if (params.length == 0) {
+        if (params.length == 0 || params.length > 1) {
             return false;
         }
 

@@ -17,6 +17,9 @@ import codebusters.laddr.data.User;
 
 /**
  * Created by greg on 5/17/2016.
+ *
+ * HTTP requests cannot be made on the main UI thread, so must be made asynchronously using
+ * AsyncTasks. This task gets a user from the ProfileID.
  */
 public class GetUserTask extends AsyncTask<String, Void, User> {
 

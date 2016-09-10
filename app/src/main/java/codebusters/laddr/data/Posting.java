@@ -2,6 +2,8 @@ package codebusters.laddr.data;
 
 /**
  * Created by greg on 5/3/2016.
+ *
+ * A data class representing a volunteer job posting
  */
 public class Posting {
     private String postingID;

@@ -16,6 +16,9 @@ import codebusters.laddr.data.Organization;
 
 /**
  * Created by greg on 5/17/2016.
+ *
+ * HTTP requests cannot be made on the main UI thread, so must be made asynchronously using
+ * AsyncTasks. This task gets an Organization from its ProfileID.
  */
 public class GetOrganizationTask extends AsyncTask<String, Void, Organization> {
 
@@ -26,6 +29,11 @@ public class GetOrganizationTask extends AsyncTask<String, Void, Organization> {
         this.activity = activity;
     }
 
+    /**
+     * Gets an Organization from the database
+     * @param params The ProfileID of the organization
+     * @return The requested organization, or null.
+     */
     @Override
     protected Organization doInBackground(String... params) {
 

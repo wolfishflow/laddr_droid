@@ -13,6 +13,10 @@ import codebusters.laddr.data.GlobalState;
 
 /**
  * Created by greg on 5/17/2016.
+ *
+ * HTTP requests cannot be made on the main UI thread, so must be made asynchronously using
+ * AsyncTasks. This task logs in using a username and password and sets the returned token
+ * in our GlobalState.
  */
 public class LoginTask extends AsyncTask<String, Void, Boolean> {
 

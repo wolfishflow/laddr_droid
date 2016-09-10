@@ -5,6 +5,9 @@ import java.util.Date;
 
 /**
  * Created by greg on 5/3/2016.
+ *
+ * A data class representing a profile. Profile is the superclass of both Users, who can apply for jobs,
+ * and Organizations, who can post jobs and review applicants.
  */
 public abstract class Profile {
     protected String profileID;
