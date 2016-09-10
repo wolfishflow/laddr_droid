@@ -17,7 +17,7 @@ public class GlobalState extends Application {
     public String getToken() {
         return token;
     }
-    
+
     public static GlobalState getInstance(){
         return singleton;
     }

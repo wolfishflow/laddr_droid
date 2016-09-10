@@ -1,5 +1,6 @@
 package codebusters.laddr.utility;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -8,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 import codebusters.laddr.data.Posting;
@@ -22,6 +22,11 @@ import codebusters.laddr.data.Posting;
 public class GetAllPostingsTask extends AsyncTask<Void, Void, ArrayList<Posting>> {
 
     private final String DEBUG_TAG = "LADDER_DEBUG";
+    private Activity activity;
+
+    public GetAllPostingsTask(Activity activity) {
+        this.activity = activity;
+    }
 
     @Override
     protected ArrayList<Posting> doInBackground(Void... params) {
@@ -30,11 +35,7 @@ public class GetAllPostingsTask extends AsyncTask<Void, Void, ArrayList<Posting>
 
         try {
             //get json of all postings
-            JSONArray json = Utility.getAllPostings();
-            System.out.println(json.toString());
-
-            json = json.getJSONArray(0); //the JSONArray comes in a length 1 array, so get the array at index 0.
-
+            JSONArray json = Utility.getAllPostings(activity);
             Log.d("LADDER_DEBUG", json.toString());
 
             //iterate through the array and create a Posting object for each
@@ -42,7 +43,7 @@ public class GetAllPostingsTask extends AsyncTask<Void, Void, ArrayList<Posting>
                 JSONObject obj = json.getJSONObject(i);
 
                 Posting posting = new Posting();
-                posting.setPostingID(Integer.parseInt(obj.getString("PostingID")));
+                posting.setPostingID(obj.getString("PostingID"));
                 posting.setJobTitle(obj.getString("JobTitle"));
                 posting.setLocation(obj.getString("Location"));
                 posting.setJobDescription(obj.getString("Description"));

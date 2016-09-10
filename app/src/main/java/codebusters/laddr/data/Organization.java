@@ -16,7 +16,7 @@ public class Organization extends Profile {
 
     }
 
-    public Organization(int profileID, String username, String email, URL pictureURL, Date timestamp,
+    public Organization(String profileID, String username, String email, URL pictureURL, Date timestamp,
                         String organizationName, String address, URL url, String missionStatement) {
         //fields from Profile superclass
         this.profileID = profileID;

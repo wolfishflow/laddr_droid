@@ -1,9 +1,9 @@
 package codebusters.laddr.utility;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,9 +18,14 @@ import codebusters.laddr.data.User;
 /**
  * Created by greg on 5/17/2016.
  */
-public class GetUserTask extends AsyncTask<Integer, Void, User> {
+public class GetUserTask extends AsyncTask<String, Void, User> {
 
     public final String DEBUG_TAG = "LADDER_DEBUG";
+    private Activity activity;
+
+    public GetUserTask(Activity activity) {
+        this.activity = activity;
+    }
 
     @Override
     protected User doInBackground(String... params) {
@@ -31,27 +36,25 @@ public class GetUserTask extends AsyncTask<Integer, Void, User> {
         }
 
         try {
-            JSONArray json = Utility.getUser(params[0]);
+            JSONObject json = Utility.getUser(activity, params[0]);
 
             Log.d(DEBUG_TAG, json.toString());
-            json = json.getJSONArray(0);
-            JSONObject obj = json.getJSONObject(0);
 
             User user = new User();
-            user.setProfileID(Integer.parseInt(obj.getString("ProfileID")));
-            user.setFirstName(obj.getString("FirstName"));
-            user.setLastName(obj.getString("LastName"));
-            user.setUserDescription(obj.getString("Description"));
-            user.setResume(obj.getString("Resume"));
-            user.setAcademicStatus(Integer.parseInt(obj.getString("AcademicStatus")));
-            user.setUsername(obj.getString("Username"));
-            user.setEmail(obj.getString("Email"));
-            user.setPictureURL(new URL(obj.getString("FirstName")));
+            user.setProfileID(json.getString("ProfileID"));
+            user.setFirstName(json.getString("FirstName"));
+            user.setLastName(json.getString("LastName"));
+            user.setUserDescription(json.getString("Description"));
+            user.setResume(json.getString("Resume"));
+            user.setAcademicStatus(Integer.parseInt(json.getString("AcademicStatus")));
+            user.setUsername(json.getString("Username"));
+            user.setEmail(json.getString("Email"));
+            user.setPictureURL(new URL(json.getString("FirstName")));
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CANADA);
-            user.setTimestamp(formatter.parse(obj.getString("Timestamp")));
+            user.setTimestamp(formatter.parse(json.getString("Timestamp")));
 
-            user.setAccountType(Integer.parseInt(obj.getString("AccountType")));
+            user.setAccountType(Integer.parseInt(json.getString("AccountType")));
 
             return user;
 

@@ -1,8 +1,5 @@
 package codebusters.laddr.data;
 
-import java.net.URL;
-import java.util.Date;
-
 /**
  * Created by greg on 5/3/2016.
  */

@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by greg on 5/3/2016.
  */
 public abstract class Profile {
-    protected int profileID;
+    protected String profileID;
     protected String username;
     protected String email;
     protected URL pictureURL;
@@ -15,11 +15,11 @@ public abstract class Profile {
     protected int accountType;
     protected String password;
 
-    public int getProfileID() {
+    public String getProfileID() {
         return profileID;
     }
 
-    public void setProfileID(int profileID) {
+    public void setProfileID(String profileID) {
         this.profileID = profileID;
     }
 

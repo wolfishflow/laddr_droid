@@ -1,9 +1,8 @@
 package codebusters.laddr.utility;
 
+import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,17 +13,21 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import codebusters.laddr.data.Organization;
-import codebusters.laddr.data.User;
 
 /**
  * Created by greg on 5/17/2016.
  */
-public class GetOrganizationTask extends AsyncTask<Integer, Void, Organization> {
+public class GetOrganizationTask extends AsyncTask<String, Void, Organization> {
 
     public final String DEBUG_TAG = "LADDER_DEBUG";
+    private Activity activity;
+
+    public GetOrganizationTask(Activity activity) {
+        this.activity = activity;
+    }
 
     @Override
-    protected Organization doInBackground(Integer... params) {
+    protected Organization doInBackground(String... params) {
 
         //must have only one param
         if (params.length != 1) {
@@ -32,26 +35,22 @@ public class GetOrganizationTask extends AsyncTask<Integer, Void, Organization> 
         }
 
         try {
-            JSONArray json = Utility.getOrganization(params[0]);
-
-            Log.d(DEBUG_TAG, json.toString());
-            json = json.getJSONArray(0);
-            JSONObject obj = json.getJSONObject(0);
+            JSONObject json = Utility.getOrganization(activity, params[0]);
 
             Organization organization = new Organization();
-            organization.setProfileID(Integer.parseInt(obj.getString("ProfileID")));
-            organization.setOrganizationName(obj.getString("OrganizationName"));
-            organization.setAddress(obj.getString("Address"));
-            organization.setUrl(new URL(obj.getString("URL")));
-            organization.setMissionStatement(obj.getString("MissionStatement"));
-            organization.setUsername(obj.getString("Username"));
-            organization.setEmail(obj.getString("Email"));
-            organization.setPictureURL(new URL(obj.getString("PictureURL")));
+            organization.setProfileID(json.getString("ProfileID"));
+            organization.setOrganizationName(json.getString("OrganizationName"));
+            organization.setAddress(json.getString("Address"));
+            organization.setUrl(new URL(json.getString("URL")));
+            organization.setMissionStatement(json.getString("MissionStatement"));
+            organization.setUsername(json.getString("Username"));
+            organization.setEmail(json.getString("Email"));
+            organization.setPictureURL(new URL(json.getString("PictureURL")));
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CANADA);
-            organization.setTimestamp(formatter.parse(obj.getString("Timestamp")));
+            organization.setTimestamp(formatter.parse(json.getString("Timestamp")));
 
-            organization.setAccountType(Integer.parseInt(obj.getString("AccountType")));
+            organization.setAccountType(Integer.parseInt(json.getString("AccountType")));
 
             return organization;
 

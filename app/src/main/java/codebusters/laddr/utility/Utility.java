@@ -1,29 +1,26 @@
 package codebusters.laddr.utility;
 
+import android.app.Activity;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
-import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
-
+import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Organization;
 import codebusters.laddr.data.Posting;
-import codebusters.laddr.data.Profile;
 import codebusters.laddr.data.User;
 
 /**
@@ -38,9 +35,25 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static Object getRequest(String url) throws IOException, JSONException {
-        InputStream is = new URL(url).openStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+
+    private static GlobalState globalState;
+
+    public static Object getRequest(Activity activity, String urlString) throws IOException, JSONException {
+
+        URL url = new URL(urlString);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        //add headers
+        con.setRequestMethod("GET");
+        con.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
+        con.setRequestProperty( "charset", "utf-8");
+        con.setUseCaches( false );
+
+        // add token header
+        globalState = (GlobalState) activity.getApplication();
+        con.setRequestProperty("x-access-token", globalState.getToken());
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("UTF-8")));
 
         StringBuilder sb = new StringBuilder();
         int cp;
@@ -49,8 +62,13 @@ public class Utility {
         }
 
         String jsonText = sb.toString();
-        JSONArray json = new JSONArray(jsonText);
-        return json;
+        Object json = new JSONTokener(jsonText).nextValue();
+        if (json instanceof JSONObject) {
+            return new JSONObject(jsonText);
+        } else if (json instanceof JSONArray) {
+            return new JSONArray(jsonText);
+        }
+        return null;
     }
 
     /**
@@ -61,7 +79,7 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static Object getRequest(String url, AbstractMap.SimpleEntry<String, String>... params)
+    public static Object getRequest(Activity activity, String url, AbstractMap.SimpleEntry<String, String>... params)
             throws IOException, JSONException {
         //prepare the URL
         StringBuilder preparedURL = new StringBuilder();
@@ -73,18 +91,7 @@ public class Utility {
             }
         }
 
-        InputStream is = new URL(preparedURL.toString()).openStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = br.read()) != -1) {
-            sb.append((char) cp);
-        }
-
-        String jsonText = sb.toString();
-        JSONArray json = new JSONArray(jsonText);
-        return json;
+        return getRequest(activity, preparedURL.toString());
     }
 
     /**
@@ -93,7 +100,7 @@ public class Utility {
      * @param params SimpleEntries as Key Value pairs, to be used as POST parameters and values.
      * @return A JSON array read from the URL.
      */
-    public static Object postRequest(String urlString, AbstractMap.SimpleEntry<String, String>... params)
+    public static Object postRequest(Activity activity, String urlString, AbstractMap.SimpleEntry<String, String>... params)
         throws IOException, JSONException{
 
         StringBuilder sb = new StringBuilder();
@@ -111,10 +118,6 @@ public class Utility {
         URL url = new URL(urlString);
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        //add headers
-        con.setRequestMethod("POST");
-
-
         // Send post request
         con.setDoOutput(true);
         con.setRequestMethod("POST");
@@ -122,6 +125,10 @@ public class Utility {
         con.setRequestProperty( "charset", "utf-8");
         con.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
         con.setUseCaches( false );
+
+        // add token header
+        globalState = (GlobalState) activity.getApplication();
+        con.setRequestProperty("x-access-token", globalState.getToken());
 
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.write(postData);
@@ -137,8 +144,13 @@ public class Utility {
         }
 
         String jsonText = sb.toString();
-        JSONArray json = new JSONArray(jsonText);
-        return json;
+        Object json = new JSONTokener(jsonText).nextValue();
+        if (json instanceof JSONObject) {
+            return new JSONObject(jsonText);
+        } else if (json instanceof JSONArray) {
+            return new JSONArray(jsonText);
+        }
+        return null;
     }
 
     /**
@@ -147,8 +159,8 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static JSONArray getAllPostings() throws IOException, JSONException {
-        JSONArray json = (JSONArray)getRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/GetAllPostings.php");
+    public static JSONArray getAllPostings(Activity activity) throws IOException, JSONException {
+        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/posting");
 
         return json;
     }
@@ -160,9 +172,9 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static JSONArray getUser(int id) throws IOException, JSONException {
-        AbstractMap.SimpleEntry<String, String> requestedID = new AbstractMap.SimpleEntry<String, String>("ProfileID", Integer.toString(id));
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/GetUser.php", requestedID);
+    public static JSONObject getUser(Activity activity, String id) throws IOException, JSONException {
+        AbstractMap.SimpleEntry<String, String> requestedID = new AbstractMap.SimpleEntry<String, String>("ProfileID", id);
+        JSONObject json = (JSONObject) getRequest(activity, "http://laddr.xyz/api/user", requestedID);
         return json;
     }
 
@@ -173,9 +185,9 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static JSONArray getOrganization(int id) throws IOException, JSONException {
-        AbstractMap.SimpleEntry<String, String> requestedID = new AbstractMap.SimpleEntry<String, String>("ProfileID", Integer.toString(id));
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/GetOrganization.php", requestedID);
+    public static JSONObject getOrganization(Activity activity, String id) throws IOException, JSONException {
+        AbstractMap.SimpleEntry<String, String> requestedID = new AbstractMap.SimpleEntry<String, String>("ProfileID", id);
+        JSONObject json = (JSONObject) getRequest(activity, "http://laddr.xyz/api/organization", requestedID);
         return json;
     }
 
@@ -186,9 +198,9 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static JSONArray getPosting(int id) throws IOException, JSONException {
-        AbstractMap.SimpleEntry<String, String> requestedID = new AbstractMap.SimpleEntry<String, String>("PostingID", Integer.toString(id));
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/GetPosting.php", requestedID);
+    public static JSONObject getPosting(Activity activity, String id) throws IOException, JSONException {
+        AbstractMap.SimpleEntry<String, String> requestedID = new AbstractMap.SimpleEntry<String, String>("PostingID", id);
+        JSONObject json = (JSONObject) getRequest(activity, "http://laddr.xyz/api/posting", requestedID);
         return json;
     }
 
@@ -199,7 +211,7 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static boolean addUser(User user) throws IOException, JSONException {
+    public static boolean addUser(Activity activity, User user) throws IOException, JSONException {
 
         //TODO: Add validation
 
@@ -211,15 +223,15 @@ public class Utility {
         AbstractMap.SimpleEntry<String, String> description = new AbstractMap.SimpleEntry<String, String>("Description", user.getUserDescription());
         AbstractMap.SimpleEntry<String, String> resume = new AbstractMap.SimpleEntry<String, String>("Resume", user.getResume());
         AbstractMap.SimpleEntry<String, String> academicStatus = new AbstractMap.SimpleEntry<String, String>("AcademicStatus", Integer.toString(user.getAcademicStatus()));
-        AbstractMap.SimpleEntry<String, String> pictureURL = new AbstractMap.SimpleEntry<String, String>("Picture", user.getPictureURL().getPath());
+        AbstractMap.SimpleEntry<String, String> pictureURL = new AbstractMap.SimpleEntry<String, String>("PictureURL", user.getPictureURL().getPath());
 
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/AddUser.php",
+        JSONObject json = (JSONObject) postRequest(activity, "http://laddr.xyz/api/user",
                 username, firstName, lastName, password, email,
                 description, resume, academicStatus, pictureURL);
 
         Log.d("LADDER_DEBUG", json.toString());
 
-        String result = json.getString(0);
+        String result = json.getString("success");
         if (result.equals("true")) {
             return true;
         }
@@ -234,12 +246,12 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static boolean addOrganization(Organization organization) throws IOException, JSONException {
+    public static boolean addOrganization(Activity activity, Organization organization) throws IOException, JSONException {
 
         //TODO: Add validation
 
         AbstractMap.SimpleEntry<String, String> username = new AbstractMap.SimpleEntry<String, String>("Username", organization.getUsername());
-        AbstractMap.SimpleEntry<String, String> orgName = new AbstractMap.SimpleEntry<String, String>("OrgName", organization.getOrganizationName());
+        AbstractMap.SimpleEntry<String, String> orgName = new AbstractMap.SimpleEntry<String, String>("OrganizationName", organization.getOrganizationName());
         AbstractMap.SimpleEntry<String, String> password = new AbstractMap.SimpleEntry<String, String>("Password", organization.getPassword());
         AbstractMap.SimpleEntry<String, String> email = new AbstractMap.SimpleEntry<String, String>("Email", organization.getEmail());
         AbstractMap.SimpleEntry<String, String> address = new AbstractMap.SimpleEntry<String, String>("Address", organization.getAddress());
@@ -249,16 +261,16 @@ public class Utility {
         } else {
             url = new AbstractMap.SimpleEntry<String, String>("URL", "");
         }
-        AbstractMap.SimpleEntry<String, String> mission = new AbstractMap.SimpleEntry<String, String>("Mission", organization.getMissionStatement());
-        AbstractMap.SimpleEntry<String, String> pictureURL = new AbstractMap.SimpleEntry<String, String>("PictureURL", organization.getPictureURL().getPath());
+        AbstractMap.SimpleEntry<String, String> mission = new AbstractMap.SimpleEntry<String, String>("MissionStatement", organization.getMissionStatement());
+        AbstractMap.SimpleEntry<String, String> pictureURL = new AbstractMap.SimpleEntry<String, String>("Picture", organization.getPictureURL().getPath());
 
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/AddOrganization.php",
+        JSONObject json = (JSONObject)postRequest(activity, "http://laddr.xyz/api/organization",
                 username, orgName, password, email,
                 address, url, mission, pictureURL);
 
         Log.d("LADDER_DEBUG", json.toString());
 
-        String result = json.getString(0);
+        String result = json.getString("success");
         if (result.equals("true")) {
             return true;
         }
@@ -273,20 +285,20 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static boolean addPosting(Posting posting) throws IOException, JSONException {
+    public static boolean addPosting(Activity activity, Posting posting) throws IOException, JSONException {
 
         //TODO: Add validation
 
-        AbstractMap.SimpleEntry<String, String> postingID = new AbstractMap.SimpleEntry<String, String>("OrganizationID", Integer.toString(posting.getOrganizerID()));
+        AbstractMap.SimpleEntry<String, String> postingID = new AbstractMap.SimpleEntry<String, String>("OrganizationID", posting.getOrganizerID());
         AbstractMap.SimpleEntry<String, String> jobTitle = new AbstractMap.SimpleEntry<String, String>("JobTitle", posting.getJobTitle());
         AbstractMap.SimpleEntry<String, String> location = new AbstractMap.SimpleEntry<String, String>("Location", posting.getLocation());
         AbstractMap.SimpleEntry<String, String> description = new AbstractMap.SimpleEntry<String, String>("Description", posting.getJobDescription());
 
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/AddPosting.php", postingID, jobTitle, location, description);
+        JSONObject json = (JSONObject)postRequest(activity, "http://laddr.xyz/api/posting", postingID, jobTitle, location, description);
 
         Log.d("LADDER_DEBUG", json.toString());
 
-        String result = json.getString(0);
+        String result = json.getString("success");
         if (result.equals("true")) {
             return true;
         }
@@ -302,12 +314,12 @@ public class Utility {
      * @throws IOException
      * @throws JSONException
      */
-    public static JSONArray loginProfile(String u, String p) throws IOException, JSONException {
+    public static JSONObject loginProfile(Activity activity, String u, String p) throws IOException, JSONException {
 
         AbstractMap.SimpleEntry<String, String> username = new AbstractMap.SimpleEntry<String, String>("Username", u);
         AbstractMap.SimpleEntry<String, String> password = new AbstractMap.SimpleEntry<String, String>("Password", p);
 
-        JSONArray json = (JSONArray)postRequest("http://mobile.sheridanc.on.ca/~woodgre/Ladder/Login.php", username, password);
+        JSONObject json = (JSONObject) postRequest(activity, "http://laddr.xyz/api/login", username, password);
 
         return json;
     }

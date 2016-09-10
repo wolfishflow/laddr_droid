@@ -4,9 +4,9 @@ package codebusters.laddr.data;
  * Created by greg on 5/3/2016.
  */
 public class Posting {
-    private int postingID;
+    private String postingID;
     private String jobTitle;
-    private int organizerID;
+    private String organizerID;
     private String organizerName;
     private String location;
     private String jobDescription;
@@ -15,7 +15,7 @@ public class Posting {
 
     }
 
-    public Posting(int postingID, String jobTitle, String organizerName, String location, String jobDescription) {
+    public Posting(String postingID, String jobTitle, String organizerName, String location, String jobDescription) {
         this.postingID = postingID;
         this.jobTitle = jobTitle;
         this.organizerName = organizerName;
@@ -23,11 +23,11 @@ public class Posting {
         this.jobDescription = jobDescription;
     }
 
-    public int getPostingID() {
+    public String getPostingID() {
         return postingID;
     }
 
-    public void setPostingID(int postingID) {
+    public void setPostingID(String postingID) {
         this.postingID = postingID;
     }
 
@@ -39,11 +39,11 @@ public class Posting {
         this.jobTitle = jobTitle;
     }
 
-    public int getOrganizerID() {
+    public String getOrganizerID() {
         return organizerID;
     }
 
-    public void setOrganizerID(int organizerID) {
+    public void setOrganizerID(String organizerID) {
         this.organizerID = organizerID;
     }
 
