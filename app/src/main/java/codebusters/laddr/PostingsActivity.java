@@ -12,14 +12,14 @@ import codebusters.laddr.data.Posting;
 import codebusters.laddr.utility.GetAllPostingsTask;
 import codebusters.laddr.utility.LoginTask;
 
-public class MainActivity extends AppCompatActivity {
+public class PostingsActivity extends AppCompatActivity {
 
     private static GlobalState globalState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_postings);
 
         //get globalState
         globalState = (GlobalState) this.getApplication();
