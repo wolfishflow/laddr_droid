@@ -1,5 +1,8 @@
 package codebusters.laddr.modules.login;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +17,7 @@ import butterknife.BindView;
 import codebusters.laddr.R;
 
 
-@EActivity(R.layout.fragment_login)
+@EActivity(R.layout.fragment_main)
 public class LoginActivity extends AppCompatActivity {
 
     private static final String LOGIN_A_TAG = "LOGIN_ACTIVITY";
@@ -23,11 +26,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
 
-    @Click(R.id.btn_login)
-    void loginClicked(){
-        Toast.makeText(LoginActivity.this, "yum", Toast.LENGTH_SHORT).show();
+        Fragment fr = new LoginFragment_();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.main_fragment_holder, fr);
+        ft.commit();
 
     }
 

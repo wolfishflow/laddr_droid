@@ -85,7 +85,7 @@
             />
 
         <Button
-            android:id="@+id/btn_reset_password"
+            android:id="@+id/btn_forgot_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@null"
-            android:text="@string/btn_link_to_register"
+            android:text="@string/btn_signup"
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
