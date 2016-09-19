@@ -5,7 +5,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -13,10 +16,11 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 
 import butterknife.BindView;
-import codebusters.laddr.modules.home.HomeActivity;
-import codebusters.laddr.modules.home.HomeActivity_;
-import codebusters.laddr.modules.postings.PostingsActivity;
+import butterknife.ButterKnife;
 import codebusters.laddr.R;
+import codebusters.laddr.data.GlobalState;
+import codebusters.laddr.modules.home.HomeActivity_;
+import codebusters.laddr.utility.LoginTask;
 
 /**
  * Created by alansimon on 2016-09-17.
@@ -27,13 +31,21 @@ public class LoginFragment extends Fragment {
 
     private static final String LOGIN_F_TAG = "LOGIN_FRAGMENT";
 
+    @BindView(R.id.et_email)
+    EditText etEmail;
+    @BindView(R.id.et_password)
+    EditText etPassword;
     @BindView(R.id.progressBar)
     private ProgressBar progressBar;
 
+    private static GlobalState globalState;
+
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
+        etEmail = (EditText) getActivity().findViewById(R.id.et_email);
+        etPassword = (EditText) getActivity().findViewById(R.id.et_password);
     }
 
     /*
@@ -44,6 +56,15 @@ public class LoginFragment extends Fragment {
     void loginClicked() {
         //Log.d(LOGIN_F_TAG, Boolean.toString(progressBar.isShown()));
         progressBar.setVisibility(View.VISIBLE);
+
+        globalState = (GlobalState) getActivity().getApplication();
+
+        try {
+            new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Intent intent = new Intent(getActivity(), HomeActivity_.class);
         startActivity(intent);
         getActivity().finish();
@@ -70,4 +91,11 @@ public class LoginFragment extends Fragment {
         ft.commit();
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
 }
