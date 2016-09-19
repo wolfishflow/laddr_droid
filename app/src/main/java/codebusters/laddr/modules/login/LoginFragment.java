@@ -13,6 +13,8 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 
 import butterknife.BindView;
+import codebusters.laddr.modules.home.HomeActivity;
+import codebusters.laddr.modules.home.HomeActivity_;
 import codebusters.laddr.modules.postings.PostingsActivity;
 import codebusters.laddr.R;
 
@@ -42,7 +44,7 @@ public class LoginFragment extends Fragment {
     void loginClicked() {
         //Log.d(LOGIN_F_TAG, Boolean.toString(progressBar.isShown()));
         progressBar.setVisibility(View.VISIBLE);
-        Intent intent = new Intent(getActivity(), PostingsActivity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity_.class);
         startActivity(intent);
         getActivity().finish();
     }
@@ -64,7 +66,7 @@ public class LoginFragment extends Fragment {
         Fragment fr = new SignUpFragment_();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.main_fragment_holder, fr).addToBackStack("Login");
+        ft.replace(R.id.login_fragment_container, fr).addToBackStack("Login");
         ft.commit();
     }
 
