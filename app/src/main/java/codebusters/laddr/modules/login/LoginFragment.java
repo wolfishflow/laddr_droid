@@ -21,19 +21,34 @@ public class LoginFragment extends Fragment{
     private static final String LOGIN_F_TAG = "LOGIN_FRAGMENT";
 
 
+    /*
+    TODO: Need to run the proper login validation. and save the JWT. mebe to shared preferences???
+
+    
+
+     */
+
     @Click(R.id.btn_login)
     void loginClicked() {
         Intent intent  =  new Intent(getActivity(), PostingsActivity.class);
         startActivity(intent);
-
+        getActivity().finish();
     }
 
     @Click(R.id.btn_forgot_password)
     void forgotClicked() {
+
         Toast.makeText(getActivity(), "forgot pwd", Toast.LENGTH_SHORT).show();
 
-
     }
+
+
+    /*
+        Create new Fragment of X type
+        Use Fragment Manager & Fragment Transactions to facilitate a replacement
+        Switch current fragment into the declared placeholder
+        Include the backstack, as pressing back will kill the app.
+     */
 
     @Click(R.id.btn_signup)
     void signupClicked() {
