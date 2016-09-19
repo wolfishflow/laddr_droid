@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -13,15 +13,12 @@
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
 
-
         <ImageView
             android:layout_width="@dimen/logo_w_h"
             android:layout_height="@dimen/logo_w_h"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
             android:src="@mipmap/ic_launcher" />
-
-        <!-- Info Card -->
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -48,8 +45,10 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_email"
                         android:inputType="textEmailAddress"
-                        android:textColor="@android:color/black"
-                        android:textColorHint="@android:color/black" />
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/white" />
+
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -58,70 +57,44 @@
 
                     <EditText
                         android:id="@+id/et_password"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
                         android:hint="@string/hint_password"
+                        android:imeActionId="@+id/login"
+                        android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
-                        android:textColor="@android:color/black"
-                        android:textColorHint="@android:color/black" />
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/white" />
+
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
 
-        <!-- Info Card -->
-
-        <!-- Login BTN -->
-
         <Button
-            android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
+            android:id="@+id/btn_signup_ok"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
+            android:layout_marginTop="20dp"
             android:background="@color/colorAccent"
-            android:text="@string/btn_login"
+            android:text="@string/btn_signup"
             android:textColor="@android:color/white"
-            />
+            android:textStyle="bold" />
 
-        <!-- Login BTN -->
-
-        <!-- Forgot PWD BTN -->
+        <!-- BTN to Login Screen -->
 
         <Button
-            android:id="@+id/btn_forgot_password"
+            android:id="@+id/btn_return"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
-            android:text="@string/btn_forgot_password"
+            android:text="@string/btn_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp" />
-
-        <!-- Forgot PWD BTN -->
-
-        <!-- SignUp BTN -->
-
-        <Button
-            android:id="@+id/btn_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@null"
-            android:text="@string/btn_signup"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp" />
-
-        <!-- SignUp BTN -->
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginBottom="20dp"
-            android:visibility="invisible" />
+            android:textColor="@color/colorAccent"/>
 
     </LinearLayout>
-</LinearLayout>
+
+</FrameLayout>

@@ -1,4 +1,4 @@
-package codebusters.laddr;
+package codebusters.laddr.modules.postings;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Posting;
 import codebusters.laddr.utility.GetAllPostingsTask;
