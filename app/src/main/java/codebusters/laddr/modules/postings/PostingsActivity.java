@@ -27,7 +27,7 @@ public class PostingsActivity extends AppCompatActivity {
 
         try {
             //log in
-            new LoginTask(this).execute("DatBoi", "oshitwhaddup").get();
+            //new LoginTask(this).execute("DatBoi", "oshitwhaddup").get();
 
             if (globalState.getToken() != null) {
                 //get all the postings
