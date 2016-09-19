@@ -18,10 +18,11 @@ import codebusters.laddr.R;
 @EFragment(R.layout.fragment_login)
 public class LoginFragment extends Fragment{
 
+    private static final String LOGIN_F_TAG = "LOGIN_FRAGMENT";
+
 
     @Click(R.id.btn_login)
     void loginClicked() {
-        Toast.makeText(getActivity(), "yum", Toast.LENGTH_SHORT).show();
         Intent intent  =  new Intent(getActivity(), PostingsActivity.class);
         startActivity(intent);
 
@@ -29,18 +30,17 @@ public class LoginFragment extends Fragment{
 
     @Click(R.id.btn_forgot_password)
     void forgotClicked() {
-        Toast.makeText(getActivity(), "no", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "forgot pwd", Toast.LENGTH_SHORT).show();
 
 
     }
 
     @Click(R.id.btn_signup)
     void signupClicked() {
-        Toast.makeText(getActivity(), "hah", Toast.LENGTH_SHORT).show();
         Fragment fr = new SignUpFragment_();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.main_fragment_holder, fr);
+        ft.replace(R.id.main_fragment_holder, fr).addToBackStack("Login");
         ft.commit();
     }
 

@@ -12,4 +12,7 @@ import codebusters.laddr.R;
 @EFragment(R.layout.fragment_signup)
 public class SignUpFragment extends Fragment {
 
+    private static final String SIGNUP_F_TAG = "SIGNUP_FRAGMENT";
+
+
 }

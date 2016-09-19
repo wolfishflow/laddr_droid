@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/email"
+                        android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_email"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
-                        android:id="@+id/password"
+                        android:id="@+id/et_password"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_password"
@@ -72,7 +72,7 @@
 
         <!-- Info Card -->
 
-        <!-- Login Button -->
+        <!-- Login BTN -->
 
         <Button
             android:id="@+id/btn_login"
@@ -83,6 +83,10 @@
             android:text="@string/btn_login"
             android:textColor="@android:color/white"
             />
+
+        <!-- Login BTN -->
+
+        <!-- Forgot PWD BTN -->
 
         <Button
             android:id="@+id/btn_forgot_password"
@@ -95,7 +99,9 @@
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
 
-        <!-- Link to Login Screen -->
+        <!-- Forgot PWD BTN -->
+
+        <!-- SignUp BTN -->
 
         <Button
             android:id="@+id/btn_signup"
@@ -107,6 +113,8 @@
             android:textAllCaps="false"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
+
+        <!-- SignUp BTN -->
 
         <ProgressBar
             android:id="@+id/progressBar"
