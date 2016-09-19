@@ -1,6 +1,8 @@
 package codebusters.laddr.modules.login;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -29,12 +31,17 @@ public class LoginFragment extends Fragment{
     void forgotClicked() {
         Toast.makeText(getActivity(), "no", Toast.LENGTH_SHORT).show();
 
+
     }
 
     @Click(R.id.btn_signup)
     void signupClicked() {
         Toast.makeText(getActivity(), "hah", Toast.LENGTH_SHORT).show();
-
+        Fragment fr = new SignUpFragment_();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.main_fragment_holder, fr);
+        ft.commit();
     }
 
 }
