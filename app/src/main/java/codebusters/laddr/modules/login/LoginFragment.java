@@ -49,6 +49,13 @@ public class LoginFragment extends Fragment {
 
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
@@ -59,7 +66,12 @@ public class LoginFragment extends Fragment {
     }
 
     /*
-    TODO: Need to run the proper login validation. and save the JWT. mebe to shared preferences???
+    Display progressbar when Clicked
+    Get Global state.
+    Check if the remember box is true, if so store email + pw in shared preferences
+    Try LoginTask with email + pw text
+    TODO: Should only move to the new activity if i can verify the success of logintask
+    TODO: Add the shared pref pre-check if it's been fufilled post or pre view created.
      */
 
     @Click(R.id.btn_login)
@@ -94,6 +106,10 @@ public class LoginFragment extends Fragment {
         getActivity().finish();
     }
 
+    /*
+    TODO: Create new fragment for our password recovery method
+     */
+
     @Click(R.id.btn_forgot_password)
     void forgotClicked() {
         Toast.makeText(getActivity(), "forgot pwd", Toast.LENGTH_SHORT).show();
@@ -113,13 +129,5 @@ public class LoginFragment extends Fragment {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.login_fragment_container, fr).addToBackStack("Login");
         ft.commit();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
     }
 }
