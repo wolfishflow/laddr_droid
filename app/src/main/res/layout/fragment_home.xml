@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"/>
@@ -15,7 +15,7 @@
         android:text="Profile"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/my_toolbar"
+        android:layout_below="@+id/toolbar_home"
         android:layout_alignEnd="@+id/button2" />
 
     <Button
