@@ -6,4 +6,6 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="btn_to_login">Already Registered?</string>
+    <string name="saved_email"/>
+    <string name="saved_password" />
 </resources>

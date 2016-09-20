@@ -3,17 +3,22 @@ package codebusters.laddr.modules.login;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +40,8 @@ public class LoginFragment extends Fragment {
     EditText etEmail;
     @BindView(R.id.et_password)
     EditText etPassword;
+    @BindView(R.id.cb_remember)
+    CheckBox cbRemember;
     @BindView(R.id.progressBar)
     private ProgressBar progressBar;
 
@@ -46,6 +53,9 @@ public class LoginFragment extends Fragment {
         progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
+        cbRemember = (CheckBox) getActivity().findViewById(R.id.cb_remember);
+        etEmail.setText("NewestUser");
+        etPassword.setText("password");
     }
 
     /*
@@ -59,6 +69,20 @@ public class LoginFragment extends Fragment {
 
         globalState = (GlobalState) getActivity().getApplication();
 
+        if (cbRemember.isChecked())
+        {
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.saved_email), etEmail.getText().toString());
+            editor.putString(getString(R.string.saved_password), etPassword.getText().toString());
+            editor.commit();
+
+            String defaultValue = getResources().getString(R.string.saved_email);
+            String emailValue = sharedPref.getString(getString(R.string.saved_email),defaultValue);
+            defaultValue = getResources().getString(R.string.saved_password);
+            String passwordValue = sharedPref.getString(getString(R.string.saved_password),defaultValue);
+    }
+        
         try {
             new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get();
         } catch (Exception e) {
