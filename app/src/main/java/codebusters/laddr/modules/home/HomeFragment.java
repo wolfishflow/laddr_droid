@@ -77,10 +77,10 @@ public class HomeFragment extends Fragment {
                 .withActivity(getActivity())
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
+                        new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1).withSetSelected(true),
                         new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user).withIdentifier(2),
-                        new PrimaryDrawerItem().withName("Forum").withIcon(FontAwesome.Icon.faw_commenting).withIdentifier(3),
-                        new PrimaryDrawerItem().withName("Postings").withIcon(FontAwesome.Icon.faw_sticky_note).withIdentifier(4),
+                        new PrimaryDrawerItem().withName("Forum").withIcon(FontAwesome.Icon.faw_commenting),
+                        new PrimaryDrawerItem().withName("Postings").withIcon(FontAwesome.Icon.faw_sticky_note),
                         new SectionDrawerItem().withName("Sub-Menu"),
                         new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog),
                         new SecondaryDrawerItem().withName("Sign Out").withIcon(FontAwesome.Icon.faw_sign_out)
@@ -88,9 +88,32 @@ public class HomeFragment extends Fragment {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        // do something with the clicked item :D
-                        if (position == 1) {
-                            Toast.makeText(getActivity(), "yummy", Toast.LENGTH_SHORT).show();
+                        switch (position){
+                            case 1:
+                                Toast.makeText(getActivity(), "Home", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 2:
+                                Toast.makeText(getActivity(), "Profile", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 3:
+                                Toast.makeText(getActivity(), "Forum", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 4:
+                                Toast.makeText(getActivity(), "Postings", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), PostingsActivity.class);
+                                startActivity(intent);
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 7:
+                                Toast.makeText(getActivity(), "Sign Out", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+
                         }
                         return false;
                     }
