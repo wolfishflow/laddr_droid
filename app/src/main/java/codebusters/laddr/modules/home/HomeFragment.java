@@ -102,6 +102,7 @@ public class HomeFragment extends Fragment {
                                 Toast.makeText(getActivity(), "Postings", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), PostingsActivity.class);
                                 startActivity(intent);
+                                getActivity().finish();
                                 break;
                             case 5:
                                 break;
@@ -120,13 +121,6 @@ public class HomeFragment extends Fragment {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
-    }
-
-    @Click(R.id.button4)
-    void postingsClicked() {
-        Intent intent = new Intent(getActivity(), PostingsActivity.class);
-        startActivity(intent);
-        //getActivity().finish();
     }
 
     @Override

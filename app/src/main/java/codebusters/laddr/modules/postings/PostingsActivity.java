@@ -27,6 +27,7 @@ import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Posting;
+import codebusters.laddr.modules.home.HomeActivity_;
 import codebusters.laddr.utility.GetAllPostingsTask;
 import codebusters.laddr.utility.LoginTask;
 
@@ -86,6 +87,9 @@ public class PostingsActivity extends AppCompatActivity {
                         switch (position){
                             case 1:
                                 Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), HomeActivity_.class);
+                                startActivity(intent);
+                                finish();
                                 break;
                             case 2:
                                 Toast.makeText(getApplicationContext(), "Profile", Toast.LENGTH_SHORT).show();
@@ -95,8 +99,6 @@ public class PostingsActivity extends AppCompatActivity {
                                 break;
                             case 4:
                                 Toast.makeText(getApplicationContext(), "Postings", Toast.LENGTH_SHORT).show();
-                                //Intent intent = new Intent(this, PostingsActivity.class);
-                                //startActivity(intent);
                                 break;
                             case 5:
                                 break;
