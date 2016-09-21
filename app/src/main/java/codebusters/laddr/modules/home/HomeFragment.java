@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -76,23 +77,50 @@ public class HomeFragment extends Fragment {
                 .withActivity(getActivity())
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
-                        new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user),
-                        new PrimaryDrawerItem().withName("Forum").withIcon(FontAwesome.Icon.faw_commenting).withIdentifier(5),
-                        new PrimaryDrawerItem().withName("Postings").withIcon(FontAwesome.Icon.faw_sticky_note).withIdentifier(5),
+                        new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1).withSetSelected(true),
+                        new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user).withIdentifier(2),
+                        new PrimaryDrawerItem().withName("Forum").withIcon(FontAwesome.Icon.faw_commenting),
+                        new PrimaryDrawerItem().withName("Postings").withIcon(FontAwesome.Icon.faw_sticky_note),
                         new SectionDrawerItem().withName("Sub-Menu"),
                         new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog),
                         new SecondaryDrawerItem().withName("Sign Out").withIcon(FontAwesome.Icon.faw_sign_out)
                 )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        switch (position){
+                            case 1:
+                                Toast.makeText(getActivity(), "Home", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 2:
+                                Toast.makeText(getActivity(), "Profile", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 3:
+                                Toast.makeText(getActivity(), "Forum", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 4:
+                                Toast.makeText(getActivity(), "Postings", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), PostingsActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                Toast.makeText(getActivity(), "Settings", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 7:
+                                Toast.makeText(getActivity(), "Sign Out", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                break;
+
+                        }
+                        return false;
+                    }
+                })
                 .withSavedInstance(savedInstanceState)
                 .build();
-    }
-
-    @Click(R.id.button4)
-    void postingsClicked() {
-        Intent intent = new Intent(getActivity(), PostingsActivity.class);
-        startActivity(intent);
-        //getActivity().finish();
     }
 
     @Override

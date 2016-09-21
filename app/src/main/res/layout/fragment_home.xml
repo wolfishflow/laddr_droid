@@ -9,41 +9,4 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/toolbar_home"
-        android:layout_alignEnd="@+id/button2" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About Us"
-        android:id="@+id/button2"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="67dp"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Forum"
-        android:id="@+id/button3"
-        android:layout_gravity="center_horizontal"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Postings"
-        android:id="@+id/button4"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp" />
 </RelativeLayout>
