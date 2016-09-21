@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
@@ -77,13 +78,23 @@ public class HomeFragment extends Fragment {
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
-                        new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user),
-                        new PrimaryDrawerItem().withName("Forum").withIcon(FontAwesome.Icon.faw_commenting).withIdentifier(5),
-                        new PrimaryDrawerItem().withName("Postings").withIcon(FontAwesome.Icon.faw_sticky_note).withIdentifier(5),
+                        new PrimaryDrawerItem().withName("Profile").withIcon(FontAwesome.Icon.faw_user).withIdentifier(2),
+                        new PrimaryDrawerItem().withName("Forum").withIcon(FontAwesome.Icon.faw_commenting).withIdentifier(3),
+                        new PrimaryDrawerItem().withName("Postings").withIcon(FontAwesome.Icon.faw_sticky_note).withIdentifier(4),
                         new SectionDrawerItem().withName("Sub-Menu"),
                         new SecondaryDrawerItem().withName("Settings").withIcon(FontAwesome.Icon.faw_cog),
                         new SecondaryDrawerItem().withName("Sign Out").withIcon(FontAwesome.Icon.faw_sign_out)
                 )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+                        if (position == 1) {
+                            Toast.makeText(getActivity(), "yummy", Toast.LENGTH_SHORT).show();
+                        }
+                        return false;
+                    }
+                })
                 .withSavedInstance(savedInstanceState)
                 .build();
     }
