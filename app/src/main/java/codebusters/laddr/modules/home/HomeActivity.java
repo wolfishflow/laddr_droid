@@ -9,7 +9,6 @@ import android.os.Bundle;
 import org.androidannotations.annotations.EActivity;
 
 import codebusters.laddr.R;
-import codebusters.laddr.modules.login.LoginFragment_;
 
 @EActivity(R.layout.activity_home)
 public class HomeActivity extends AppCompatActivity {
