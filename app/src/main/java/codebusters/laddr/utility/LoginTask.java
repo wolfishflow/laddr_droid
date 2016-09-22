@@ -3,12 +3,16 @@ package codebusters.laddr.utility;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 
 /**
@@ -26,6 +30,17 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
     public LoginTask(Activity activity) {
         this.activity = activity;
+    }
+
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+
     }
 
     /**
