@@ -1,8 +1,13 @@
 package codebusters.laddr.modules.postings;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.SupportActionModeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +16,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -38,9 +45,6 @@ import codebusters.laddr.utility.GetAllPostingsTask;
 public class PostingsActivity extends AppCompatActivity {
 
     private static GlobalState globalState;
-
-    Toolbar toolbarHome;
-
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
@@ -52,13 +56,13 @@ public class PostingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Log.d("TAG", "wtf2");
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         globalState = (GlobalState) this.getApplication();
 
-
-        toolbarHome = (Toolbar) this.findViewById(R.id.toolbar_posts);
-
-        toolbarHome.setTitle("Postings");
-        toolbarHome.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Postings");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
 
         final IProfile profile = new ProfileDrawerItem().withName("Full Name").withEmail("Email").withIcon(R.drawable.profile);
 
@@ -75,6 +79,7 @@ public class PostingsActivity extends AppCompatActivity {
 
         result = new DrawerBuilder()
                 .withActivity(this)
+                .withToolbar(toolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
@@ -121,6 +126,16 @@ public class PostingsActivity extends AppCompatActivity {
                 .build();
 
         result.setSelection(4);
+        result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Drawable upArrow = new IconicsDrawable(this)
+                .icon(GoogleMaterial.Icon.gmd_arrow_back)
+                .color(getResources().getColor(R.color.md_white_1000))
+                .sizeDp(14);
+        upArrow.setColorFilter(ContextCompat.getColor(this, R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
+        getSupportActionBar().setHomeAsUpIndicator(upArrow);
+
 
         try {
             //log in
