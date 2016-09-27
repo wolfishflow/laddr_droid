@@ -126,17 +126,6 @@ public class PostingsActivity extends AppCompatActivity {
                 .build();
 
         result.setSelection(4);
-        result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Drawable upArrow = new IconicsDrawable(this)
-                .icon(GoogleMaterial.Icon.gmd_arrow_back)
-                .color(getResources().getColor(R.color.md_white_1000))
-                .sizeDp(14);
-        upArrow.setColorFilter(ContextCompat.getColor(this, R.color.md_white_1000), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(upArrow);
-
-
         try {
             //log in
             //new LoginTask(this).execute("DatBoi", "oshitwhaddup").get();
