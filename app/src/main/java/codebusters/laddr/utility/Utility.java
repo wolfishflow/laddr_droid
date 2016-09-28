@@ -327,18 +327,18 @@ public class Utility {
     /**
      * Logs in either a User or Organization.
      * @param activity  The calling activity, included to get reference to GlobalState
-     * @param u The username of the user
+     * @param e The email of the user
      * @param p The password of the user.
      * @return A JSON Array containing the information about the logged in user.
      * @throws IOException
      * @throws JSONException
      */
-    public static JSONObject loginProfile(Activity activity, String u, String p) throws IOException, JSONException {
+    public static JSONObject loginProfile(Activity activity, String e, String p) throws IOException, JSONException {
 
-        AbstractMap.SimpleEntry<String, String> username = new AbstractMap.SimpleEntry<String, String>("Username", u);
+        AbstractMap.SimpleEntry<String, String> email = new AbstractMap.SimpleEntry<String, String>("Email", e);
         AbstractMap.SimpleEntry<String, String> password = new AbstractMap.SimpleEntry<String, String>("Password", p);
 
-        JSONObject json = (JSONObject) postRequest(activity, "http://laddr.xyz/api/login", username, password);
+        JSONObject json = (JSONObject) postRequest(activity, "http://laddr.xyz/api/login", email, password);
 
         return json;
     }

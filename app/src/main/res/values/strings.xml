@@ -8,4 +8,16 @@
     <string name="btn_to_login">Already Registered?</string>
     <string name="saved_email"/>
     <string name="saved_password" />
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="btn_next">Next</string>
+    <string name="hint_firstname">First Name</string>
+    <string name="hint_lastname">Last Name</string>
+    <string name="btn_return_bank">Go Back?</string>
+    <string-array name="ddl_academic">
+        <item>HighSchool</item>
+        <item>College</item>
+        <item>University</item>
+        <item>Graduated</item>
+        <item>Not in School</item>
+    </string-array>
 </resources>

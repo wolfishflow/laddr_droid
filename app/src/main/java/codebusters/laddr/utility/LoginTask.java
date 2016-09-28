@@ -54,11 +54,11 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
         if (params.length < 2) {
             return null;
         }
-        String username = params[0];
+        String email = params[0];
         String password = params[1];
 
         try {
-            JSONObject json = Utility.loginProfile(activity, username, password);
+            JSONObject json = Utility.loginProfile(activity, email, password);
             Log.d(DEBUG_TAG, json.toString());
 
             if (json.getString("success").equals("true")) {

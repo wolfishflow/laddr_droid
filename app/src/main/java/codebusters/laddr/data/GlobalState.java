@@ -14,6 +14,16 @@ public class GlobalState extends Application {
     private static GlobalState singleton;
     private String token;
 
+    private static SignUpUser signUpUserValue;
+
+    public static SignUpUser getSignUpUserValue() {
+        return signUpUserValue;
+    }
+
+    public static void setSignUpUserValue(SignUpUser signUpUserValue) {
+        GlobalState.signUpUserValue = signUpUserValue;
+    }
+
     /**
      * Sets the token used to authenticate API requests.
      * @param token The token as a string.
