@@ -14,10 +14,10 @@
     <string name="hint_lastname">Last Name</string>
     <string name="btn_return_bank">Go Back?</string>
     <string-array name="ddl_academic">
-        <item>HighSchool</item>
+        <item>High School</item>
         <item>College</item>
         <item>University</item>
         <item>Graduated</item>
-        <item>Not in School</item>
+        <item>Not In School</item>
     </string-array>
 </resources>

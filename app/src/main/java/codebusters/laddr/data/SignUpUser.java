@@ -12,6 +12,9 @@ public class SignUpUser {
     protected String lastName;
     protected int academicStatus;
 
+    public SignUpUser(){}
+
+
     public String getEmail() {
         return email;
     }

@@ -20,12 +20,20 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
+import codebusters.laddr.data.GlobalState;
+import codebusters.laddr.data.SignUpUser;
 
 /**
  * Created by alansimon on 2016-09-18.
  */
 @EFragment(R.layout.fragment_signup)
 public class SignUpFragment extends Fragment {
+
+    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
+    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+    private Matcher matcher;
+
+    private static GlobalState globalState;
 
     private static final String SIGNUP_F_TAG = "SIGNUP_FRAGMENT";
     @BindView(R.id.et_email)
@@ -41,18 +49,17 @@ public class SignUpFragment extends Fragment {
     @BindView(R.id.til_confirmpassword)
     TextInputLayout tilConfirmpassword;
 
-
-    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
-    private Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-    private Matcher matcher;
-
     public boolean validateEmail(String email) {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
+    public boolean validatePassword(String password) {
+        return password.length() > 5;
+    }
+
     @AfterViews
-    void setFocus() {
+    void setVars() {
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         //etEmail.requestFocus(1);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
@@ -64,18 +71,31 @@ public class SignUpFragment extends Fragment {
 
     @Click(R.id.btn_next)
     void nextClicked() {
-        if (etEmail.getText().toString().length() == 0) {
+        String emailValue = etEmail.getText().toString();
+        String passwordValue = etPassword.getText().toString();
+        String confirmPasswordValue = etConfirmpassword.getText().toString();
+
+        if (emailValue.length() == 0) {
             tilEmail.setError("Email Required!");
-        }
-        else if(validateEmail(etEmail.getText().toString())){
+        } else if (validateEmail(etEmail.getText().toString())) {
             tilEmail.setError("Email Format InCorrect!");
-        }else if (etPassword.getText().toString().length() == 0) {
+        } else if (passwordValue.length() == 0) {
             tilPassword.setError("Password Required!");
-        } else if (etConfirmpassword.getText().toString().length() == 0) {
+        } else if (confirmPasswordValue.length() == 0) {
             tilConfirmpassword.setError("Confirmation Password Required!");
-        } else if (!etConfirmpassword.getText().toString().equals(etPassword.getText().toString())) {
+        } else if (!confirmPasswordValue.equals(etPassword.getText().toString())) {
             tilConfirmpassword.setError("Passwords Must Match!");
         } else {
+
+            SignUpUser su = new SignUpUser();
+
+            su.setEmail(emailValue);
+            su.setPassword(passwordValue);
+
+            globalState = (GlobalState) getActivity().getApplication();
+
+            globalState.setSignUpUserValue(su);
+
             Fragment fr = new UserDetailsFragment_();
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();

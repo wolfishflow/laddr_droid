@@ -14,14 +14,14 @@ public class GlobalState extends Application {
     private static GlobalState singleton;
     private String token;
 
-    private static SignUpUser signUpUserValue;
+    private  SignUpUser signUpUserValue;
 
-    public static SignUpUser getSignUpUserValue() {
+    public SignUpUser getSignUpUserValue() {
         return signUpUserValue;
     }
 
-    public static void setSignUpUserValue(SignUpUser signUpUserValue) {
-        GlobalState.signUpUserValue = signUpUserValue;
+    public void setSignUpUserValue(SignUpUser signUpUserValue) {
+        this.signUpUserValue = signUpUserValue;
     }
 
     /**
