@@ -88,12 +88,10 @@ public class SignUpFragment extends Fragment {
         } else {
 
             SignUpUser su = new SignUpUser();
-
             su.setEmail(emailValue);
             su.setPassword(passwordValue);
 
             globalState = (GlobalState) getActivity().getApplication();
-
             globalState.setSignUpUserValue(su);
 
             Fragment fr = new UserDetailsFragment_();

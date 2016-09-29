@@ -1,6 +1,7 @@
 package codebusters.laddr.modules.login;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -19,6 +21,8 @@ import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.SignUpUser;
+import codebusters.laddr.modules.home.HomeActivity_;
+import codebusters.laddr.utility.LoginTask;
 
 /**
  * Created by alansimon on 2016-09-28.
@@ -59,33 +63,63 @@ public class UserDetailsFragment extends Fragment {
         SignUpUser su = globalState.getSignUpUserValue();
 
         if (firstNameValue.length() == 0) {
-            etFirstname.setError("Email Required!");
+            tilFirstname.setError("First Name Required!");
+        }else if (lastNameValue.length() == 0){
+            tilLastname.setError("Last Name Required!");
         }
 
-            if (spinnerValue.equals("High School")) {
-                Log.d("abc", "HS");
-            } else if (spinnerValue.equals("College")) {
-                Log.d("abc", "C");
-            } else if (spinnerValue.equals("University")) {
-                Log.d("abc", "U");
-            } else if (spinnerValue.equals("Graduated")) {
-                Log.d("abc", "G");
-            } else if (spinnerValue.equals("Not In School")) {
-                Log.d("abc", "N");
+        if (spinnerValue.equals("High School")) {
+            Log.d("abc", "HS");
+            su.setAcademicStatus(1);
+        } else if (spinnerValue.equals("College")) {
+            Log.d("abc", "C");
+            su.setAcademicStatus(2);
+        } else if (spinnerValue.equals("University")) {
+            Log.d("abc", "U");
+            su.setAcademicStatus(3);
+        } else if (spinnerValue.equals("Graduated")) {
+            Log.d("abc", "G");
+            su.setAcademicStatus(4);
+        } else if (spinnerValue.equals("Not In School")) {
+            Log.d("abc", "N");
+            su.setAcademicStatus(0);
+        }
+
+        su.setFirstName(firstNameValue);
+        su.setLastName(lastNameValue);
+
+        Log.d("wasd", su.getFirstName());
+        Log.d("wasd", su.getLastName());
+        Log.d("wasd", su.getEmail());
+        Log.d("wasd", su.getPassword());
+        Log.d("wasd",Integer.toString(su.getAcademicStatus()));
+
+        // Now put add user task here
+
+        // Then login
+
+        try {
+            if (new LoginTask(getActivity()).execute(su.getEmail(), su.getPassword()).get()){
+                Intent intent = new Intent(getActivity(), HomeActivity_.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+            else {
+                Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
             }
 
-            su.setFirstName(firstNameValue);
-            su.setLastName(lastNameValue);
 
-
-        }
-
-        @Override
-        public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle
-        savedInstanceState){
-            // TODO: inflate a fragment view
-            View rootView = super.onCreateView(inflater, container, savedInstanceState);
-            ButterKnife.bind(this, rootView);
-            return rootView;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+}

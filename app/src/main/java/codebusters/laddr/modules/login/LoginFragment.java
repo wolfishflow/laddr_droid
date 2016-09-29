@@ -95,14 +95,21 @@ public class LoginFragment extends Fragment {
     }
         
         try {
-            new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get();
+            if (new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get()){
+                Intent intent = new Intent(getActivity(), HomeActivity_.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+            else {
+                Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Intent intent = new Intent(getActivity(), HomeActivity_.class);
-        startActivity(intent);
-        getActivity().finish();
+
     }
 
     /*
