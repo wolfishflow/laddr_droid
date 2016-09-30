@@ -60,8 +60,8 @@ public class LoginFragment extends Fragment {
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
         cbRemember = (CheckBox) getActivity().findViewById(R.id.cb_remember);
-        etEmail.setText("NewestUser");
-        etPassword.setText("password");
+        etEmail.setText("dat@boi.com");
+        etPassword.setText("oshitwhaddup");
     }
 
     /*
@@ -95,14 +95,21 @@ public class LoginFragment extends Fragment {
     }
         
         try {
-            new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get();
+            if (new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get()){
+                Intent intent = new Intent(getActivity(), HomeActivity_.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+            else {
+                Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        Intent intent = new Intent(getActivity(), HomeActivity_.class);
-        startActivity(intent);
-        getActivity().finish();
+
     }
 
     /*
@@ -120,7 +127,6 @@ public class LoginFragment extends Fragment {
         Switch current fragment into the declared placeholder
         Include the backstack, as pressing back will kill the app.
      */
-
     @Click(R.id.btn_signup)
     void signupClicked() {
         Fragment fr = new SignUpFragment_();
@@ -129,4 +135,5 @@ public class LoginFragment extends Fragment {
         ft.replace(R.id.login_fragment_container, fr).addToBackStack("Login");
         ft.commit();
     }
+
 }

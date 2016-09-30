@@ -36,6 +36,10 @@ public class User extends Profile {
         this.academicStatus = academicStatus;
     }
 
+    public String getEmail(){ return email; }
+
+    public void setEmail(String email){ this.email = email;}
+
     public String getFirstName() {
         return firstName;
     }
