@@ -43,7 +43,7 @@ public class LoginFragment extends Fragment {
     @BindView(R.id.cb_remember)
     CheckBox cbRemember;
     @BindView(R.id.progressBar)
-    private ProgressBar progressBar;
+    ProgressBar progressBar;
 
     private static GlobalState globalState;
 
@@ -57,7 +57,6 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        progressBar = (ProgressBar) getActivity().findViewById(R.id.progressBar);
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
         cbRemember = (CheckBox) getActivity().findViewById(R.id.cb_remember);
@@ -77,7 +76,7 @@ public class LoginFragment extends Fragment {
     @Click(R.id.btn_login)
     void loginClicked() {
         //Log.d(LOGIN_F_TAG, Boolean.toString(progressBar.isShown()));
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
 
         globalState = (GlobalState) getActivity().getApplication();
 

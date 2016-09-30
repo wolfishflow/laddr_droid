@@ -1,15 +1,23 @@
 package codebusters.laddr.modules.postings;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.SupportActionModeWrapper;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -21,39 +29,40 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EActivity;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Posting;
 import codebusters.laddr.modules.home.HomeActivity_;
 import codebusters.laddr.utility.GetAllPostingsTask;
-import codebusters.laddr.utility.LoginTask;
 
 public class PostingsActivity extends AppCompatActivity {
 
     private static GlobalState globalState;
-
-    @BindView(R.id.toolbar_home)
-    Toolbar myToolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
+        ButterKnife.bind(this);
+        Log.d("TAG", "wtf2");
 
-        //get globalState
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         globalState = (GlobalState) this.getApplication();
 
-
-        myToolbar = (Toolbar) this.findViewById(R.id.toolbar_home);
-
-        myToolbar.setTitle("Postings");
-        myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
-        //getContext().getColor(R.color.md_white_1000) //API is 19+ but this call needs 23+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Postings");
+        toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
 
         final IProfile profile = new ProfileDrawerItem().withName("Full Name").withEmail("Email").withIcon(R.drawable.profile);
 
@@ -64,13 +73,13 @@ public class PostingsActivity extends AppCompatActivity {
                 .addProfiles(
                         profile
                 )
-                .withSavedInstance(savedInstanceState)
                 .build();
 
         new DrawerBuilder().withActivity(this).build();
 
         result = new DrawerBuilder()
                 .withActivity(this)
+                .withToolbar(toolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
@@ -84,7 +93,7 @@ public class PostingsActivity extends AppCompatActivity {
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        switch (position){
+                        switch (position) {
                             case 1:
                                 Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity_.class);
@@ -114,11 +123,9 @@ public class PostingsActivity extends AppCompatActivity {
                         return false;
                     }
                 })
-                .withSavedInstance(savedInstanceState)
                 .build();
 
         result.setSelection(4);
-
         try {
             //log in
             //new LoginTask(this).execute("DatBoi", "oshitwhaddup").get();
