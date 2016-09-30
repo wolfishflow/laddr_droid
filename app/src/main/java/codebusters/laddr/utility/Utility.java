@@ -21,6 +21,7 @@ import java.util.AbstractMap;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Organization;
 import codebusters.laddr.data.Posting;
+import codebusters.laddr.data.SignUpUser;
 import codebusters.laddr.data.User;
 
 /**
@@ -222,11 +223,33 @@ public class Utility {
     /**
      * Adds a user to the database.
      * @param activity  The calling activity, included to get reference to GlobalState
-     * @param user The User object to add.
+     * @param su The User object to add.
      * @return Success as a boolean value.
      * @throws IOException
      * @throws JSONException
      */
+
+    public static boolean addNewUser(Activity activity, SignUpUser su) throws IOException, JSONException{
+
+        AbstractMap.SimpleEntry<String, String> firstName = new AbstractMap.SimpleEntry<String, String>("FirstName", su.getFirstName());
+        AbstractMap.SimpleEntry<String, String> lastName = new AbstractMap.SimpleEntry<String, String>("LastName", su.getLastName());
+        AbstractMap.SimpleEntry<String, String> password = new AbstractMap.SimpleEntry<String, String>("Password", su.getPassword());
+        AbstractMap.SimpleEntry<String, String> email = new AbstractMap.SimpleEntry<String, String>("Email", su.getEmail());
+        AbstractMap.SimpleEntry<String, String> academicStatus = new AbstractMap.SimpleEntry<String, String>("AcademicStatus", Integer.toString(su.getAcademicStatus()));
+
+        JSONObject json = (JSONObject) postRequest(activity, "http://laddr.xyz/api/user",
+                firstName, lastName, password, email, academicStatus);
+
+        Log.d("LADDER_DEBUG", json.toString());
+
+        String result = json.getString("success");
+        if (result.equals("true")) {
+            return true;
+        }
+
+        return false;
+    }
+
     public static boolean addUser(Activity activity, User user) throws IOException, JSONException {
 
         //TODO: Add validation
