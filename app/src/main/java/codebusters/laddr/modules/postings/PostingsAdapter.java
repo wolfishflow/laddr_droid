@@ -17,39 +17,44 @@ import codebusters.laddr.data.Posting;
 
 public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHolder> {
 
-    ArrayList<Posting> postings;
+    ArrayList<Posting> postingsList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView;
-        public ViewHolder(TextView v) {
+        public TextView title, orgName,location;
+        public ViewHolder(View v) {
             super(v);
-            mTextView = v;
+            title = (TextView) v.findViewById(R.id.postings_title);
+            orgName = (TextView) v.findViewById(R.id.postings_organization);
+            location = (TextView) v.findViewById(R.id.postings_location);
         }
     }
 
     public PostingsAdapter(ArrayList<Posting> postings) {
-        this.postings = postings;
+        this.postingsList = postings;
     }
 
     @Override
     public PostingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.my_text_view, parent, false);
+                .inflate(R.layout.content_postings, parent, false);
         // set the view's size, margins, paddings and layout parameters
 
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(PostingsAdapter.ViewHolder holder, int position) {
-
+        Posting post = postingsList.get(position);
+        holder.title.setText(post.getJobTitle());
+        holder.orgName.setText(post.getOrganizerName());
+        holder.location.setText(post.getLocation());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return postingsList.size();
     }
 }

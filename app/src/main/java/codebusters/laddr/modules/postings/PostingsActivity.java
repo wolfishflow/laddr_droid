@@ -132,16 +132,25 @@ public class PostingsActivity extends AppCompatActivity {
 
         result.setSelection(4);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
 
         try {
 
             if (globalState.getToken() != null) {
                 //get all the postings
-                ArrayList<Posting> postings = new GetAllPostingsTask(this).execute().get();
+                //ArrayList<Posting> postings = new GetAllPostingsTask(this).execute().get();
 
+                mAdapter = new PostingsAdapter(new GetAllPostingsTask(this).execute().get());
+                mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+                mRecyclerView.setAdapter(mAdapter);
                 //get a reference to the ListView and fill it with our postings
-                ListView postingsList = (ListView) findViewById(R.id.postings);
-                postingsList.setAdapter(new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_1, postings));
+
+//
+//                ListView postingsList = (ListView) findViewById(R.id.postings);
+//                postingsList.setAdapter(new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_1, postings));
             }
 
         } catch (Exception e) {
@@ -149,14 +158,10 @@ public class PostingsActivity extends AppCompatActivity {
         }
 
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+
 
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);
+
 
     }
 
