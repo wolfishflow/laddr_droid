@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.SupportActionModeWrapper;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,9 @@ public class PostingsActivity extends AppCompatActivity {
     private static GlobalState globalState;
     private AccountHeader headerResult = null;
     private Drawer result = null;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
 
     @Override
@@ -126,9 +131,9 @@ public class PostingsActivity extends AppCompatActivity {
                 .build();
 
         result.setSelection(4);
+
+
         try {
-            //log in
-            //new LoginTask(this).execute("DatBoi", "oshitwhaddup").get();
 
             if (globalState.getToken() != null) {
                 //get all the postings
@@ -142,6 +147,17 @@ public class PostingsActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new MyAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);
+
     }
 
 

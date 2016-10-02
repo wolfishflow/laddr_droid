@@ -60,8 +60,8 @@ public class LoginFragment extends Fragment {
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
         cbRemember = (CheckBox) getActivity().findViewById(R.id.cb_remember);
-        etEmail.setText("dat@boi.com");
-        etPassword.setText("oshitwhaddup");
+        etEmail.setText("alan@laddr.xyz");
+        etPassword.setText("password");
     }
 
     /*
@@ -127,6 +127,8 @@ public class LoginFragment extends Fragment {
         Switch current fragment into the declared placeholder
         Include the backstack, as pressing back will kill the app.
      */
+
+
     @Click(R.id.btn_signup)
     void signupClicked() {
         Fragment fr = new SignUpFragment_();

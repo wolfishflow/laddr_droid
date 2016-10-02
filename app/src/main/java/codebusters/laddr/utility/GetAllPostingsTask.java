@@ -47,7 +47,6 @@ public class GetAllPostingsTask extends AsyncTask<Void, Void, ArrayList<Posting>
                 posting.setJobTitle(obj.getString("JobTitle"));
                 posting.setLocation(obj.getString("Location"));
                 posting.setJobDescription(obj.getString("Description"));
-                posting.setOrganizerName(obj.getString("OrganizationName"));
 
                 //add new posting to array list
                 postings.add(posting);
