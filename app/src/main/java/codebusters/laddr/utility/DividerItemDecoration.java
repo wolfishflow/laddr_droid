@@ -1,4 +1,4 @@
-package codebusters.laddr.modules.postings;
+package codebusters.laddr.utility;
 
 import android.content.Context;
 import android.content.res.TypedArray;

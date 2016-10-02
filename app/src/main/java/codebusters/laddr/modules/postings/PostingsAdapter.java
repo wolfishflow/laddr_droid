@@ -18,6 +18,8 @@ import codebusters.laddr.data.Posting;
 public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHolder> {
 
     ArrayList<Posting> postingsList;
+    //private final View.OnClickListener mOnClickListener = new MyOnClickListener();
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
