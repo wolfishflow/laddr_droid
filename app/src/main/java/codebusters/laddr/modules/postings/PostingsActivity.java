@@ -1,23 +1,16 @@
 package codebusters.laddr.modules.postings;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.SupportActionModeWrapper;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -29,17 +22,14 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.EActivity;
-
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Posting;
 import codebusters.laddr.modules.home.HomeActivity_;
+import codebusters.laddr.utility.DividerItemDecoration;
 import codebusters.laddr.utility.GetAllPostingsTask;
 
 public class PostingsActivity extends AppCompatActivity {
@@ -47,6 +37,9 @@ public class PostingsActivity extends AppCompatActivity {
     private static GlobalState globalState;
     private AccountHeader headerResult = null;
     private Drawer result = null;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
 
     @Override
@@ -126,23 +119,37 @@ public class PostingsActivity extends AppCompatActivity {
                 .build();
 
         result.setSelection(4);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         try {
-            //log in
-            //new LoginTask(this).execute("DatBoi", "oshitwhaddup").get();
 
             if (globalState.getToken() != null) {
                 //get all the postings
-                ArrayList<Posting> postings = new GetAllPostingsTask(this).execute().get();
+                final ArrayList<Posting> postings = new GetAllPostingsTask(this).execute().get();
+                mAdapter = new PostingsAdapter(postings);
+                mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+                mRecyclerView.setAdapter(mAdapter);
 
-                //get a reference to the ListView and fill it with our postings
-                ListView postingsList = (ListView) findViewById(R.id.postings);
-                postingsList.setAdapter(new ArrayAdapter<Posting>(this, android.R.layout.simple_list_item_1, postings));
+                //Add a listener to each list object
+                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mRecyclerView, new ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        Posting posting = postings.get(position);
+                        Toast.makeText(getApplicationContext(), posting.getLocation()+" is selected!", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onLongClick(View view, int position) {
+
+                    }
+                }));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -28,6 +28,7 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
     private Activity activity;
     private static GlobalState globalState;
 
+
     public LoginTask(Activity activity) {
         this.activity = activity;
     }
@@ -41,6 +42,12 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
         progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    protected void onPostExecute(Boolean aBoolean) {
+        super.onPostExecute(aBoolean);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     /**
