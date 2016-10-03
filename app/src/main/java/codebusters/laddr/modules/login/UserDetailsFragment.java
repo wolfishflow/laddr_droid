@@ -50,7 +50,6 @@ public class UserDetailsFragment extends Fragment {
         spinner = (Spinner) getActivity().findViewById(R.id.spr_academicstatus);
         tilFirstname = (TextInputLayout) getActivity().findViewById(R.id.til_firstname);
         tilLastname = (TextInputLayout) getActivity().findViewById(R.id.til_lastname);
-
     }
 
     @Click(R.id.btn_signup_add_user)
@@ -70,30 +69,19 @@ public class UserDetailsFragment extends Fragment {
         }
 
         if (spinnerValue.equals("High School")) {
-            Log.d("abc", "HS");
             su.setAcademicStatus(1);
         } else if (spinnerValue.equals("College")) {
-            Log.d("abc", "C");
             su.setAcademicStatus(2);
         } else if (spinnerValue.equals("University")) {
-            Log.d("abc", "U");
             su.setAcademicStatus(3);
         } else if (spinnerValue.equals("Graduated")) {
-            Log.d("abc", "G");
             su.setAcademicStatus(4);
         } else if (spinnerValue.equals("Not In School")) {
-            Log.d("abc", "N");
             su.setAcademicStatus(0);
         }
 
         su.setFirstName(firstNameValue);
         su.setLastName(lastNameValue);
-
-        Log.d("wasd", su.getFirstName());
-        Log.d("wasd", su.getLastName());
-        Log.d("wasd", su.getEmail());
-        Log.d("wasd", su.getPassword());
-        Log.d("wasd", Integer.toString(su.getAcademicStatus()));
 
         // Now put add user task here
         try {
@@ -111,8 +99,6 @@ public class UserDetailsFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
