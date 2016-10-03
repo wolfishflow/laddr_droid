@@ -22,6 +22,7 @@ import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.SignUpUser;
 import codebusters.laddr.modules.home.HomeActivity_;
+import codebusters.laddr.utility.AddUserTask;
 import codebusters.laddr.utility.LoginTask;
 
 /**
@@ -64,7 +65,7 @@ public class UserDetailsFragment extends Fragment {
 
         if (firstNameValue.length() == 0) {
             tilFirstname.setError("First Name Required!");
-        }else if (lastNameValue.length() == 0){
+        } else if (lastNameValue.length() == 0) {
             tilLastname.setError("Last Name Required!");
         }
 
@@ -92,19 +93,22 @@ public class UserDetailsFragment extends Fragment {
         Log.d("wasd", su.getLastName());
         Log.d("wasd", su.getEmail());
         Log.d("wasd", su.getPassword());
-        Log.d("wasd",Integer.toString(su.getAcademicStatus()));
+        Log.d("wasd", Integer.toString(su.getAcademicStatus()));
 
         // Now put add user task here
-
-        // Then login
-
         try {
-            if (new LoginTask(getActivity()).execute(su.getEmail(), su.getPassword()).get()){
+            new AddUserTask(getActivity()).execute(su).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // Then login
+        Toast.makeText(getActivity(), "added user?", Toast.LENGTH_SHORT).show();
+        try {
+            if (new LoginTask(getActivity()).execute(su.getEmail(), su.getPassword()).get()) {
                 Intent intent = new Intent(getActivity(), HomeActivity_.class);
                 startActivity(intent);
                 getActivity().finish();
-            }
-            else {
+            } else {
                 Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
             }
 

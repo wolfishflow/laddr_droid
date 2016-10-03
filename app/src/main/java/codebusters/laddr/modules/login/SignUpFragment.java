@@ -77,7 +77,7 @@ public class SignUpFragment extends Fragment {
 
         if (emailValue.length() == 0) {
             tilEmail.setError("Email Required!");
-        } else if (validateEmail(etEmail.getText().toString())) {
+        } else if (!validateEmail(etEmail.getText().toString())) {
             tilEmail.setError("Email Format InCorrect!");
         } else if (passwordValue.length() == 0) {
             tilPassword.setError("Password Required!");

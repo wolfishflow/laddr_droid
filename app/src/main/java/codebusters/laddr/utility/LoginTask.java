@@ -39,15 +39,15 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar = (ProgressBar) activity.findViewById(R.id.progressBar);
+        //progressBar.setVisibility(View.VISIBLE);
 
     }
 
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
-        progressBar.setVisibility(View.INVISIBLE);
+        //progressBar.setVisibility(View.INVISIBLE);
     }
 
     /**
