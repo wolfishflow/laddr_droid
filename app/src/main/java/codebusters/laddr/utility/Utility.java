@@ -11,6 +11,7 @@ import org.json.JSONTokener;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -136,6 +137,8 @@ public class Utility {
         con.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded");
         con.setRequestProperty( "charset", "utf-8");
         con.setRequestProperty( "Content-Length", Integer.toString( postDataLength ));
+        con.setRequestProperty("User-Agent","Mozilla/5.0 ( compatible ) ");
+        con.setRequestProperty("Accept","*/*");
         con.setUseCaches( false );
 
         // add token header
@@ -147,6 +150,17 @@ public class Utility {
         wr.flush();
         wr.close();
 
+        Log.d("utility", Integer.toString(con.getResponseCode()));
+//        BufferedReader er = new BufferedReader(new InputStreamReader(con.getErrorStream(), Charset.forName("UTF-8")));
+//
+//        sb = new StringBuilder();
+//        int cp;
+//        while ((cp = er.read()) != -1) {
+//            sb.append((char) cp);
+//        }
+//        String jsonText = sb.toString();
+//        Log.d("utility", jsonText);
+
         BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("UTF-8")));
 
         sb = new StringBuilder();
@@ -156,6 +170,7 @@ public class Utility {
         }
 
         String jsonText = sb.toString();
+        jsonText = sb.toString();
         Object json = new JSONTokener(jsonText).nextValue();
         if (json instanceof JSONObject) {
             return new JSONObject(jsonText);
@@ -236,9 +251,14 @@ public class Utility {
         AbstractMap.SimpleEntry<String, String> password = new AbstractMap.SimpleEntry<String, String>("Password", su.getPassword());
         AbstractMap.SimpleEntry<String, String> email = new AbstractMap.SimpleEntry<String, String>("Email", su.getEmail());
         AbstractMap.SimpleEntry<String, String> academicStatus = new AbstractMap.SimpleEntry<String, String>("AcademicStatus", Integer.toString(su.getAcademicStatus()));
+        AbstractMap.SimpleEntry<String, String> description = new AbstractMap.SimpleEntry<String, String>("Description", " ");
+        AbstractMap.SimpleEntry<String, String> pictureURL = new AbstractMap.SimpleEntry<String, String>("Picture", " ");
+        AbstractMap.SimpleEntry<String, String> resume = new AbstractMap.SimpleEntry<String, String>("Resume", " ");
+
+
 
         JSONObject json = (JSONObject) postRequest(activity, "http://laddr.xyz/api/user",
-                firstName, lastName, password, email, academicStatus);
+                firstName, lastName, password, email, academicStatus, description, pictureURL, resume);
 
         Log.d("LADDER_DEBUG", json.toString());
 
