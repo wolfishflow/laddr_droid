@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,6 +12,7 @@
     <!-- TODO: seperate this layout into its own -->
 
     <LinearLayout
+        android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -34,18 +36,37 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:paddingBottom="16dp"
                 android:layout_width="match_parent"
-                android:text="Alan Simon"
                 android:textSize="@dimen/title_name"
                 android:layout_height="match_parent"/>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit your profile"/>
+
         </LinearLayout>
 
-
-
     </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_below="@id/profile_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp">
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
