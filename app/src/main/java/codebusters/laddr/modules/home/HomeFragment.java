@@ -1,6 +1,8 @@
 package codebusters.laddr.modules.home;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.modules.postings.PostingsActivity;
+import codebusters.laddr.modules.profile.ProfileFragment;
+import codebusters.laddr.modules.profile.ProfileFragment_;
 
 /**
  * Created by alansimon on 2016-09-18.
@@ -94,6 +98,11 @@ public class HomeFragment extends Fragment {
                                 break;
                             case 2:
                                 Toast.makeText(getActivity(), "Profile", Toast.LENGTH_SHORT).show();
+                                Fragment fr = new ProfileFragment_();
+                                FragmentManager fm = getFragmentManager();
+                                FragmentTransaction ft = fm.beginTransaction();
+                                ft.replace(R.id.home_fragment_container, fr);
+                                ft.commit();
                                 break;
                             case 3:
                                 Toast.makeText(getActivity(), "Forum", Toast.LENGTH_SHORT).show();
