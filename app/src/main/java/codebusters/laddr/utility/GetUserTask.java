@@ -50,7 +50,6 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
             user.setUserDescription(json.getString("Description"));
             user.setResume(json.getString("Resume"));
             user.setAcademicStatus(Integer.parseInt(json.getString("AcademicStatus")));
-            user.setUsername(json.getString("Username"));
             user.setEmail(json.getString("Email"));
             user.setPictureURL(new URL(json.getString("FirstName")));
 
