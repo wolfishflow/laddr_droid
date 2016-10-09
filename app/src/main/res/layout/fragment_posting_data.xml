@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="5dp"
+        android:minHeight="?attr/actionBarSize" />
+
+    <TextView
+        android:id="@+id/tv_postingTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/tv_postingOrganizationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_postingTitle" />
+
+    <TextView
+        android:id="@+id/tv_postingLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_postingOrganizationName" />
+
+    <TextView
+        android:id="@+id/tv_postingsDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_postingLocation" />
+
+    <TextView
+        android:id="@+id/tv_postingTimeStamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_postingsDescription" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_postingTimeStamp"
+        android:layout_marginTop="20dip"
+        android:background="@color/colorAccent"
+        android:text="@string/btn_apply"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>
