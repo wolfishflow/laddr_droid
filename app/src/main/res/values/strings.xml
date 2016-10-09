@@ -13,6 +13,7 @@
     <string name="hint_firstname">First Name</string>
     <string name="hint_lastname">Last Name</string>
     <string name="btn_return_bank">Go Back?</string>
+    <string name="btn_apply">Apply Now!</string>
     <string-array name="ddl_academic">
         <item>High School</item>
         <item>College</item>
