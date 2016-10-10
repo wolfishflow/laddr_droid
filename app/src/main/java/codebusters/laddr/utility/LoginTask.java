@@ -14,6 +14,7 @@ import java.io.IOException;
 import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
+import codebusters.laddr.data.User;
 
 /**
  * Created by greg on 5/17/2016.
@@ -71,6 +72,7 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
             if (json.getString("success").equals("true")) {
                 globalState = (GlobalState) activity.getApplication();
                 globalState.setToken(json.getString("token"));
+                Log.d("Testing json ", json.getJSONObject("profile").toString());
                 return true;
             }
 
