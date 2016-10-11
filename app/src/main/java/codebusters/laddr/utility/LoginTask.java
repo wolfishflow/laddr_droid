@@ -10,10 +10,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 
 import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
+import codebusters.laddr.data.Profile;
 import codebusters.laddr.data.User;
 
 /**
@@ -73,6 +75,16 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
                 globalState = (GlobalState) activity.getApplication();
                 globalState.setToken(json.getString("token"));
                 Log.d("Testing json ", json.getJSONObject("profile").toString());
+                Log.d("Testing json ", json.getJSONObject("profile").getString("ProfileID"));
+
+                User user = new User();
+                user.setProfileID(json.getJSONObject("profile").getString("ProfileID"));
+                user.setEmail(json.getJSONObject("profile").getString("Email"));
+                //user.setTimestamp(json.getJSONObject("profile").getString("Timestamp"));
+                user.setPictureURL(new URL(json.getJSONObject("profile").getString("PictureURL")));
+
+                globalState.setUserValue(user);
+
                 return true;
             }
 
