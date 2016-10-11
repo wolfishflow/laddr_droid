@@ -81,7 +81,8 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
                 user.setProfileID(json.getJSONObject("profile").getString("ProfileID"));
                 user.setEmail(json.getJSONObject("profile").getString("Email"));
                 //user.setTimestamp(json.getJSONObject("profile").getString("Timestamp"));
-                user.setPictureURL(new URL(json.getJSONObject("profile").getString("PictureURL")));
+                //broken rn
+                //user.setPictureURL(new URL(json.getJSONObject("profile").getString("PictureURL")));
 
                 globalState.setUserValue(user);
 

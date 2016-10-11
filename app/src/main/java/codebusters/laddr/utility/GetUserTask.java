@@ -58,8 +58,8 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
 
             user.setAccountType(Integer.parseInt(json.getString("AccountType")));
 
-            Log.d("TEsting", "succeess bud");
-            Log.d("TEsting", json.toString());
+            Log.d("test", "succeess bud");
+            Log.d("test", json.toString());
             return user;
 
         } catch (IOException e) {
