@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
+import codebusters.laddr.data.User;
 import codebusters.laddr.utility.GetUserTask;
 
 /**
@@ -37,7 +38,8 @@ public class ProfileFragment extends Fragment {
         globalState = (GlobalState) getActivity().getApplication();
 
         try {
-            new GetUserTask(getActivity());
+            User user;
+            new GetUserTask(getActivity()).execute(globalState.getUserValue().getProfileID());
         } catch (Exception e) {
             e.printStackTrace();
         }
