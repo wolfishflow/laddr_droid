@@ -97,7 +97,7 @@ public class Utility {
         StringBuilder preparedURL = new StringBuilder();
         preparedURL.append(url);
         for (int i = 0; i < params.length; i++) {
-            preparedURL.append(params[i].getKey() + "=" + params[i].getValue());
+            preparedURL.append("/" + params[i].getValue());
             if (i < params.length - 1) {
                 preparedURL.append("&");
             }
