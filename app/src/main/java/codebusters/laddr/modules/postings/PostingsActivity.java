@@ -47,7 +47,6 @@ public class PostingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
         ButterKnife.bind(this);
-        Log.d("TAG", "wtf2");
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
