@@ -27,7 +27,7 @@ import codebusters.laddr.data.User;
  */
 public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
-    private final String DEBUG_TAG = "LADDER_DEBUG";
+    private final String TAG = "Login Task";
     private Activity activity;
     private static GlobalState globalState;
 
@@ -77,7 +77,7 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
         try {
             JSONObject json = Utility.loginProfile(activity, email, password);
-            Log.d(DEBUG_TAG, json.toString());
+            Log.d(TAG, json.toString());
 
             if (json.getString("success").equals("true")) {
                 globalState = (GlobalState) activity.getApplication();

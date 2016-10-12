@@ -34,6 +34,9 @@ import codebusters.laddr.utility.GetAllPostingsTask;
 
 public class PostingsActivity extends AppCompatActivity {
 
+    private final String TAG = "Postings Activity";
+
+
     private static GlobalState globalState;
     private AccountHeader headerResult = null;
     private Drawer result = null;
@@ -47,6 +50,9 @@ public class PostingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
         ButterKnife.bind(this);
+
+        if (isTaskRoot())
+            Log.d(TAG, "onCreate: Is Task Root");
 
         globalState = (GlobalState) this.getApplication();
 
