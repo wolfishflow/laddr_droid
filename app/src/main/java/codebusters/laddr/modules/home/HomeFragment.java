@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -26,10 +24,6 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.mikepenz.materialize.util.UIUtils;
-
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 
 import butterknife.BindView;
@@ -65,7 +59,6 @@ public class HomeFragment extends Fragment {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
 
         myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_home);
         myToolbar.setTitle("Home");
@@ -119,6 +112,7 @@ public class HomeFragment extends Fragment {
                                 FragmentManager fm = getFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();
                                 ft.replace(R.id.home_fragment_container, fr);
+                                ft.addToBackStack(null);
                                 ft.commit();
                                 break;
                             case 3:
@@ -146,9 +140,6 @@ public class HomeFragment extends Fragment {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
-
-
-
 
     }
 
