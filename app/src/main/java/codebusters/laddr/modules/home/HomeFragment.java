@@ -34,9 +34,11 @@ import org.androidannotations.annotations.EFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
+import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.modules.postings.PostingsActivity;
 import codebusters.laddr.modules.profile.ProfileFragment;
 import codebusters.laddr.modules.profile.ProfileFragment_;
+import codebusters.laddr.utility.GetUserTask;
 
 /**
  * Created by alansimon on 2016-09-18.
@@ -48,6 +50,8 @@ public class HomeFragment extends Fragment {
     Toolbar myToolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
+    private static GlobalState globalState;
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -60,6 +64,9 @@ public class HomeFragment extends Fragment {
         //getContext().getColor(R.color.md_white_1000) //API is 19+ but this call needs 23+
 
         final IProfile profile = new ProfileDrawerItem().withName("Full Name").withEmail("Email").withIcon(R.drawable.profile);
+
+
+
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
@@ -129,6 +136,17 @@ public class HomeFragment extends Fragment {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+
+        globalState = (GlobalState) getActivity().getApplication();
+        String profileId = globalState.getUserValue().getProfileID();
+
+        try {
+            new GetUserTask(getActivity()).execute(profileId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
