@@ -48,10 +48,9 @@ public class PostingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_postings);
         ButterKnife.bind(this);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         globalState = (GlobalState) this.getApplication();
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Postings");
         toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));

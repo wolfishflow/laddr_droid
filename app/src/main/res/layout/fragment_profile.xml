@@ -8,7 +8,7 @@
     <!-- TODO: separate this layout into its own -->
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_postings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -17,7 +17,7 @@
 
     <LinearLayout
         android:id="@+id/profile_header"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/toolbar_postings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
