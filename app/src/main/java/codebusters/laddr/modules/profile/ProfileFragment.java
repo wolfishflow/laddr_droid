@@ -36,14 +36,20 @@ public class ProfileFragment extends Fragment {
         tvDescription = (TextView) getActivity().findViewById(R.id.tv_description);
 
         globalState = (GlobalState) getActivity().getApplication();
+//        String profileId = globalState.getUserValue().getProfileID();
+//
+//        try {
+//            new GetUserTask(getActivity()).execute(profileId);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-        try {
-            User user;
-            new GetUserTask(getActivity()).execute(globalState.getUserValue().getProfileID());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        tvName.setText(globalState.getUserValue().getFirstName());
     }
 
     @Override
