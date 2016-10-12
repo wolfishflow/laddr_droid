@@ -33,6 +33,10 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
         this.activity = activity;
     }
 
+    public GetUserTask(){
+
+    }
+
     @Override
     protected User doInBackground(String... params) {
 
