@@ -134,8 +134,8 @@ public class ProfileFragment extends Fragment {
                                 break;
                             case 4:
                                 Toast.makeText(getActivity(), "Postings", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getActivity(), PostingsActivity.class);
-                                startActivity(intent);
+//                                Intent intent = new Intent(getActivity(), PostingsActivity.class);
+//                                startActivity(intent);
                                 break;
                             case 5:
                                 break;
