@@ -14,8 +14,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
-import codebusters.laddr.data.User;
-import codebusters.laddr.utility.GetUserTask;
 
 /**
  * Created by alansimon on 2016-10-03.
@@ -23,19 +21,27 @@ import codebusters.laddr.utility.GetUserTask;
 @EFragment(R.layout.fragment_profile)
 public class ProfileFragment extends Fragment {
 
+    public final String TAG = "ProfileFragment";
+
     private static GlobalState globalState;
 
     @BindView(R.id.tv_name)
     TextView tvName;
     @BindView(R.id.tv_description)
     TextView tvDescription;
+    @BindView(R.id.tv_email)
+    TextView tvEmail;
+    @BindView(R.id.tv_academicStatus)
+    TextView tvAcademicStatus;
 
     @AfterViews
     void setVars() {
         tvName = (TextView) getActivity().findViewById(R.id.tv_name);
         tvDescription = (TextView) getActivity().findViewById(R.id.tv_description);
+        tvEmail = (TextView) getActivity().findViewById(R.id.tv_email);
+        tvAcademicStatus = (TextView) getActivity().findViewById(R.id.tv_academicStatus);
 
-        globalState = (GlobalState) getActivity().getApplication();
+
 //        String profileId = globalState.getUserValue().getProfileID();
 //
 //        try {
@@ -44,12 +50,17 @@ public class ProfileFragment extends Fragment {
 //            e.printStackTrace();
 //        }
 
+        globalState = (GlobalState) getActivity().getApplication();
+        //Log.d(TAG, "onViewCreated: " + globalState.getUserValue().getFirstName());
+        tvName.setText(globalState.getUserValue().getFirstName() + " " + globalState.getUserValue().getLastName());
+
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvName.setText(globalState.getUserValue().getFirstName());
+
     }
 
     @Override

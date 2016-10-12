@@ -58,15 +58,11 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_home);
-
         myToolbar.setTitle("Home");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
         //getContext().getColor(R.color.md_white_1000) //API is 19+ but this call needs 23+
 
         final IProfile profile = new ProfileDrawerItem().withName("Full Name").withEmail("Email").withIcon(R.drawable.profile);
-
-
-
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
