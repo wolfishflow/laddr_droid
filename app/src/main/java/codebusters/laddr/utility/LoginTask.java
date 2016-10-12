@@ -51,6 +51,14 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         //progressBar.setVisibility(View.INVISIBLE);
+        globalState = (GlobalState) activity.getApplication();
+        String profileId = globalState.getUserValue().getProfileID();
+
+        try {
+            new GetUserTask(activity).execute(profileId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
