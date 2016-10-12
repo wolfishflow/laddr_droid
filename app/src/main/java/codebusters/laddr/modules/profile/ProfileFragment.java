@@ -1,9 +1,6 @@
 package codebusters.laddr.modules.profile;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -73,9 +70,9 @@ public class ProfileFragment extends Fragment {
         globalState = (GlobalState) getActivity().getApplication();
         //Log.d(TAG, "onViewCreated: " + globalState.getUserValue().getFirstName());
         tvName.setText(globalState.getUserValue().getFirstName() + " " + globalState.getUserValue().getLastName());
-
-
-
+        tvDescription.setText(globalState.getUserValue().getUserDescription());
+        tvEmail.setText(globalState.getUserValue().getEmail());
+//        tvAcademicStatus.setText(globalState.getUserValue().getAcademicStatus());
 
     }
 
@@ -154,8 +151,6 @@ public class ProfileFragment extends Fragment {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
-
-
     }
 
     @Override
