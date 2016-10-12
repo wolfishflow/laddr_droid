@@ -42,23 +42,33 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         //super.onBackPressed();
 
-        new AlertDialog.Builder(this)
-                .setIcon(new IconicsDrawable(this)
-                        .icon(FontAwesome.Icon.faw_exclamation_triangle)
-                        .color(Color.RED)
-                        .sizeDp(24))
-                //.setIcon(FontAwesome.Icon.faw_exclamation_triangle)
-                .setTitle("Exit?")
-                .setMessage("Are you sure you want to exit right now?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
 
-                })
-                .setNegativeButton("No", null)
-                .show();
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            //super.onBackPressed();
+            //additional code
+            new AlertDialog.Builder(this)
+                    .setIcon(new IconicsDrawable(this)
+                            .icon(FontAwesome.Icon.faw_exclamation_triangle)
+                            .color(Color.RED)
+                            .sizeDp(24))
+                    //.setIcon(FontAwesome.Icon.faw_exclamation_triangle)
+                    .setTitle("Exit?")
+                    .setMessage("Are you sure you want to exit right now?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        } else {
+            getFragmentManager().popBackStack();
+        }
+
+
     }
 }
