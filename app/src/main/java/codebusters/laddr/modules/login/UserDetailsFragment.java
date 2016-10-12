@@ -76,7 +76,7 @@ public class UserDetailsFragment extends Fragment {
             su.setAcademicStatus(3);
         } else if (spinnerValue.equals("Graduated")) {
             su.setAcademicStatus(4);
-        } else if (spinnerValue.equals("Not In School")) {
+        } else if (spinnerValue.equals("Not Applicable")) {
             su.setAcademicStatus(0);
         }
 

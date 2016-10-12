@@ -19,6 +19,6 @@
         <item>College</item>
         <item>University</item>
         <item>Graduated</item>
-        <item>Not In School</item>
+        <item>Not Applicable</item>
     </string-array>
 </resources>
