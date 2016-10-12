@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,12 +58,25 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        globalState = (GlobalState) getActivity().getApplication();
+//        String profileId = globalState.getUserValue().getProfileID();
+//        try {
+//            new GetUserTask(getActivity()).execute(profileId);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
         myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_home);
         myToolbar.setTitle("Home");
+        //((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Home");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
         //getContext().getColor(R.color.md_white_1000) //API is 19+ but this call needs 23+
 
-        final IProfile profile = new ProfileDrawerItem().withName("Full Name").withEmail("Email").withIcon(R.drawable.profile);
+        final IProfile profile = new ProfileDrawerItem()
+                .withName(globalState.getUserValue().getFirstName()+" "+globalState.getUserValue().getLastName())
+                .withEmail(globalState.getUserValue().getEmail())
+                .withIcon(R.drawable.profile);
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
@@ -134,14 +148,7 @@ public class HomeFragment extends Fragment {
                 .build();
 
 
-        globalState = (GlobalState) getActivity().getApplication();
-        String profileId = globalState.getUserValue().getProfileID();
 
-        try {
-            new GetUserTask(getActivity()).execute(profileId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
