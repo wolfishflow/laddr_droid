@@ -71,14 +71,17 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
             globalState.getUserValue().setResume(json.getString("Resume"));
             globalState.getUserValue().setAcademicStatus(Integer.parseInt(json.getString("AcademicStatus")));
 
+            Log.d("Get User Task", "global state happy");
+            Log.d("Get User Task", globalState.getUserValue().getFirstName());
+
             return user;
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
         }
         return null;
     }
