@@ -27,7 +27,7 @@ import codebusters.laddr.data.User;
  */
 public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
-    private final String DEBUG_TAG = "LADDER_DEBUG";
+    private final String TAG = "Login Task";
     private Activity activity;
     private static GlobalState globalState;
 
@@ -51,6 +51,14 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
         //progressBar.setVisibility(View.INVISIBLE);
+        globalState = (GlobalState) activity.getApplication();
+        String profileId = globalState.getUserValue().getProfileID();
+
+        try {
+            new GetUserTask(activity).execute(profileId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -69,7 +77,7 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
 
         try {
             JSONObject json = Utility.loginProfile(activity, email, password);
-            Log.d(DEBUG_TAG, json.toString());
+            Log.d(TAG, json.toString());
 
             if (json.getString("success").equals("true")) {
                 globalState = (GlobalState) activity.getApplication();
@@ -80,8 +88,10 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
                 User user = new User();
                 user.setProfileID(json.getJSONObject("profile").getString("ProfileID"));
                 user.setEmail(json.getJSONObject("profile").getString("Email"));
+                user.setAccountType(Integer.parseInt(json.getJSONObject("profile").getString("AccountType")));
                 //user.setTimestamp(json.getJSONObject("profile").getString("Timestamp"));
-                user.setPictureURL(new URL(json.getJSONObject("profile").getString("PictureURL")));
+                //broken rn
+                //user.setPictureURL(new URL(json.getJSONObject("profile").getString("PictureURL")));
 
                 globalState.setUserValue(user);
 

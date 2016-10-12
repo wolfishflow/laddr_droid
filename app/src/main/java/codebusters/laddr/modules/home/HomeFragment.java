@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -25,18 +24,16 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.mikepenz.materialize.util.UIUtils;
-
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
+import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.modules.postings.PostingsActivity;
 import codebusters.laddr.modules.profile.ProfileFragment;
 import codebusters.laddr.modules.profile.ProfileFragment_;
+import codebusters.laddr.utility.GetUserTask;
 
 /**
  * Created by alansimon on 2016-09-18.
@@ -48,18 +45,31 @@ public class HomeFragment extends Fragment {
     Toolbar myToolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
+    private static GlobalState globalState;
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_home);
+        globalState = (GlobalState) getActivity().getApplication();
+//        String profileId = globalState.getUserValue().getProfileID();
+//        try {
+//            new GetUserTask(getActivity()).execute(profileId);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
+        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_home);
         myToolbar.setTitle("Home");
+        //((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Home");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
         //getContext().getColor(R.color.md_white_1000) //API is 19+ but this call needs 23+
 
-        final IProfile profile = new ProfileDrawerItem().withName("Full Name").withEmail("Email").withIcon(R.drawable.profile);
+        final IProfile profile = new ProfileDrawerItem()
+                .withName(globalState.getUserValue().getFirstName()+" "+globalState.getUserValue().getLastName())
+                .withEmail(globalState.getUserValue().getEmail())
+                .withIcon(R.drawable.profile);
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(getActivity())
@@ -102,6 +112,7 @@ public class HomeFragment extends Fragment {
                                 FragmentManager fm = getFragmentManager();
                                 FragmentTransaction ft = fm.beginTransaction();
                                 ft.replace(R.id.home_fragment_container, fr);
+                                ft.addToBackStack(null);
                                 ft.commit();
                                 break;
                             case 3:
@@ -129,6 +140,7 @@ public class HomeFragment extends Fragment {
                 })
                 .withSavedInstance(savedInstanceState)
                 .build();
+
     }
 
     @Override

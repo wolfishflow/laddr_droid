@@ -76,7 +76,7 @@ public class UserDetailsFragment extends Fragment {
             su.setAcademicStatus(3);
         } else if (spinnerValue.equals("Graduated")) {
             su.setAcademicStatus(4);
-        } else if (spinnerValue.equals("Not In School")) {
+        } else if (spinnerValue.equals("Not Applicable")) {
             su.setAcademicStatus(0);
         }
 
@@ -90,7 +90,6 @@ public class UserDetailsFragment extends Fragment {
             e.printStackTrace();
         }
         // Then login
-        Toast.makeText(getActivity(), "added user?", Toast.LENGTH_SHORT).show();
         try {
             if (new LoginTask(getActivity()).execute(su.getEmail(), su.getPassword()).get()) {
                 Intent intent = new Intent(getActivity(), HomeActivity_.class);

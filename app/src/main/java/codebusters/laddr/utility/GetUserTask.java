@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.User;
 
 /**
@@ -25,9 +26,15 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
 
     public final String DEBUG_TAG = "LADDER_DEBUG";
     private Activity activity;
+    private static GlobalState globalState;
+
 
     public GetUserTask(Activity activity) {
         this.activity = activity;
+    }
+
+    public GetUserTask(){
+
     }
 
     @Override
@@ -41,7 +48,7 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
         try {
             JSONObject json = Utility.getUser(activity, params[0]);
 
-            Log.d(DEBUG_TAG, json.toString());
+            //Log.d(DEBUG_TAG, json.toString());
 
             User user = new User();
             user.setProfileID(json.getString("ProfileID"));
@@ -50,13 +57,26 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
             user.setUserDescription(json.getString("Description"));
             user.setResume(json.getString("Resume"));
             user.setAcademicStatus(Integer.parseInt(json.getString("AcademicStatus")));
-            user.setEmail(json.getString("Email"));
-            user.setPictureURL(new URL(json.getString("FirstName")));
+            //user.setEmail(json.getString("Email"));
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CANADA);
-            user.setTimestamp(formatter.parse(json.getString("Timestamp")));
+//            Picture not handled currently
+//            user.setPictureURL(new URL(json.getString("FirstName")));
 
-            user.setAccountType(Integer.parseInt(json.getString("AccountType")));
+//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CANADA);
+//            user.setTimestamp(formatter.parse(json.getString("Timestamp")));
+//
+//            user.setAccountType(Integer.parseInt(json.getString("AccountType")));
+
+            globalState = (GlobalState) activity.getApplication();
+
+            globalState.getUserValue().setFirstName(json.getString("FirstName"));
+            globalState.getUserValue().setLastName(json.getString("LastName"));
+            globalState.getUserValue().setUserDescription(json.getString("Description"));
+            globalState.getUserValue().setResume(json.getString("Resume"));
+            globalState.getUserValue().setAcademicStatus(Integer.parseInt(json.getString("AcademicStatus")));
+
+            Log.d("Get User Task", "global state happy");
+            Log.d("Get User Task", globalState.getUserValue().getFirstName());
 
             return user;
 
@@ -64,8 +84,8 @@ public class GetUserTask extends AsyncTask<String, Void, User> {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
         }
         return null;
     }

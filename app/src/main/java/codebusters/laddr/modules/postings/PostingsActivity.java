@@ -34,6 +34,9 @@ import codebusters.laddr.utility.GetAllPostingsTask;
 
 public class PostingsActivity extends AppCompatActivity {
 
+    private final String TAG = "Postings Activity";
+
+
     private static GlobalState globalState;
     private AccountHeader headerResult = null;
     private Drawer result = null;
@@ -47,12 +50,13 @@ public class PostingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postings);
         ButterKnife.bind(this);
-        Log.d("TAG", "wtf2");
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (isTaskRoot())
+            Log.d(TAG, "onCreate: Is Task Root");
 
         globalState = (GlobalState) this.getApplication();
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Postings");
         toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
