@@ -19,11 +19,10 @@ public class User extends Profile {
 
     }
 
-    public User(String profileID, String username, String email, URL pictureURL, Date timestamp,
+    public User(String profileID, String email, URL pictureURL, Date timestamp,
                 String firstName, String lastName, String userDescription, String resume, int academicStatus) {
         //fields from Profile superclass
         this.profileID = profileID;
-        this.username = username;
         this.email = email;
         this.pictureURL = pictureURL;
         this.timestamp = timestamp;

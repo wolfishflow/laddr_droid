@@ -25,7 +25,6 @@ public class GlobalState extends Application {
         this.userValue = userValue;
     }
 
-
     public SignUpUser getSignUpUserValue() {
         return signUpUserValue;
     }
