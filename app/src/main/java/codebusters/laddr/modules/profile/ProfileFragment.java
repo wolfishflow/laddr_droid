@@ -50,7 +50,7 @@ public class ProfileFragment extends Fragment {
     TextView tvEmail;
     @BindView(R.id.tv_academicStatus)
     TextView tvAcademicStatus;
-    @BindView(R.id.toolbar_postings)
+    @BindView(R.id.toolbar)
     Toolbar myToolbar;
 
     @AfterViews
@@ -79,7 +79,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_postings);
+        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         myToolbar.setTitle("Profile");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
 //        globalState = (GlobalState) getActivity().getApplication();

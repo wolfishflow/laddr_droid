@@ -41,7 +41,7 @@ import codebusters.laddr.utility.GetUserTask;
 @EFragment(R.layout.fragment_home)
 public class HomeFragment extends Fragment {
 
-    @BindView(R.id.toolbar_home)
+    @BindView(R.id.toolbar)
     Toolbar myToolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
 //            e.printStackTrace();
 //        }
 
-        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar_home);
+        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         myToolbar.setTitle("Home");
         //((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Home");
         myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));

@@ -72,8 +72,6 @@ public class PostingsActivity extends AppCompatActivity {
                 )
                 .build();
 
-        new DrawerBuilder().withActivity(this).build();
-
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
