@@ -6,9 +6,10 @@ import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -28,8 +29,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.InstanceState;
 
+import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.modules.postings.PostingsActivity;
@@ -40,19 +41,24 @@ public class HomeActivity extends AppCompatActivity {
 
     public final String TAG = "HomeActivity";
     private static GlobalState globalState;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
     Bundle savedInstanceState;
 
     @AfterViews
-    void setVars(){
-        if (isTaskRoot())
-            Log.d(TAG, "onCreate: Is Task Root");
+    void setVars() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        globalState = (GlobalState) this.getApplication();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Home");
+
+        globalState = (GlobalState) getApplication();
+
         final IProfile profile = new ProfileDrawerItem()
-                .withName(globalState.getUserValue().getFirstName()+" "+globalState.getUserValue().getLastName())
+                .withName(globalState.getUserValue().getFirstName() + " " + globalState.getUserValue().getLastName())
                 .withEmail(globalState.getUserValue().getEmail())
                 .withIcon(R.drawable.profile);
 
@@ -70,8 +76,10 @@ public class HomeActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-        Drawer result = new DrawerBuilder()
+        result = new DrawerBuilder()
                 .withActivity(this)
+                .withToolbar(toolbar)
+                .withActionBarDrawerToggle(true)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName("Home").withIcon(FontAwesome.Icon.faw_home).withIdentifier(1).withSetSelected(true),
@@ -124,6 +132,9 @@ public class HomeActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        result.getActionBarDrawerToggle().setDrawerIndicatorEnabled(true);
+
         Fragment fr = new HomeFragment_();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -157,8 +168,7 @@ public class HomeActivity extends AppCompatActivity {
                     //.setIcon(FontAwesome.Icon.faw_exclamation_triangle)
                     .setTitle("Exit?")
                     .setMessage("Are you sure you want to exit right now?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                    {
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
