@@ -70,9 +70,7 @@ public class HomeActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-        new DrawerBuilder().withActivity(this).build();
-
-        result = new DrawerBuilder()
+        Drawer result = new DrawerBuilder()
                 .withActivity(this)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
