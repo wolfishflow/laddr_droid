@@ -7,20 +7,11 @@
 
     <!-- TODO: separate this layout into its own -->
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_postings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="5dp"
-        android:minHeight="?attr/actionBarSize" />
-
     <LinearLayout
         android:padding="16dp"
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_postings"
         android:orientation="horizontal"
         android:weightSum="1">
 
