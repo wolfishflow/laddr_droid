@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
         myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         myToolbar.setTitle("Home");
         //((ActionBarActivity)getActivity()).getSupportActionBar().setTitle("Home");
-        myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
+        //myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
         //getContext().getColor(R.color.md_white_1000) //API is 19+ but this call needs 23+
 
 //        final IProfile profile = new ProfileDrawerItem()
