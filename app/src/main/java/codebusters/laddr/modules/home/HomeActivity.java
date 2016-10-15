@@ -34,6 +34,8 @@ import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.modules.postings.PostingsActivity;
+import codebusters.laddr.modules.postings.PostingsFragment;
+import codebusters.laddr.modules.postings.PostingsFragment_;
 import codebusters.laddr.modules.profile.ProfileFragment_;
 
 @EActivity(R.layout.activity_home)
@@ -45,6 +47,10 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
+
+    Fragment fr;
+    FragmentManager fm;
+    FragmentTransaction ft;
 
     Bundle savedInstanceState;
 
@@ -99,9 +105,9 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
-                                Fragment fr = new ProfileFragment_();
-                                FragmentManager fm = getFragmentManager();
-                                FragmentTransaction ft = fm.beginTransaction();
+                                fr = new ProfileFragment_();
+                                fm = getFragmentManager();
+                                ft = fm.beginTransaction();
                                 ft.replace(R.id.home_fragment_container, fr);
                                 ft.addToBackStack(null);
                                 ft.commit();
@@ -111,8 +117,15 @@ public class HomeActivity extends AppCompatActivity {
                                 break;
                             case 4:
                                 //Toast.makeText(getActivity(), "Postings", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(HomeActivity.this, PostingsActivity.class);
-                                startActivity(intent);
+                                //Intent intent = new Intent(HomeActivity.this, PostingsActivity.class);
+                                //startActivity(intent);
+                                Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                                fr = new PostingsFragment_();
+                                fm = getFragmentManager();
+                                ft = fm.beginTransaction();
+                                ft.replace(R.id.home_fragment_container, fr);
+                                ft.addToBackStack(null);
+                                ft.commit();
                                 break;
                             case 5:
                                 break;
