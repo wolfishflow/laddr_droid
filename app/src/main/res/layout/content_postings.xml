@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
@@ -8,24 +9,46 @@
     android:paddingRight="16dp"
     android:paddingTop="10dp">
 
+    <ImageView
+        android:id="@+id/iv_organizationLogo"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginRight="16dp"
+        app:srcCompat="@drawable/ic_goal" />
+
+
     <TextView
-        android:id="@+id/postings_title"
+        android:id="@+id/tv_postingsName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/iv_organizationLogo"
+        android:text="Temporary Title Here"
         android:textSize="16dp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/postings_organization"
+        android:id="@+id/tv_postingsOrganizationName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/postings_title" />
+        android:layout_below="@id/tv_postingsName"
+        android:layout_toRightOf="@+id/iv_organizationLogo"
+        android:text="Temporary Org Name Here" />
 
     <TextView
-        android:id="@+id/postings_location"
+        android:id="@+id/tv_postingsLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/postings_organization" />
+        android:layout_below="@id/tv_postingsOrganizationName"
+        android:layout_toRightOf="@+id/iv_organizationLogo"
+        android:text="Temporary Location Here" />
+
+    <TextView
+        android:id="@+id/tv_postingsTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_postingsLocation"
+        android:layout_toRightOf="@+id/iv_organizationLogo"
+        android:text="Temporary Time Stamp Here" />
 
 </RelativeLayout>
