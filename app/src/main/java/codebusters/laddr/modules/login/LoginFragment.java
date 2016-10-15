@@ -6,19 +6,19 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +46,8 @@ public class LoginFragment extends Fragment {
     ProgressBar progressBar;
 
     private static GlobalState globalState;
+    @BindView(R.id.tv_loginLogo)
+    TextView tvLoginLogo;
 
 
     @Override
@@ -57,6 +59,15 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        String fontPath = "fonts/lobster1point4.otf";
+
+        // Loading Font Face
+        Typeface m_typeFace = Typeface.createFromAsset(getActivity().getAssets(), fontPath);
+        tvLoginLogo = (TextView) view.findViewById(R.id.tv_loginLogo);
+        // Applying font
+        tvLoginLogo.setTypeface(m_typeFace);
+
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
         cbRemember = (CheckBox) getActivity().findViewById(R.id.cb_remember);
@@ -80,8 +91,7 @@ public class LoginFragment extends Fragment {
 
         globalState = (GlobalState) getActivity().getApplication();
 
-        if (cbRemember.isChecked())
-        {
+        if (cbRemember.isChecked()) {
             SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(getString(R.string.saved_email), etEmail.getText().toString());
@@ -89,18 +99,17 @@ public class LoginFragment extends Fragment {
             editor.commit();
 
             String defaultValue = getResources().getString(R.string.saved_email);
-            String emailValue = sharedPref.getString(getString(R.string.saved_email),defaultValue);
+            String emailValue = sharedPref.getString(getString(R.string.saved_email), defaultValue);
             defaultValue = getResources().getString(R.string.saved_password);
-            String passwordValue = sharedPref.getString(getString(R.string.saved_password),defaultValue);
-    }
-        
+            String passwordValue = sharedPref.getString(getString(R.string.saved_password), defaultValue);
+        }
+
         try {
-            if (new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get()){
+            if (new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get()) {
                 Intent intent = new Intent(getActivity(), HomeActivity_.class);
                 startActivity(intent);
                 getActivity().finish();
-            }
-            else {
+            } else {
                 Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
             }
 
