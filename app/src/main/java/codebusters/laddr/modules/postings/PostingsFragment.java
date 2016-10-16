@@ -1,6 +1,8 @@
 package codebusters.laddr.modules.postings;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -85,9 +87,16 @@ public class PostingsFragment extends Fragment {
                     public void onClick(View view, int position) {
                         Posting posting = postings.get(position);
                         Toast.makeText(getActivity().getApplicationContext(), posting.getLocation()+" is selected!", Toast.LENGTH_SHORT).show();
+                        Fragment fr = new PostingsContentFragment_();
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.home_fragment_container, fr);
+                        ft.addToBackStack(null);
+                        ft.commit();
                     }
                     @Override
                     public void onLongClick(View view, int position) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
 
                     }
                 }));

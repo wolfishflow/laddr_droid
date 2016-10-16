@@ -40,7 +40,7 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
     public PostingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.content_postings, parent, false);
+                .inflate(R.layout.layout_postings, parent, false);
         // set the view's size, margins, paddings and layout parameters
         return new ViewHolder(v);
     }
