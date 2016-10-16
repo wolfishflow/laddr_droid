@@ -1,40 +1,24 @@
 package codebusters.laddr.modules.postings;
 
+import org.androidannotations.annotations.EFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
-import org.androidannotations.annotations.EFragment;
-
 import java.util.ArrayList;
-
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Posting;
-import codebusters.laddr.modules.home.HomeActivity_;
 import codebusters.laddr.utility.DividerItemDecoration;
 import codebusters.laddr.utility.GetAllPostingsTask;
 

@@ -5,10 +5,10 @@ import android.os.Parcelable;
 
 /**
  * Created by greg on 5/3/2016.
- *
+ * <p>
  * A data class representing a volunteer job posting
  */
-public class Posting implements Parcelable{
+public class Posting implements Parcelable {
     private String postingID;
     private String jobTitle;
     private String organizerID;

@@ -4,13 +4,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -33,8 +31,6 @@ import org.androidannotations.annotations.EActivity;
 import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
-import codebusters.laddr.modules.postings.PostingsActivity;
-import codebusters.laddr.modules.postings.PostingsFragment;
 import codebusters.laddr.modules.postings.PostingsFragment_;
 import codebusters.laddr.modules.profile.ProfileFragment_;
 
@@ -104,7 +100,6 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                                 break;
                             case 2:
-                                Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                                 fr = new ProfileFragment_();
                                 fm = getFragmentManager();
                                 ft = fm.beginTransaction();
@@ -116,7 +111,6 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(HomeActivity.this, "Forum", Toast.LENGTH_SHORT).show();
                                 break;
                             case 4:
-                                Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                                 fr = new PostingsFragment_();
                                 fm = getFragmentManager();
                                 ft = fm.beginTransaction();
@@ -162,20 +156,14 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-
-
         int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
-            //super.onBackPressed();
-            //additional code
             new AlertDialog.Builder(this)
                     .setIcon(new IconicsDrawable(this)
                             .icon(FontAwesome.Icon.faw_exclamation_triangle)
                             .color(Color.RED)
                             .sizeDp(24))
-                    //.setIcon(FontAwesome.Icon.faw_exclamation_triangle)
                     .setTitle("Exit?")
                     .setMessage("Are you sure you want to exit right now?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {

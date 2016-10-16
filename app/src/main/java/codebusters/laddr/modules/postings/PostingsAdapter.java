@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import codebusters.laddr.R;
 import codebusters.laddr.data.Posting;
 
@@ -18,8 +16,6 @@ import codebusters.laddr.data.Posting;
 public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHolder> {
 
     ArrayList<Posting> postingsList;
-    //private final View.OnClickListener mOnClickListener = new MyOnClickListener();
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
