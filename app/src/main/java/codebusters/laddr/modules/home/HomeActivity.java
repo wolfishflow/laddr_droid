@@ -116,9 +116,6 @@ public class HomeActivity extends AppCompatActivity {
                                 Toast.makeText(HomeActivity.this, "Forum", Toast.LENGTH_SHORT).show();
                                 break;
                             case 4:
-                                //Toast.makeText(getActivity(), "Postings", Toast.LENGTH_SHORT).show();
-                                //Intent intent = new Intent(HomeActivity.this, PostingsActivity.class);
-                                //startActivity(intent);
                                 Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                                 fr = new PostingsFragment_();
                                 fm = getFragmentManager();

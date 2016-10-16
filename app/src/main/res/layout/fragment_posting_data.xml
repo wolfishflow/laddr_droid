@@ -3,41 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="5dp"
-        android:minHeight="?attr/actionBarSize" />
-
+    
     <TextView
         android:id="@+id/tv_postingTitle"
+        android:text="Sample Title Here"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar" />
 
     <TextView
         android:id="@+id/tv_postingOrganizationName"
+        android:text="Sample Org Name Here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_postingTitle" />
 
     <TextView
         android:id="@+id/tv_postingLocation"
+        android:text="Sample Location Here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_postingOrganizationName" />
 
     <TextView
         android:id="@+id/tv_postingsDescription"
+        android:text="Sample Description Here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_postingLocation" />
 
     <TextView
         android:id="@+id/tv_postingTimeStamp"
+        android:text="Sample TimeStamp Here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_postingsDescription" />
