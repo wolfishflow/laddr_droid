@@ -1,11 +1,14 @@
 package codebusters.laddr.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by greg on 5/3/2016.
  *
  * A data class representing a volunteer job posting
  */
-public class Posting {
+public class Posting implements Parcelable{
     private String postingID;
     private String jobTitle;
     private String organizerID;
@@ -24,6 +27,27 @@ public class Posting {
         this.location = location;
         this.jobDescription = jobDescription;
     }
+
+    protected Posting(Parcel in) {
+        postingID = in.readString();
+        jobTitle = in.readString();
+        organizerID = in.readString();
+        organizerName = in.readString();
+        location = in.readString();
+        jobDescription = in.readString();
+    }
+
+    public static final Creator<Posting> CREATOR = new Creator<Posting>() {
+        @Override
+        public Posting createFromParcel(Parcel in) {
+            return new Posting(in);
+        }
+
+        @Override
+        public Posting[] newArray(int size) {
+            return new Posting[size];
+        }
+    };
 
     public String getPostingID() {
         return postingID;
@@ -75,5 +99,20 @@ public class Posting {
 
     public String toString() {
         return this.getJobTitle();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(postingID);
+        dest.writeString(jobTitle);
+        dest.writeString(organizerID);
+        dest.writeString(organizerName);
+        dest.writeString(location);
+        dest.writeString(jobDescription);
     }
 }

@@ -56,8 +56,6 @@ public class PostingsFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
 
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -76,8 +74,8 @@ public class PostingsFragment extends Fragment {
 
             if (globalState.getToken() != null) {
                 //get all the postings
-                final ArrayList<Posting> postings = new GetAllPostingsTask(getActivity()).execute().get();
-                mAdapter = new PostingsAdapter(postings);
+                final ArrayList<Posting> allPostings = new GetAllPostingsTask(getActivity()).execute().get();
+                mAdapter = new PostingsAdapter(allPostings);
                 mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 mRecyclerView.setAdapter(mAdapter);
 
@@ -85,15 +83,21 @@ public class PostingsFragment extends Fragment {
                 mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                        Posting posting = postings.get(position);
-                        Toast.makeText(getActivity().getApplicationContext(), posting.getLocation()+" is selected!", Toast.LENGTH_SHORT).show();
+
+                        Posting singlePosting = allPostings.get(position);
+                        Toast.makeText(getActivity().getApplicationContext(), singlePosting.getLocation() + " is selected!", Toast.LENGTH_SHORT).show();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("posting", singlePosting);
                         Fragment fr = new PostingsContentFragment_();
+                        fr.setArguments(bundle);
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
                         ft.replace(R.id.home_fragment_container, fr);
                         ft.addToBackStack(null);
                         ft.commit();
                     }
+
                     @Override
                     public void onLongClick(View view, int position) {
                         Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
