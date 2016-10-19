@@ -367,6 +367,19 @@ public class Utility {
         return false;
     }
 
+    public static boolean applyPosting(Activity activity, Posting posting) throws IOException, JSONException{
+        AbstractMap.SimpleEntry<String, String> postingID = new AbstractMap.SimpleEntry<String, String>("PostingID", posting.getPostingID());
+        JSONObject json = (JSONObject)postRequest(activity, "http://laddr.xyz/api/apply", postingID);
+
+        String result = json.getString("success");
+        if (result.equals("true")) {
+            return true;
+        }
+
+        return false;
+    }
+
+
     /**
      * Logs in either a User or Organization.
      * @param activity  The calling activity, included to get reference to GlobalState

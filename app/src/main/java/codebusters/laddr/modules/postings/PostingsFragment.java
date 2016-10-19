@@ -69,10 +69,10 @@ public class PostingsFragment extends Fragment {
                     public void onClick(View view, int position) {
 
                         Posting singlePosting = allPostings.get(position);
-                        Toast.makeText(getActivity().getApplicationContext(), singlePosting.getLocation() + " is selected!", Toast.LENGTH_SHORT).show();
 
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("posting", singlePosting);
+
                         Fragment fr = new PostingsContentFragment_();
                         fr.setArguments(bundle);
                         FragmentManager fm = getFragmentManager();
