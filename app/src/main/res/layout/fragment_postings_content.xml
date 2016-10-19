@@ -42,13 +42,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_postingsDescription"/>
 
+    <!--<fragment-->
+        <!--android:layout_below="@+id/tv_postingTimeStamp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_below="@id/tv_postingTimeStamp"-->
+        <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--android:id="@+id/map"-->
+        <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="500dp"-->
+        <!--tools:context="codebusters.homeassign1.MapsActivity" />-->
+
     <RelativeLayout
         android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
-            android:layout_width="fill_parent"
+            android:id="@+id/btn_postingApply"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:text="@string/btn_apply"
