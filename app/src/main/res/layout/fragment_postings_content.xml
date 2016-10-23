@@ -1,66 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_postingTitle"
-        android:text="Sample Title Here"
-        android:textAlignment="center"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:textSize="20sp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_margin="10dp"/>
+        android:layout_margin="16dp"
+        app:cardUseCompatPadding="true"
+        card_view:cardElevation="4dp">
 
-    <TextView
-        android:id="@+id/tv_postingOrganizationName"
-        android:text="Sample Org Name Here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingTitle" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_postingLocation"
-        android:text="Sample Location Here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingOrganizationName" />
+            <TextView
+                android:id="@+id/tv_postingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toolbar"
+                android:layout_margin="10dp"
+                android:text="Sample Title Here"
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tv_postingsDescription"
-        android:text="Sample Description Here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingLocation" />
+            <TextView
+                android:id="@+id/tv_postingOrganizationName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postingTitle"
+                android:text="Sample Org Name Here" />
 
-    <TextView
-        android:id="@+id/tv_postingTimeStamp"
-        android:text="Sample TimeStamp Here"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingsDescription"/>
+            <TextView
+                android:id="@+id/tv_postingLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postingOrganizationName"
+                android:text="Sample Location Here" />
+
+            <TextView
+                android:id="@+id/tv_postingsDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postingLocation"
+                android:text="Sample Description Here" />
+
+            <TextView
+                android:id="@+id/tv_postingTimeStamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_postingsDescription"
+                android:text="Sample TimeStamp Here" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
 
     <!--<fragment-->
-        <!--android:layout_below="@+id/tv_postingTimeStamp"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+    <!--android:layout_below="@+id/tv_postingTimeStamp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content" />-->
 
     <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:layout_below="@id/tv_postingTimeStamp"-->
-        <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/map"-->
-        <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="500dp"-->
-        <!--tools:context="codebusters.homeassign1.MapsActivity" />-->
+    <!--android:layout_below="@id/tv_postingTimeStamp"-->
+    <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/map"-->
+    <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="500dp"-->
+    <!--tools:context="codebusters.homeassign1.MapsActivity" />-->
 
     <RelativeLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/btn_postingApply"
