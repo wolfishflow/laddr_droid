@@ -6,7 +6,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dd.morphingbutton.MorphingButton;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.iconics.IconicsDrawable;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -83,6 +89,25 @@ public class LoginFragment extends Fragment {
     TODO: Should only move to the new activity if i can verify the success of logintask
     TODO: Add the shared pref pre-check if it's been fufilled post or pre view created.
      */
+
+//    @Click(R.id.btn_woo)
+//    void woo(){
+//        MorphingButton btn = (MorphingButton) getActivity().findViewById(R.id.btn_woo);
+//        Drawable abc = new IconicsDrawable(getActivity())
+//                .icon(FontAwesome.Icon.faw_sign_in)
+//                .color(Color.BLUE)
+//                .sizeDp(24);
+//
+//        MorphingButton.Params circle = MorphingButton.Params.create()
+//                .duration(500)
+//                .cornerRadius(200) // 56 dp
+//                .width(200) // 56 dp
+//                .height(200) // 56 dp
+//                .color((R.color.md_green_50)) // normal state color
+//                .colorPressed((R.color.md_green_400)) // pressed state color
+//                .icon(R.drawable.ic_goal); // icon
+//        btn.morph(circle);
+//    }
 
     @Click(R.id.btn_login)
     void loginClicked() {

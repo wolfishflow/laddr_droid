@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/tv_loginLogo"
-            android:text="Ladder"
+            android:text="Laddr"
             android:layout_marginBottom="30dp"
             android:textAlignment="center"
             android:textSize="60sp"
@@ -59,7 +59,7 @@
 
                     <EditText
                         android:id="@+id/et_password"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_password"
                         android:inputType="textPassword"/>
@@ -84,7 +84,7 @@
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@color/colorAccent"
@@ -92,13 +92,19 @@
             android:textColor="@android:color/white"
             />
 
+        <!--<com.dd.morphingbutton.MorphingButton-->
+            <!--android:id="@+id/btn_woo"-->
+            <!--android:text="Login"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
         <!-- Login BTN -->
 
         <!-- Forgot PWD BTN -->
 
         <Button
             android:id="@+id/btn_forgot_password"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
@@ -113,7 +119,7 @@
 
         <Button
             android:id="@+id/btn_signup"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@null"
