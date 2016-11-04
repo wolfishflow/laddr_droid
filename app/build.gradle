@@ -67,6 +67,10 @@ dependencies {
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
 }
 //apply plugin: 'com.google.gms.google-services'
+dependencies {
+    compile 'com.google.firebase:firebase-messaging:9.2.1'
+    compile 'com.google.android.gms:play-services-maps:9.6.1'
+}
 
 
 

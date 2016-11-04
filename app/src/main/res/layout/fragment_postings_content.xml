@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -65,16 +66,27 @@
     <!--android:layout_below="@+id/tv_postingTimeStamp"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content" />-->
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
     <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_below="@id/tv_postingTimeStamp"-->
+    <!--android:layout_below="@id/card"-->
     <!--xmlns:map="http://schemas.android.com/apk/res-auto"-->
     <!--xmlns:tools="http://schemas.android.com/tools"-->
     <!--android:id="@+id/map"-->
     <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+    <!--class="com.google.android.gms.maps.SupportMapFragment"-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="500dp"-->
-    <!--tools:context="codebusters.homeassign1.MapsActivity" />-->
+    <!--android:layout_height="500dp" />-->
 
     <RelativeLayout
         android:layout_width="wrap_content"
