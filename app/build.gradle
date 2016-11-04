@@ -36,6 +36,7 @@ buildscript {
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url "https://jitpack.io" }
 }
 
 apply plugin: 'com.android.application'
@@ -62,6 +63,8 @@ dependencies {
     compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
 }
 //apply plugin: 'com.google.gms.google-services'
 
