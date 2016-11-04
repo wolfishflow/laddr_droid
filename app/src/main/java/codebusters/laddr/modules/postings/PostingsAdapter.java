@@ -5,9 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import codebusters.laddr.R;
 import codebusters.laddr.data.Posting;
 
@@ -18,8 +16,6 @@ import codebusters.laddr.data.Posting;
 public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHolder> {
 
     ArrayList<Posting> postingsList;
-    //private final View.OnClickListener mOnClickListener = new MyOnClickListener();
-
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -40,10 +36,8 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
     public PostingsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.content_postings, parent, false);
+                .inflate(R.layout.layout_postings, parent, false);
         // set the view's size, margins, paddings and layout parameters
-
-
         return new ViewHolder(v);
     }
 

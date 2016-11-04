@@ -1,38 +1,24 @@
 package codebusters.laddr.modules.postings;
 
+import org.androidannotations.annotations.EFragment;
 import android.app.Fragment;
-import android.content.Intent;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-
-import org.androidannotations.annotations.EFragment;
-
 import java.util.ArrayList;
-
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Posting;
-import codebusters.laddr.modules.home.HomeActivity_;
 import codebusters.laddr.utility.DividerItemDecoration;
 import codebusters.laddr.utility.GetAllPostingsTask;
 
@@ -54,8 +40,6 @@ public class PostingsFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
 
 
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -74,8 +58,8 @@ public class PostingsFragment extends Fragment {
 
             if (globalState.getToken() != null) {
                 //get all the postings
-                final ArrayList<Posting> postings = new GetAllPostingsTask(getActivity()).execute().get();
-                mAdapter = new PostingsAdapter(postings);
+                final ArrayList<Posting> allPostings = new GetAllPostingsTask(getActivity()).execute().get();
+                mAdapter = new PostingsAdapter(allPostings);
                 mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 mRecyclerView.setAdapter(mAdapter);
 
@@ -83,11 +67,24 @@ public class PostingsFragment extends Fragment {
                 mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                        Posting posting = postings.get(position);
-                        Toast.makeText(getActivity().getApplicationContext(), posting.getLocation()+" is selected!", Toast.LENGTH_SHORT).show();
+
+                        Posting singlePosting = allPostings.get(position);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("posting", singlePosting);
+
+                        Fragment fr = new PostingsContentFragment_();
+                        fr.setArguments(bundle);
+                        FragmentManager fm = getFragmentManager();
+                        FragmentTransaction ft = fm.beginTransaction();
+                        ft.replace(R.id.home_fragment_container, fr);
+                        ft.addToBackStack(null);
+                        ft.commit();
                     }
+
                     @Override
                     public void onLongClick(View view, int position) {
+                        Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
 
                     }
                 }));
