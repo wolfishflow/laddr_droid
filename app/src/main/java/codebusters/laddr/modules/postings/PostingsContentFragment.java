@@ -1,7 +1,12 @@
 package codebusters.laddr.modules.postings;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +14,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 
@@ -25,7 +35,7 @@ import codebusters.laddr.utility.GetAllPostingsTask;
  * Created by alansimon on 2016-10-15.
  */
 @EFragment(R.layout.fragment_postings_content)
-public class PostingsContentFragment extends Fragment {
+public class PostingsContentFragment extends Fragment implements OnMapReadyCallback {
     @BindView(R.id.tv_postingTitle)
     TextView tvPostingTitle;
     @BindView(R.id.tv_postingOrganizationName)
@@ -39,7 +49,25 @@ public class PostingsContentFragment extends Fragment {
     @BindView(R.id.btn_postingApply)
     Button btnPostingApply;
 
+
     Posting singlePosting;
+    private FragmentActivity myContext;
+    private MapView mapView;
+    private GoogleMap googleMap;
+
+    @AfterViews
+    void stuff()
+    {
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        myContext=(FragmentActivity) activity;
+        super.onAttach(activity);
+    }
+
+    private final String TAG = "POSTINGS CONTENT";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,11 +93,34 @@ public class PostingsContentFragment extends Fragment {
         tvPostingOrganizationName.setText(singlePosting.getOrganizerName());
         tvPostingLocation.setText(singlePosting.getLocation());
         tvPostingsDescription.setText(singlePosting.getJobDescription());
+
+        Log.d(TAG, singlePosting.getLatitude().toString() + "||||" + singlePosting.getLongitude().toString());
+
         //tvPostingTimeStamp.setText(singlePosting);
 
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+
+
+        Fragment mapFragment = new MapFragment();
+        FragmentTransaction tr = getChildFragmentManager().beginTransaction();
+        tr.add(R.id.map_holder, mapFragment).commit();
+
+//        mapView = (MapView) getActivity().findViewById(R.id.map);
+//        mapView.onCreate(savedInstanceState);
+//
+//
+//        mapView.getMapAsync(this);
+        //googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        //googleMap.setMyLocationEnabled(true);
+
+//        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
 //                .findFragmentById(R.id.map);
 //        mapFragment.getMapAsync(this);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
     }
 
@@ -84,6 +135,21 @@ public class PostingsContentFragment extends Fragment {
             e.printStackTrace();
         }
         Toast.makeText(getActivity(), "success posting", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        this.googleMap = googleMap;
+//        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        LatLng coordinate = new LatLng(21.182782, 72.830115);
+//        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 11);
+//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
+//        googleMap.animateCamera(yourLocation);
+
+
+        //googleMap.setMyLocationEnabled(true);
 
     }
 }
