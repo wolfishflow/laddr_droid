@@ -76,11 +76,11 @@
         android:id="@+id/map"
         android:layout_below="@id/card"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="400dp"/>
     
-    <com.google.android.gms.maps.MapView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"></com.google.android.gms.maps.MapView>
+    <!--<com.google.android.gms.maps.MapView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="500dp"></com.google.android.gms.maps.MapView>-->
 
 
     <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
