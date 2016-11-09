@@ -18,6 +18,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -74,22 +75,6 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
         View rootView = inflater.inflate(R.layout.fragment_postings_content, container, false);
-//        Bundle bundle = this.getArguments();
-//        singlePosting = bundle.getParcelable("posting");
-//
-//        TextView tvPostingTitle = (TextView) getActivity().findViewById(R.id.tv_postingTitle);
-//        TextView tvPostingOrganizationName = (TextView) getActivity().findViewById(R.id.tv_postingOrganizationName);
-//        TextView tvPostingLocation = (TextView) getActivity().findViewById(R.id.tv_postingLocation);
-//        TextView tvPostingsDescription = (TextView) getActivity().findViewById(R.id.tv_postingsDescription);
-//        TextView tvPostingTimeStamp = (TextView) getActivity().findViewById(R.id.tv_postingTimeStamp);
-//
-//        tvPostingTitle.setText(singlePosting.getJobTitle());
-//        tvPostingOrganizationName.setText(singlePosting.getOrganizerName());
-//        tvPostingLocation.setText(singlePosting.getLocation());
-//        tvPostingsDescription.setText(singlePosting.getJobDescription());
-//
-//        Log.d(TAG, singlePosting.getLatitude().toString() + "||||" + singlePosting.getLongitude().toString());
-
         ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -160,20 +145,22 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         this.googleMap = googleMap;
 
         MapsInitializer.initialize(this.getActivity());
-        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        LatLng coordinate = new LatLng(21.182782, 72.830115);
-        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 11);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
-        googleMap.animateCamera(yourLocation);
         mapQuest();
         //googleMap.setMyLocationEnabled(true);
 
     }
-    
+
 
     public void mapQuest(){
-
+        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        LatLng coordinate = new LatLng(singlePosting.getLatitude(), singlePosting.getLongitude());
+        googleMap.addMarker(new MarkerOptions()
+                .position(new LatLng(singlePosting.getLatitude(), singlePosting.getLongitude()))
+                .title(singlePosting.getLocation()));
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(coordinate, 16);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(coordinate));
+        googleMap.animateCamera(yourLocation);
     }
 
     @Override
