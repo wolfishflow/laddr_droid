@@ -57,17 +57,6 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     private MapView mapView;
     private GoogleMap googleMap;
 
-//    @AfterViews
-//    void stuff()
-//    {
-//
-//    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        myContext=(FragmentActivity) activity;
-        super.onAttach(activity);
-    }
 
     private final String TAG = "POSTINGS CONTENT";
 
@@ -95,28 +84,37 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         tvPostingOrganizationName.setText(singlePosting.getOrganizerName());
         tvPostingLocation.setText(singlePosting.getLocation());
         tvPostingsDescription.setText(singlePosting.getJobDescription());
-
-        Log.d(TAG, singlePosting.getLatitude().toString() + "||||" + singlePosting.getLongitude().toString());
-
         //tvPostingTimeStamp.setText(singlePosting);
 
-
-
-//        Fragment mapFragment = new MapFragment();
-//        FragmentTransaction tr = getChildFragmentManager().beginTransaction();
-//        tr.add(R.id.map_holder, mapFragment).commit();
-
+        /*
+        Assign MapView, enable it and initialize it.
+         */
         mapView = (MapView) getActivity().findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
-//
-//
         mapView.getMapAsync(this);
-        //googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-        //googleMap.setMyLocationEnabled(true);
 
-//        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
-//                .findFragmentById(R.id.map);
-//        mapFragment.getMapAsync(this);
+        /*
+        Assign Button, initialize it, and assign a listener to it.
+         */
+        Button button = (Button) getActivity().findViewById(R.id.btn_postingApply);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                try {
+                    Toast.makeText(getActivity(), "sending posting", Toast.LENGTH_SHORT).show();
+                    new ApplyPosting(getActivity()).execute(singlePosting).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "failed posting", Toast.LENGTH_SHORT).show();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "failed posting", Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(getActivity(), "success posting", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
