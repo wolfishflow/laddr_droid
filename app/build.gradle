@@ -66,6 +66,7 @@ dependencies {
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
     compile 'it.sephiroth.android.library.bottomnavigation:bottom-navigation:1.0.9'
+    compile 'com.roughike:bottom-bar:2.0.2'
 }
 //apply plugin: 'com.google.gms.google-services'
 dependencies {

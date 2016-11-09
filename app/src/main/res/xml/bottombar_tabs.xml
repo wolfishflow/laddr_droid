@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        icon="@drawable/ic_home_white_24px"
+        id="@+id/tab_home"
+        title="Home"
+        barColorWhenSelected="@color/colorPrimary"/>
+    <tab
+        icon="@drawable/ic_person_white_24px"
+        id="@+id/tab_profile"
+        title="Profile"
+        barColorWhenSelected="@color/md_green_500"/>
+    <tab
+        icon="@drawable/ic_question_answer_white_24px"
+        id="@+id/tab_forums"
+        title="Forums"
+        barColorWhenSelected="@color/md_amber_500"/>
+    <tab
+        icon="@drawable/ic_event_white_24px"
+        id="@+id/tab_postings"
+        title="Postings"
+        barColorWhenSelected="@color/md_red_500"/>
+</tabs>
