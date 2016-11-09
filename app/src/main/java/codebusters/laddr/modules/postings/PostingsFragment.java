@@ -73,7 +73,7 @@ public class PostingsFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("posting", singlePosting);
 
-                        Fragment fr = new PostingsContentFragment_();
+                        Fragment fr = new PostingsContentFragment();
                         fr.setArguments(bundle);
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();

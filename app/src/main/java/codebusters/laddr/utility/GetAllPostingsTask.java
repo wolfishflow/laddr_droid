@@ -48,6 +48,8 @@ public class GetAllPostingsTask extends AsyncTask<Void, Void, ArrayList<Posting>
                 posting.setOrganizerName(obj.getJSONObject("LdrProfile").getJSONObject("LdrOrganization").getString("OrganizationName"));
                 posting.setLocation(obj.getString("Location"));
                 posting.setJobDescription(obj.getString("Description"));
+                posting.setLatitude(obj.optDouble("Lat", 43.58877160000001));
+                posting.setLongitude(obj.optDouble("Lng", -79.64439469999999));
                 //add new posting to array list
                 postings.add(posting);
             }

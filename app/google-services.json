@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "314748235158",
+    "firebase_url": "https://laddrdroid.firebaseio.com",
+    "project_id": "laddrdroid",
+    "storage_bucket": "laddrdroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314748235158:android:261c3db019859ba6",
+        "android_client_info": {
+          "package_name": "codebusters.laddr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314748235158-futq4bmdm57vtks5ljnhdchhfe51e6hg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "codebusters.laddr",
+            "certificate_hash": "273110E7B7F1FFCA8A410AC76AF0DBA079DFB695"
+          }
+        },
+        {
+          "client_id": "314748235158-o86mfkdn7cjhqfk0dsd7no0stc4s14t8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-5Taxb19G4EL1cTSa08JuauSelv9VvKk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314748235158-o86mfkdn7cjhqfk0dsd7no0stc4s14t8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
