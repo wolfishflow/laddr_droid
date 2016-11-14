@@ -33,7 +33,6 @@ public class PostingsFragment extends Fragment {
 
     private final String TAG = "Postings Fragment";
 
-
     private static GlobalState globalState;
     private AccountHeader headerResult = null;
     private Drawer result = null;
