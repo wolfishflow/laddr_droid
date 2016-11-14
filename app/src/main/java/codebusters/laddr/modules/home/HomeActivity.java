@@ -44,27 +44,26 @@ import codebusters.laddr.modules.profile.ProfileFragment_;
 public class HomeActivity extends AppCompatActivity {
 
     public final String TAG = "HomeActivity";
-    private static GlobalState globalState;
+
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    private Toolbar toolbar;
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
-    Fragment fr;
-    FragmentManager fm;
-    FragmentTransaction ft;
+    private Fragment fr;
+    private FragmentManager fm;
+    private FragmentTransaction ft;
 
-    Bundle savedInstanceState;
+    private Bundle savedInstanceState;
+    private static GlobalState globalState;
 
     @AfterViews
     void setVars() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
 
         globalState = (GlobalState) getApplication();
-
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -110,8 +109,6 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
         final IProfile profile = new ProfileDrawerItem()
                 .withName(globalState.getUserValue().getFirstName() + " " + globalState.getUserValue().getLastName())
@@ -203,9 +200,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         this.savedInstanceState = savedInstanceState;
-
     }
 
     @Override
@@ -231,8 +226,6 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             getFragmentManager().popBackStack();
         }
-
-
     }
 
     @Override
