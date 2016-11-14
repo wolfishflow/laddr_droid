@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.Drawer;
+import com.roughike.bottombar.BottomBar;
+
 import org.androidannotations.annotations.EFragment;
 
 import butterknife.BindView;
@@ -27,7 +29,6 @@ public class HomeFragment extends Fragment {
     private Drawer result = null;
     private static GlobalState globalState;
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -35,6 +36,8 @@ public class HomeFragment extends Fragment {
         globalState = (GlobalState) getActivity().getApplication();
         myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         myToolbar.setTitle("Home");
+        BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
+        bottomBar.selectTabWithId(R.id.tab_home);
     }
 
     @Override

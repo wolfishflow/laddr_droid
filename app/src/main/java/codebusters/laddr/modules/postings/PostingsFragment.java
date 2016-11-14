@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.Drawer;
+import com.roughike.bottombar.BottomBar;
+
 import java.util.ArrayList;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
@@ -30,7 +32,6 @@ import codebusters.laddr.utility.GetAllPostingsTask;
 public class PostingsFragment extends Fragment {
 
     private final String TAG = "Postings Fragment";
-
 
     private static GlobalState globalState;
     private AccountHeader headerResult = null;
@@ -53,6 +54,9 @@ public class PostingsFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
+        BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
+        bottomBar.selectTabWithId(R.id.tab_postings);
+
 
         try {
 

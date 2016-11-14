@@ -62,10 +62,11 @@ dependencies {
     compile 'com.mikepenz:google-material-typeface:2.2.0.3.original@aar'    //Google Material Icons
     compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
     compile 'com.mikhaellopez:circularimageview:3.0.2'
-    compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
+    compile 'com.pavelsikun:materialdesignicons:1.0'
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
     compile 'com.github.dmytrodanylyk:android-morphing-button:98a4986e56'
     compile 'it.sephiroth.android.library.bottomnavigation:bottom-navigation:1.0.9'
+    compile 'com.roughike:bottom-bar:2.0.2'
 }
 //apply plugin: 'com.google.gms.google-services'
 dependencies {
