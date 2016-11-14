@@ -73,11 +73,21 @@ public class HomeActivity extends AppCompatActivity {
                 if (tabId == R.id.tab_home) {
                     Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                 } else if (tabId == R.id.tab_profile){
-                    Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
+                    fr = new ProfileFragment_();
+                    fm = getFragmentManager();
+                    ft = fm.beginTransaction();
+                    ft.replace(R.id.home_fragment_container, fr);
+                    ft.addToBackStack(null);
+                    ft.commit();
                 } else if (tabId == R.id.tab_forums){
                     Toast.makeText(HomeActivity.this, "Forums", Toast.LENGTH_SHORT).show();
                 } else if (tabId == R.id.tab_postings){
-                    Toast.makeText(HomeActivity.this, "Postings", Toast.LENGTH_SHORT).show();
+                    fr = new PostingsFragment_();
+                    fm = getFragmentManager();
+                    ft = fm.beginTransaction();
+                    ft.replace(R.id.home_fragment_container, fr);
+                    ft.addToBackStack(null);
+                    ft.commit();
                 }
             }
         });
