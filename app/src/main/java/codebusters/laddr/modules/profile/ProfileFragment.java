@@ -20,6 +20,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.roughike.bottombar.BottomBar;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -73,7 +74,8 @@ public class ProfileFragment extends Fragment {
         tvDescription.setText(globalState.getUserValue().getUserDescription());
         tvEmail.setText(globalState.getUserValue().getEmail());
 //        tvAcademicStatus.setText(globalState.getUserValue().getAcademicStatus());
-
+        BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
+        bottomBar.selectTabWithId(R.id.tab_profile);
     }
 
     @Override
