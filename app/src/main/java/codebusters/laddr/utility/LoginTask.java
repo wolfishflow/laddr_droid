@@ -82,9 +82,6 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
             if (json.getString("success").equals("true")) {
                 globalState = (GlobalState) activity.getApplication();
                 globalState.setToken(json.getString("token"));
-                Log.d("Testing json ", json.getJSONObject("profile").toString());
-                Log.d("Testing json ", json.getJSONObject("profile").getString("ProfileID"));
-
                 User user = new User();
                 user.setProfileID(json.getJSONObject("profile").getString("ProfileID"));
                 user.setEmail(json.getJSONObject("profile").getString("Email"));
@@ -94,7 +91,6 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
                 //user.setPictureURL(new URL(json.getJSONObject("profile").getString("PictureURL")));
 
                 globalState.setUserValue(user);
-
                 return true;
             }
 

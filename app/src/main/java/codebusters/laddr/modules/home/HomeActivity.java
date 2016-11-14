@@ -72,6 +72,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_home) {
                     Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    Fragment fr = new HomeFragment_();
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.home_fragment_container, fr);
                 } else if (tabId == R.id.tab_profile){
                     fr = new ProfileFragment_();
                     fm = getFragmentManager();
