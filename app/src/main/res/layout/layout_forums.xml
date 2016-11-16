@@ -10,44 +10,38 @@
     android:paddingTop="10dp">
 
     <ImageView
-        android:id="@+id/iv_organizationLogo"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
+        android:id="@+id/iv_forum_avatar"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:layout_marginRight="16dp"
-        app:srcCompat="@drawable/ic_goal" />
+        app:srcCompat="@drawable/profile" />
 
     <TextView
-        android:id="@+id/tv_postingsName"
+        android:id="@+id/tv_forum_topic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/iv_organizationLogo"
+        android:layout_toRightOf="@+id/iv_forum_avatar"
         android:text="Temporary Title Here"
-        android:textSize="16dp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_postingsOrganizationName"
+        android:id="@+id/tv_forum_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingsName"
-        android:layout_toRightOf="@+id/iv_organizationLogo"
-        android:text="Temporary Org Name Here" />
-
-    <TextView
-        android:id="@+id/tv_postingsLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingsOrganizationName"
-        android:layout_toRightOf="@+id/iv_organizationLogo"
-        android:text="Temporary Location Here" />
+        android:layout_below="@id/tv_forum_topic"
+        android:layout_toRightOf="@+id/iv_forum_avatar"
+        android:text="Temporary Name Here"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_postingsTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_postingsLocation"
-        android:layout_toRightOf="@+id/iv_organizationLogo"
+        android:layout_below="@id/tv_forum_user_name"
+        android:layout_toRightOf="@+id/iv_forum_avatar"
         android:text="Temporary Time Stamp Here" />
 
 </RelativeLayout>
