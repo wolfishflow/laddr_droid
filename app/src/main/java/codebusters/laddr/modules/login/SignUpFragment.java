@@ -97,7 +97,7 @@ public class SignUpFragment extends Fragment {
             Fragment fr = new UserDetailsFragment_();
             FragmentManager fm = getFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.login_fragment_container, fr).addToBackStack("SignUp");
+            ft.replace(R.id.frlt_fragment_container_login, fr).addToBackStack("SignUp");
             ft.commit();
         }
     }

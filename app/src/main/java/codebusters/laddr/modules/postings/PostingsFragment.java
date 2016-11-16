@@ -81,7 +81,7 @@ public class PostingsFragment extends Fragment {
                         fr.setArguments(bundle);
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.home_fragment_container, fr);
+                        ft.replace(R.id.frlt_fragment_container_home, fr);
                         ft.addToBackStack(null);
                         ft.commit();
                     }

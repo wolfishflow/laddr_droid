@@ -22,9 +22,9 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
         public TextView title, orgName,location;
         public ViewHolder(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.tv_postingsName);
-            orgName = (TextView) v.findViewById(R.id.tv_postingsOrganizationName);
-            location = (TextView) v.findViewById(R.id.tv_postingsLocation);
+            title = (TextView) v.findViewById(R.id.tv_posting_title);
+            orgName = (TextView) v.findViewById(R.id.tv_posting_organization_name);
+            location = (TextView) v.findViewById(R.id.tv_posting_location);
         }
     }
 
