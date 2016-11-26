@@ -193,6 +193,17 @@ public class Utility {
         return json;
     }
 
+    public static JSONArray getAllTopics(Activity activity) throws IOException, JSONException {
+        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/topic");
+        return json;
+    }
+
+    public static JSONArray getAllComments(Activity activity) throws IOException, JSONException {
+        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/comment");
+
+        return json;
+    }
+
     /**
      * Gets a specified User from the database.
      * @param activity  The calling activity, included to get reference to GlobalState
