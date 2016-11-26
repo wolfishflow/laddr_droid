@@ -10,7 +10,7 @@ import android.view.View;
  * Created by alansimon on 2016-10-02.
  */
 
-interface ClickListener {
+public interface ClickListener {
     void onClick(View view, int position);
 
     void onLongClick(View view, int position);
@@ -18,8 +18,8 @@ interface ClickListener {
 
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
-    private GestureDetector gestureDetector;
-    private ClickListener clickListener;
+    public GestureDetector gestureDetector;
+    public ClickListener clickListener;
 
     public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
         this.clickListener = clickListener;

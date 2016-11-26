@@ -44,11 +44,9 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(PostingsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(TopicsAdapter.ViewHolder holder, int position) {
         Topic topic = topicList.get(position);
-        holder.title.setText(post.getJobTitle());
-        holder.orgName.setText(post.getOrganizerName());
-        holder.location.setText(post.getLocation());
+        holder.title.setText(topic.getTitle());
     }
 
     @Override
