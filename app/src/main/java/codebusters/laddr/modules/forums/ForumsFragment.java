@@ -7,23 +7,20 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.EFragment;
 
 import java.util.ArrayList;
 
+import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
-import codebusters.laddr.data.Posting;
 import codebusters.laddr.data.Topic;
-import codebusters.laddr.modules.postings.ClickListener;
-import codebusters.laddr.modules.postings.PostingsAdapter;
-import codebusters.laddr.modules.postings.PostingsContentFragment;
-import codebusters.laddr.modules.postings.RecyclerTouchListener;
 import codebusters.laddr.utility.DividerItemDecoration;
-import codebusters.laddr.utility.GetAllPostingsTask;
 import codebusters.laddr.utility.GetAllTopicsTask;
 
 /**
@@ -38,6 +35,8 @@ public class ForumsFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class ForumsFragment extends Fragment {
                 mRecyclerView.setAdapter(mAdapter);
 
                 //Add a listener to each list object
-                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
+                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener2(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
 
@@ -93,5 +92,20 @@ public class ForumsFragment extends Fragment {
         }
 
 
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 }

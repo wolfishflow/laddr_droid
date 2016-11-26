@@ -26,7 +26,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         public TextView title, firstName, timestamp;
         public ViewHolder(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.tv_posting_title);
+            title = (TextView) v.findViewById(R.id.tv_forum_topic);
         }
     }
 
@@ -38,7 +38,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     public TopicsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_postings, parent, false);
+                .inflate(R.layout.layout_forums, parent, false);
         // set the view's size, margins, paddings and layout parameters
         return new TopicsAdapter.ViewHolder(v);
     }

@@ -198,9 +198,8 @@ public class Utility {
         return json;
     }
 
-    public static JSONArray getAllComments(Activity activity) throws IOException, JSONException {
-        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/comment");
-
+    public static JSONArray getAllComments(Activity activity, String id) throws IOException, JSONException {
+        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/topic/"+id);
         return json;
     }
 

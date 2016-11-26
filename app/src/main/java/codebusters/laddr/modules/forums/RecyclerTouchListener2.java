@@ -1,4 +1,4 @@
-package codebusters.laddr.modules.postings;
+package codebusters.laddr.modules.forums;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -16,12 +16,12 @@ interface ClickListener {
     void onLongClick(View view, int position);
 }
 
-public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+public class RecyclerTouchListener2 implements RecyclerView.OnItemTouchListener {
 
     public GestureDetector gestureDetector;
     public ClickListener clickListener;
 
-    public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
+    public RecyclerTouchListener2(Context context, final RecyclerView recyclerView, final ClickListener clickListener) {
         this.clickListener = clickListener;
         gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
