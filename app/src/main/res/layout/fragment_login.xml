@@ -19,7 +19,7 @@
             android:layout_marginBottom="30dp"
             android:textAlignment="center"
             android:textSize="60sp"
-            android:textColor="@color/accent"
+            android:textColor="@color/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -84,25 +84,6 @@ public class LoginFragment extends Fragment {
     TODO: Add the shared pref pre-check if it's been fufilled post or pre view created.
      */
 
-//    @Click(R.id.btn_woo)
-//    void woo(){
-//        MorphingButton btn = (MorphingButton) getActivity().findViewById(R.id.btn_woo);
-//        Drawable abc = new IconicsDrawable(getActivity())
-//                .icon(FontAwesome.Icon.faw_sign_in)
-//                .color(Color.BLUE)
-//                .sizeDp(24);
-//
-//        MorphingButton.Params circle = MorphingButton.Params.create()
-//                .duration(500)
-//                .cornerRadius(200) // 56 dp
-//                .width(200) // 56 dp
-//                .height(200) // 56 dp
-//                .color((R.color.md_green_50)) // normal state color
-//                .colorPressed((R.color.md_green_400)) // pressed state color
-//                .icon(R.drawable.ic_goal); // icon
-//        btn.morph(circle);
-//    }
-
     @Click(R.id.btn_login)
     void loginClicked() {
         //Log.d(LOGIN_F_TAG, Boolean.toString(progressBar.isShown()));
@@ -132,11 +113,9 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 
