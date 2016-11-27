@@ -4,7 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import codebusters.laddr.R;
 import codebusters.laddr.data.Posting;
@@ -20,11 +24,13 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView title, orgName,location;
+        public ImageView logo;
         public ViewHolder(View v) {
             super(v);
             title = (TextView) v.findViewById(R.id.tv_posting_title);
             orgName = (TextView) v.findViewById(R.id.tv_posting_organization_name);
             location = (TextView) v.findViewById(R.id.tv_posting_location);
+            logo = (ImageView) v.findViewById(R.id.iv_organization_logo);
         }
     }
 
@@ -47,6 +53,9 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
         holder.title.setText(post.getJobTitle());
         holder.orgName.setText(post.getOrganizerName());
         holder.location.setText(post.getLocation());
+        Picasso.with(holder.itemView.getContext())
+                .load("http://www.laddr.xyz/"+post.getPictureLink())
+                .into(holder.logo);
     }
 
     @Override

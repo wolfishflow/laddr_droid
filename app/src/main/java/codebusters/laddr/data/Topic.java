@@ -3,6 +3,8 @@ package codebusters.laddr.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 /**
  * Created by alansimon on 2016-11-26.
  */
@@ -16,6 +18,7 @@ public class Topic implements Parcelable {
     private String timestamp;
     private String firstName;
     private String picture;
+    private Date formatted;
 
     public String getPicture() {
         return picture;
@@ -31,6 +34,14 @@ public class Topic implements Parcelable {
         this.profileId = profileId;
         this.timestamp = timestamp;
         this.firstName = firstName;
+    }
+
+    public Date getFormatted() {
+        return formatted;
+    }
+
+    public void setFormatted(Date formatted) {
+        this.formatted = formatted;
     }
 
     public String getTopicId() {

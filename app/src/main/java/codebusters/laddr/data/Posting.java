@@ -17,6 +17,7 @@ public class Posting implements Parcelable {
     private String jobDescription;
     private Double latitude;
     private Double longitude;
+    private String pictureLink;
 
     public Posting() {
 
@@ -55,6 +56,14 @@ public class Posting implements Parcelable {
             return new Posting[size];
         }
     };
+
+    public String getPictureLink() {
+        return pictureLink;
+    }
+
+    public void setPictureLink(String pictureLink) {
+        this.pictureLink = pictureLink;
+    }
 
     public String getPostingID() {
         return postingID;

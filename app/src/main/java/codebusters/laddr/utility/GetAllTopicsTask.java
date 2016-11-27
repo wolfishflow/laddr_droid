@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import codebusters.laddr.data.Topic;
@@ -46,12 +48,17 @@ public class GetAllTopicsTask extends AsyncTask<Void, Void, ArrayList<Topic>> {
                 topic.setProfileId(obj.getString("ProfileID"));
                 topic.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrUser").getString("FirstName"));
                 topic.setPicture(obj.getJSONObject("LdrProfile").getString("PictureURL"));
+                topic.setTimestamp(obj.getString("Timestamp"));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                topic.setFormatted(format.parse(topic.getTimestamp()));
                 //add new posting to array list
                 topics.add(topic);
             }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         return topics;
