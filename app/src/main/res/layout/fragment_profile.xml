@@ -17,6 +17,7 @@
         android:weightSum="1">
 
         <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/im_profile_avatar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"

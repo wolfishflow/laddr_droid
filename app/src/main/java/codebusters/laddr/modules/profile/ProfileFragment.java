@@ -7,20 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.roughike.bottombar.BottomBar;
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -29,7 +21,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
-import codebusters.laddr.modules.postings.PostingsActivity;
 
 /**
  * Created by alansimon on 2016-10-03.
@@ -40,6 +31,7 @@ public class ProfileFragment extends Fragment {
     public final String TAG = "ProfileFragment";
 
     private static GlobalState globalState;
+
     private AccountHeader headerResult = null;
     private Drawer result = null;
 
@@ -53,6 +45,8 @@ public class ProfileFragment extends Fragment {
     TextView tvAcademicStatus;
     @BindView(R.id.toolbar)
     Toolbar myToolbar;
+    @BindView(R.id.im_profile_avatar)
+    CircularImageView imProfileAvatar;
 
     @AfterViews
     void setVars() {
@@ -60,6 +54,7 @@ public class ProfileFragment extends Fragment {
         tvDescription = (TextView) getActivity().findViewById(R.id.tv_description);
         tvEmail = (TextView) getActivity().findViewById(R.id.tv_email);
         tvAcademicStatus = (TextView) getActivity().findViewById(R.id.tv_academicStatus);
+        imProfileAvatar = (CircularImageView) getActivity().findViewById(R.id.im_profile_avatar);
 //        String profileId = globalState.getUserValue().getProfileID();
 //
 //        try {
@@ -73,6 +68,9 @@ public class ProfileFragment extends Fragment {
         tvName.setText(globalState.getUserValue().getFirstName() + " " + globalState.getUserValue().getLastName());
         tvDescription.setText(globalState.getUserValue().getUserDescription());
         tvEmail.setText(globalState.getUserValue().getEmail());
+        Picasso.with(getActivity())
+                .load("http://www.laddr.xyz/"+globalState.getUserValue().getPicLink())
+                .into(imProfileAvatar);
 //        tvAcademicStatus.setText(globalState.getUserValue().getAcademicStatus());
         BottomBar bottomBar = (BottomBar) getActivity().findViewById(R.id.bottomBar);
         bottomBar.selectTabWithId(R.id.tab_profile);
