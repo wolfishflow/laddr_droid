@@ -17,6 +17,15 @@ public abstract class Profile {
     protected Date timestamp;
     protected int accountType;
     protected String password;
+    protected String picLink;
+
+    public String getPicLink() {
+        return picLink;
+    }
+
+    public void setPicLink(String picLink) {
+        this.picLink = picLink;
+    }
 
     public String getProfileID() {
         return profileID;

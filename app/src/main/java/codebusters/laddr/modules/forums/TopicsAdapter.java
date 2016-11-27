@@ -1,10 +1,14 @@
 package codebusters.laddr.modules.forums;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -24,9 +28,11 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView title, firstName, timestamp;
+        public ImageView picture;
         public ViewHolder(View v) {
             super(v);
             title = (TextView) v.findViewById(R.id.tv_forum_topic);
+            picture = (ImageView) v.findViewById(R.id.iv_forum_avatar);
         }
     }
 
@@ -47,6 +53,9 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
     public void onBindViewHolder(TopicsAdapter.ViewHolder holder, int position) {
         Topic topic = topicList.get(position);
         holder.title.setText(topic.getTitle());
+        Picasso.with(holder.itemView.getContext())
+                .load("http://www.laddr.xyz/"+topic.getPicture())
+                .into(holder.picture);
     }
 
     @Override

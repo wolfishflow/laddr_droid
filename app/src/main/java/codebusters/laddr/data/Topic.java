@@ -15,6 +15,15 @@ public class Topic implements Parcelable {
     private String profileId;
     private String timestamp;
     private String firstName;
+    private String picture;
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public Topic(String topicId, String title, String profileId, String timestamp, String firstName) {
         this.topicId = topicId;

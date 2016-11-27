@@ -45,6 +45,7 @@ public class GetAllTopicsTask extends AsyncTask<Void, Void, ArrayList<Topic>> {
                 topic.setTitle(obj.getString("Title"));
                 topic.setProfileId(obj.getString("ProfileID"));
                 topic.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrUser").getString("FirstName"));
+                topic.setPicture(obj.getJSONObject("LdrProfile").getString("PictureURL"));
                 //add new posting to array list
                 topics.add(topic);
             }
