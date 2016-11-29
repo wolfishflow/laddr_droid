@@ -88,8 +88,6 @@ public class PostingsFragment extends Fragment {
 
                     @Override
                     public void onLongClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
-
                     }
                 }));
             }

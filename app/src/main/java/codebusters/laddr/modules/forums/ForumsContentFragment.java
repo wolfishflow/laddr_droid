@@ -20,10 +20,12 @@ import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
+import codebusters.laddr.data.Comment;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Topic;
 import codebusters.laddr.utility.ApplyPosting;
 import codebusters.laddr.utility.DividerItemDecoration;
+import codebusters.laddr.utility.GetAllCommentsTask;
 import codebusters.laddr.utility.GetAllTopicsTask;
 
 /**
@@ -32,8 +34,9 @@ import codebusters.laddr.utility.GetAllTopicsTask;
 
 public class ForumsContentFragment extends Fragment {
 
-    private final String TAG = "Topic CONTENT";
+    private final String TAG = "Comments CONTENT";
     private static GlobalState globalState;
+    private Comment singleComment;
     private Topic singleTopic;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -66,27 +69,22 @@ public class ForumsContentFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//
-//        TextView tvTopicsTitle = (TextView) getActivity().findViewById(R.id.tv_forum_topic);
-//
-//        tvTopicsTitle.setText(singleTopic.getTitle());
-//
-//        try {
-//
-//            if (globalState.getToken() != null) {
-//                //get all the postings
-//                final ArrayList<Topic> allTopics = new GetAllTopicsTask(getActivity()).execute().get();
-//                mAdapter = new TopicsAdapter(allTopics);
-//                mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-//                mRecyclerView.setAdapter(mAdapter);
-//
+
+        try {
+
+            if (globalState.getToken() != null) {
+                //get all the postings
+                final ArrayList<Comment> allComments = new GetAllCommentsTask(getActivity()).execute(singleTopic.getTopicId()).get();
+                mAdapter = new CommentsAdapter(allComments);
+                mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+                mRecyclerView.setAdapter(mAdapter);
+
 //                //Add a listener to each list object
 //                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener2(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
 //                    @Override
 //                    public void onClick(View view, int position) {
 //
-//                        Topic singleTopic = allTopics.get(position);
+//                        Topic singleCommnet = allComments.get(position);
 //
 //                        Bundle bundle = new Bundle();
 //                        bundle.putParcelable("topic", singleTopic);
@@ -106,11 +104,11 @@ public class ForumsContentFragment extends Fragment {
 //
 //                    }
 //                }));
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 

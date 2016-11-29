@@ -188,8 +188,8 @@ public class Utility {
         return json;
     }
 
-    public static JSONArray getAllComments(Activity activity, String id) throws IOException, JSONException {
-        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/topic/"+id);
+    public static JSONObject getAllComments(Activity activity, String id) throws IOException, JSONException {
+        JSONObject json = (JSONObject)getRequest(activity, "http://laddr.xyz/api/topic/"+id);
         return json;
     }
 
