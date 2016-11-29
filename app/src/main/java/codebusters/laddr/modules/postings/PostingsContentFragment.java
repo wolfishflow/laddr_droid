@@ -6,6 +6,9 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.Posting;
+import codebusters.laddr.modules.home.HomeActivity;
 import codebusters.laddr.utility.ApplyPosting;
 import codebusters.laddr.utility.GetAllPostingsTask;
 
@@ -56,6 +60,8 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     private FragmentActivity myContext;
     private MapView mapView;
     private GoogleMap googleMap;
+    private Toolbar toolbar;
+
 
 
     private final String TAG = "POSTINGS CONTENT";
@@ -73,6 +79,20 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = this.getArguments();
         singlePosting = bundle.getParcelable("posting");
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                Toast.makeText(getActivity(), "back toolbar", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         TextView tvPostingTitle = (TextView) getActivity().findViewById(R.id.tv_postingTitle);
         TextView tvPostingOrganizationName = (TextView) getActivity().findViewById(R.id.tv_postingOrganizationName);
