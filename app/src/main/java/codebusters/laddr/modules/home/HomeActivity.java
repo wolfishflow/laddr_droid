@@ -37,6 +37,8 @@ import org.androidannotations.annotations.EActivity;
 import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
+import codebusters.laddr.modules.forums.ForumsFragment;
+import codebusters.laddr.modules.forums.ForumsFragment_;
 import codebusters.laddr.modules.postings.PostingsFragment_;
 import codebusters.laddr.modules.profile.ProfileFragment_;
 
@@ -74,21 +76,26 @@ public class HomeActivity extends AppCompatActivity {
                     Fragment fr = new HomeFragment_();
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.home_fragment_container, fr);
+                    ft.replace(R.id.frlt_fragment_container_home, fr);
                 } else if (tabId == R.id.tab_profile){
                     fr = new ProfileFragment_();
                     fm = getFragmentManager();
                     ft = fm.beginTransaction();
-                    ft.replace(R.id.home_fragment_container, fr);
+                    ft.replace(R.id.frlt_fragment_container_home, fr);
                     ft.addToBackStack(null);
                     ft.commit();
                 } else if (tabId == R.id.tab_forums){
-                    Toast.makeText(HomeActivity.this, "Forums", Toast.LENGTH_SHORT).show();
+                    fr = new ForumsFragment_();
+                    fm = getFragmentManager();
+                    ft = fm.beginTransaction();
+                    ft.replace(R.id.frlt_fragment_container_home, fr);
+                    ft.addToBackStack(null);
+                    ft.commit();
                 } else if (tabId == R.id.tab_postings){
                     fr = new PostingsFragment_();
                     fm = getFragmentManager();
                     ft = fm.beginTransaction();
-                    ft.replace(R.id.home_fragment_container, fr);
+                    ft.replace(R.id.frlt_fragment_container_home, fr);
                     ft.addToBackStack(null);
                     ft.commit();
                 }
@@ -154,7 +161,7 @@ public class HomeActivity extends AppCompatActivity {
                                 fr = new ProfileFragment_();
                                 fm = getFragmentManager();
                                 ft = fm.beginTransaction();
-                                ft.replace(R.id.home_fragment_container, fr);
+                                ft.replace(R.id.frlt_fragment_container_home, fr);
                                 ft.addToBackStack(null);
                                 ft.commit();
                                 break;
@@ -165,7 +172,7 @@ public class HomeActivity extends AppCompatActivity {
                                 fr = new PostingsFragment_();
                                 fm = getFragmentManager();
                                 ft = fm.beginTransaction();
-                                ft.replace(R.id.home_fragment_container, fr);
+                                ft.replace(R.id.frlt_fragment_container_home, fr);
                                 ft.addToBackStack(null);
                                 ft.commit();
                                 break;
@@ -193,7 +200,7 @@ public class HomeActivity extends AppCompatActivity {
         Fragment fr = new HomeFragment_();
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.home_fragment_container, fr);
+        ft.replace(R.id.frlt_fragment_container_home, fr);
         ft.commit();
     }
 

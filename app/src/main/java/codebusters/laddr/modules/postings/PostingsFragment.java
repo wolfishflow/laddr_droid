@@ -50,7 +50,7 @@ public class PostingsFragment extends Fragment {
         final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Postings");
 
-        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) getActivity().findViewById(R.id.rv_postings);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -81,15 +81,13 @@ public class PostingsFragment extends Fragment {
                         fr.setArguments(bundle);
                         FragmentManager fm = getFragmentManager();
                         FragmentTransaction ft = fm.beginTransaction();
-                        ft.replace(R.id.home_fragment_container, fr);
+                        ft.replace(R.id.frlt_fragment_container_home, fr);
                         ft.addToBackStack(null);
                         ft.commit();
                     }
 
                     @Override
                     public void onLongClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
-
                     }
                 }));
             }

@@ -3,19 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize">
 
     <!-- TODO: separate this layout into its own -->
 
     <LinearLayout
-        android:padding="16dp"
         android:id="@+id/profile_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="16dp"
         android:weightSum="1">
 
         <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/im_profile_avatar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
@@ -49,33 +51,33 @@
     </LinearLayout>
 
     <android.support.v7.widget.CardView
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_header"
+        android:layout_margin="16dp"
         app:cardUseCompatPadding="true"
         card_view:cardElevation="4dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:padding="16dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/lbl_description"
-                android:text="Summary"
-                android:textSize="23sp"
-                android:padding="5dp"
-                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Summary"
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/tv_description"
-                android:layout_below="@+id/lbl_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"/>
+                android:layout_below="@+id/lbl_description"
+                android:padding="5dp" />
 
             <View
                 android:id="@+id/divider_description"
@@ -86,20 +88,20 @@
 
             <TextView
                 android:id="@+id/lbl_email"
-                android:text="Email"
-                android:textSize="23sp"
-                android:padding="5dp"
-                android:gravity="center_horizontal"
-                android:layout_below="@+id/divider_description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider_description"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Email"
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_below="@+id/lbl_email" />
+                android:layout_below="@+id/lbl_email"
+                android:padding="5dp" />
 
             <View
                 android:id="@+id/divider_email"
@@ -110,20 +112,20 @@
 
             <TextView
                 android:id="@+id/lbl_academicStatus"
-                android:text="Academic Status"
-                android:textSize="23sp"
-                android:padding="5dp"
-                android:gravity="center_horizontal"
-                android:layout_below="@+id/divider_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider_email"
+                android:gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="Academic Status"
+                android:textSize="23sp" />
 
             <TextView
                 android:id="@+id/tv_academicStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_below="@+id/lbl_academicStatus" />
+                android:layout_below="@+id/lbl_academicStatus"
+                android:padding="5dp" />
 
             <View
                 android:id="@+id/divider_academicStatus"

@@ -151,16 +151,6 @@ public class Utility {
         wr.close();
 
         Log.d("utility", Integer.toString(con.getResponseCode()));
-//        BufferedReader er = new BufferedReader(new InputStreamReader(con.getErrorStream(), Charset.forName("UTF-8")));
-//
-//        sb = new StringBuilder();
-//        int cp;
-//        while ((cp = er.read()) != -1) {
-//            sb.append((char) cp);
-//        }
-//        String jsonText = sb.toString();
-//        Log.d("utility", jsonText);
-
         BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), Charset.forName("UTF-8")));
 
         sb = new StringBuilder();
@@ -190,6 +180,16 @@ public class Utility {
     public static JSONArray getAllPostings(Activity activity) throws IOException, JSONException {
         JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/posting");
 
+        return json;
+    }
+
+    public static JSONArray getAllTopics(Activity activity) throws IOException, JSONException {
+        JSONArray json = (JSONArray)getRequest(activity, "http://laddr.xyz/api/topic");
+        return json;
+    }
+
+    public static JSONObject getAllComments(Activity activity, String id) throws IOException, JSONException {
+        JSONObject json = (JSONObject)getRequest(activity, "http://laddr.xyz/api/topic/"+id);
         return json;
     }
 

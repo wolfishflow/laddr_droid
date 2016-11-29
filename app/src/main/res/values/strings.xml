@@ -7,7 +7,7 @@
     <string name="hint_password">Password</string>
     <string name="btn_to_login">Already Registered?</string>
     <string name="saved_email"/>
-    <string name="saved_password" />
+    <string name="saved_password"/>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="btn_next">Next</string>
     <string name="hint_firstname">First Name</string>

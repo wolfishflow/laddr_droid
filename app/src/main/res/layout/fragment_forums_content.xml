@@ -9,101 +9,13 @@
     android:scrollbarStyle="insideInset"
     android:paddingTop="?attr/actionBarSize"
     android:paddingBottom="56dp">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_forums_content"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardUseCompatPadding="true"
-        card_view:cardElevation="4dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/tv_postingTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/toolbar"
-                android:layout_margin="10dp"
-                android:text="Sample Title Here"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/tv_postingOrganizationName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_postingTitle"
-                android:text="Sample Org Name Here" />
-
-            <TextView
-                android:id="@+id/tv_postingLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_postingOrganizationName"
-                android:text="Sample Location Here" />
-
-            <TextView
-                android:id="@+id/tv_postingsDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_postingLocation"
-                android:text="Sample Description Here" />
-
-            <TextView
-                android:id="@+id/tv_postingTimeStamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_postingsDescription"
-                android:text="Sample TimeStamp Here" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <Button
-        android:layout_margin="16dp"
-        android:layout_below="@+id/card"
-        android:id="@+id/btn_postingApply"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:text="@string/btn_apply"
-        android:textColor="@android:color/white" />
-
-    <!--android:layout_below="@+id/tv_postingTimeStamp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_below="@id/btn_postingApply"
-        android:layout_height="400dp"></com.google.android.gms.maps.MapView>
-
-    <!--<RelativeLayout-->
-        <!--android:layout_below="@+id/map"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true">-->
-
-        <!--<Button-->
-            <!--android:id="@+id/btn_postingApply"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/colorAccent"-->
-            <!--android:text="@string/btn_apply"-->
-            <!--android:textColor="@android:color/white" />-->
-
-    <!--</RelativeLayout>-->
-</RelativeLayout>
-
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+    </android.support.v7.widget.RecyclerView>
 
 </ScrollView>
