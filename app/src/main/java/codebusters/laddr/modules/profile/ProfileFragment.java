@@ -56,14 +56,6 @@ public class ProfileFragment extends Fragment {
         tvEmail = (TextView) getActivity().findViewById(R.id.tv_email);
         tvAcademicStatus = (TextView) getActivity().findViewById(R.id.tv_academicStatus);
         imProfileAvatar = (CircularImageView) getActivity().findViewById(R.id.im_profile_avatar);
-//        String profileId = globalState.getUserValue().getProfileID();
-//
-//        try {
-//            new GetUserTask(getActivity()).execute(profileId);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
         globalState = (GlobalState) getActivity().getApplication();
         //Log.d(TAG, "onViewCreated: " + globalState.getUserValue().getFirstName());
         tvName.setText(globalState.getUserValue().getFirstName() + " " + globalState.getUserValue().getLastName());

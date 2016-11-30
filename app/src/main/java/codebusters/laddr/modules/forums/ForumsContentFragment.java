@@ -1,8 +1,6 @@
 package codebusters.laddr.modules.forums;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,24 +9,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.maps.MapView;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.Comment;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Topic;
-import codebusters.laddr.utility.ApplyPosting;
 import codebusters.laddr.utility.DividerItemDecoration;
 import codebusters.laddr.utility.GetAllCommentsTask;
-import codebusters.laddr.utility.GetAllTopicsTask;
 
 /**
  * Created by alansimon on 2016-11-26.

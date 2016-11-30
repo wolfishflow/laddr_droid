@@ -125,7 +125,7 @@ public class LoginFragment extends Fragment {
 
     @Click(R.id.btn_forgot_password)
     void forgotClicked() {
-        Toast.makeText(getActivity(), "forgot pwd", Toast.LENGTH_SHORT).show();
+
     }
 
     /*

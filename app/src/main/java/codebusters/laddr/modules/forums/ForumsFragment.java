@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.androidannotations.annotations.EFragment;
 
@@ -81,7 +80,6 @@ public class ForumsFragment extends Fragment {
 
                     @Override
                     public void onLongClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
 
                     }
                 }));

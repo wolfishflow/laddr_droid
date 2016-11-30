@@ -11,22 +11,12 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Toast;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.context.IconicsContextWrapper;
 import com.mikepenz.materialdrawer.AccountHeader;
-import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
-import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -37,7 +27,6 @@ import org.androidannotations.annotations.EActivity;
 import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
-import codebusters.laddr.modules.forums.ForumsFragment;
 import codebusters.laddr.modules.forums.ForumsFragment_;
 import codebusters.laddr.modules.postings.PostingsFragment_;
 import codebusters.laddr.modules.profile.ProfileFragment_;
@@ -64,8 +53,6 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         globalState = (GlobalState) getApplication();
 
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
@@ -73,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_home) {
-                    Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                     Fragment fr = new HomeFragment_();
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
@@ -107,13 +94,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_home) {
-                    Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
                 } else if (tabId == R.id.tab_profile){
-                    Toast.makeText(HomeActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                 } else if (tabId == R.id.tab_forums){
-                    Toast.makeText(HomeActivity.this, "Forums", Toast.LENGTH_SHORT).show();
                 } else if (tabId == R.id.tab_postings){
-                    Toast.makeText(HomeActivity.this, "Postings", Toast.LENGTH_SHORT).show();
                 }
             }
         });
