@@ -78,10 +78,6 @@
         android:text="@string/btn_apply"
         android:textColor="@android:color/white" />
 
-    <!--android:layout_below="@+id/tv_postingTimeStamp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
-
     <com.google.android.gms.maps.MapView
         android:layout_margin="8dp"
         android:id="@+id/map"
@@ -89,21 +85,7 @@
         android:layout_below="@id/btn_postingApply"
         android:layout_height="400dp"></com.google.android.gms.maps.MapView>
 
-    <!--<RelativeLayout-->
-        <!--android:layout_below="@+id/map"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true">-->
 
-        <!--<Button-->
-            <!--android:id="@+id/btn_postingApply"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/colorAccent"-->
-            <!--android:text="@string/btn_apply"-->
-            <!--android:textColor="@android:color/white" />-->
-
-    <!--</RelativeLayout>-->
 </RelativeLayout>
 
 

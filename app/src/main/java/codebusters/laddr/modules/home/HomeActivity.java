@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     @AfterViews
     void setVars() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Home");
         globalState = (GlobalState) getApplication();

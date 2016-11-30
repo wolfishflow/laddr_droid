@@ -12,10 +12,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:elevation="5dp"
+        android:titleTextColor="@color/md_white_1000"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/AppTheme" />
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/frlt_fragment_container_home"
