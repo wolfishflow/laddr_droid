@@ -2,6 +2,7 @@ package codebusters.laddr.modules.profile;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,7 +45,7 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.tv_academicStatus)
     TextView tvAcademicStatus;
     @BindView(R.id.toolbar)
-    Toolbar myToolbar;
+    Toolbar toolbar;
     @BindView(R.id.im_profile_avatar)
     CircularImageView imProfileAvatar;
 
@@ -79,9 +80,24 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        myToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        myToolbar.setTitle("Profile");
-        myToolbar.setTitleTextColor(getResources().getColor(R.color.md_white_1000));
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Profile");
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -90,5 +106,37 @@ public class ProfileFragment extends Fragment {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, rootView);
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 }

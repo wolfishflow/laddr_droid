@@ -63,7 +63,6 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     private Toolbar toolbar;
 
 
-
     private final String TAG = "POSTINGS CONTENT";
 
     @Override
@@ -80,16 +79,15 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         Bundle bundle = this.getArguments();
         singlePosting = bundle.getParcelable("posting");
         toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // back button pressed
-                Toast.makeText(getActivity(), "back toolbar", Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             }
         });
 
@@ -117,11 +115,9 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         Assign Button, initialize it, and assign a listener to it.
          */
         Button button = (Button) getActivity().findViewById(R.id.btn_postingApply);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 try {
                     Toast.makeText(getActivity(), "sending posting", Toast.LENGTH_SHORT).show();
                     new ApplyPosting(getActivity()).execute(singlePosting).get();
@@ -144,32 +140,14 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
 
     }
 
-//    @Click(R.id.btn_postingApply)
-//     void applyToPosting(){
-//        try {
-//            Toast.makeText(getActivity(), "sending posting", Toast.LENGTH_SHORT).show();
-//            new ApplyPosting(getActivity()).execute(singlePosting).get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//        Toast.makeText(getActivity(), "success posting", Toast.LENGTH_SHORT).show();
-//
-//    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-
         MapsInitializer.initialize(this.getActivity());
         mapQuest();
-        //googleMap.setMyLocationEnabled(true);
-
     }
 
-
-    public void mapQuest(){
+    public void mapQuest() {
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         LatLng coordinate = new LatLng(singlePosting.getLatitude(), singlePosting.getLongitude());
@@ -185,18 +163,35 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
 }

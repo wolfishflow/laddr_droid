@@ -4,8 +4,10 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ public class ForumsContentFragment extends Fragment {
     private static GlobalState globalState;
     private Comment singleComment;
     private Topic singleTopic;
+    private Toolbar toolbar;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -62,6 +65,18 @@ public class ForumsContentFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = this.getArguments();
         singleTopic = bundle.getParcelable("topic");
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
 
 
         globalState = (GlobalState) this.getActivity().getApplication();
@@ -78,71 +93,43 @@ public class ForumsContentFragment extends Fragment {
                 mAdapter = new CommentsAdapter(allComments);
                 mRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 mRecyclerView.setAdapter(mAdapter);
-
-//                //Add a listener to each list object
-//                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener2(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
-//                    @Override
-//                    public void onClick(View view, int position) {
-//
-//                        Topic singleCommnet = allComments.get(position);
-//
-//                        Bundle bundle = new Bundle();
-//                        bundle.putParcelable("topic", singleTopic);
-//
-//                        Fragment fr = new ForumsContentFragment();
-//                        fr.setArguments(bundle);
-//                        FragmentManager fm = getFragmentManager();
-//                        FragmentTransaction ft = fm.beginTransaction();
-//                        ft.replace(R.id.frlt_fragment_container_home, fr);
-//                        ft.addToBackStack(null);
-//                        ft.commit();
-//                    }
-//
-//                    @Override
-//                    public void onLongClick(View view, int position) {
-//                        Toast.makeText(getActivity().getApplicationContext(), "Longos", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                }));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
 
-
-
-
-
-        /*
-        Assign Button, initialize it, and assign a listener to it.
-         */
-
-
-
-//        Button button = (Button) getActivity().findViewById(R.id.btn_postingApply);
-//        button.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View v)
-//            {
-//                try {
-//                    Toast.makeText(getActivity(), "sending posting", Toast.LENGTH_SHORT).show();
-//                    new ApplyPosting(getActivity()).execute(singleTopic).get();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(), "failed posting", Toast.LENGTH_SHORT).show();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(), "failed posting", Toast.LENGTH_SHORT).show();
-//                }
-//                Toast.makeText(getActivity(), "success posting", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 }
