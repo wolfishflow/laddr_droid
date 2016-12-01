@@ -2,7 +2,6 @@ package codebusters.laddr.utility;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,8 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import codebusters.laddr.data.Comment;
-import codebusters.laddr.data.Posting;
-import codebusters.laddr.data.Topic;
 
 /**
  * Created by alansimon on 2016-11-26.

@@ -10,12 +10,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
 
 import butterknife.BindView;
 import codebusters.laddr.R;
 import codebusters.laddr.data.GlobalState;
-import codebusters.laddr.data.Profile;
 import codebusters.laddr.data.User;
 
 /**

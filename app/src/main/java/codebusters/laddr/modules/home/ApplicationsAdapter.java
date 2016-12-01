@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import codebusters.laddr.R;
 import codebusters.laddr.data.Application;
-import codebusters.laddr.data.Comment;
 
 /**
  * Created by alansimon on 2016-11-26.
@@ -25,12 +24,14 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView title, firstName, timestamp;
+        public TextView title, orgName, appStatus;
         public ImageView picture;
         public ViewHolder(View v) {
             super(v);
-            title = (TextView) v.findViewById(R.id.tv_forum_topic);
-            picture = (ImageView) v.findViewById(R.id.iv_forum_avatar);
+            title = (TextView) v.findViewById(R.id.tv_application_title);
+            orgName = (TextView) v.findViewById(R.id.tv_application_organization_name);
+            appStatus = (TextView) v.findViewById(R.id.tv_application_status);
+            picture = (ImageView) v.findViewById(R.id.iv_application_logo);
         }
     }
 
@@ -42,7 +43,7 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
     public ApplicationsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_forums, parent, false);
+                .inflate(R.layout.layout_applications, parent, false);
         // set the view's size, margins, paddings and layout parameters
         return new ApplicationsAdapter.ViewHolder(v);
     }
@@ -50,10 +51,11 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
     @Override
     public void onBindViewHolder(ApplicationsAdapter.ViewHolder holder, int position) {
         Application application = applicationsList.get(position);
-//        holder.title.setText(application.getBody());
-//        Picasso.with(holder.itemView.getContext())
-//                .load("http://www.laddr.xyz/"+application.getPictureURL())
-//                .into(holder.picture);
+        holder.title.setText(application.getJobTitle());
+        Picasso.with(holder.itemView.getContext())
+                .load("http://www.laddr.xyz/"+application.getOrganizationPhoto())
+                .into(holder.picture);
+        holder.appStatus.setText(application.getStatusString());
     }
 
     @Override
