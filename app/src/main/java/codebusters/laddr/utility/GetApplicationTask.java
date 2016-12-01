@@ -42,6 +42,8 @@ public class GetApplicationTask extends AsyncTask<Void, Void, ArrayList<Applicat
                 app.setOrganizationName(obj.getJSONObject("LdrPosting").getJSONObject("LdrProfile")
                         .getJSONObject("LdrOrganization").getString("OrganizationName"));
                 app.setOrganizationProfileId(obj.getJSONObject("LdrPosting").getJSONObject("LdrProfile").getString("ProfileID"));
+                app.setOrganizationPhoto(obj.getJSONObject("LdrPosting").getJSONObject("LdrProfile")
+                        .getString("PictureURL"));
                 app.setStatus(obj.getInt("ApplicationStatus"));
 
                 //add new application to array list

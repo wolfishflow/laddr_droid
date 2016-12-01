@@ -10,6 +10,7 @@ public class Application {
     private String postingId;
     private String organizationName;
     private String organizationProfileId;
+    private String organizationPhoto;
     private int status;
     private final String[] STATUSES = new String[] {
       "Pending", "Declined", "Approved", "Posting Cancelled"
@@ -68,5 +69,13 @@ public class Application {
 
     public String getStatusString() {
         return STATUSES[status];
+    }
+
+    public String getOrganizationPhoto() {
+        return organizationPhoto;
+    }
+
+    public void setOrganizationPhoto(String organizationPhoto) {
+        this.organizationPhoto = organizationPhoto;
     }
 }
