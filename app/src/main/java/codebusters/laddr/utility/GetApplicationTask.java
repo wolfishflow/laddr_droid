@@ -22,6 +22,11 @@ public class GetApplicationTask extends AsyncTask<Void, Void, ArrayList<Applicat
     private final String DEBUG_TAG = "LADDER_DEBUG";
     private Activity activity;
 
+    public GetApplicationTask(Activity activity) {
+        this.activity = activity;
+    }
+
+
     @Override
     protected ArrayList<Application> doInBackground(Void... params) {
         ArrayList<Application> applications = new ArrayList<>();
