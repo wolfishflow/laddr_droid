@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,10 @@ public class LoginFragment extends Fragment {
     CheckBox cbRemember;
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.til_email)
+    TextInputLayout tilEmail;
+    @BindView(R.id.til_password)
+    TextInputLayout tilPassword;
 
     private static GlobalState globalState;
     @BindView(R.id.tv_loginLogo)
@@ -71,8 +76,10 @@ public class LoginFragment extends Fragment {
         etEmail = (EditText) getActivity().findViewById(R.id.et_email);
         etPassword = (EditText) getActivity().findViewById(R.id.et_password);
         cbRemember = (CheckBox) getActivity().findViewById(R.id.cb_remember);
-        etEmail.setText("alan@laddr.xyz");
-        etPassword.setText("password");
+        tilEmail = (TextInputLayout) getActivity().findViewById(R.id.til_email);
+        tilPassword = (TextInputLayout) getActivity().findViewById(R.id.til_password);
+//        etEmail.setText("alan@laddr.xyz");
+//        etPassword.setText("password");
     }
 
     /*
@@ -104,19 +111,31 @@ public class LoginFragment extends Fragment {
             String passwordValue = sharedPref.getString(getString(R.string.saved_password), defaultValue);
         }
 
-        try {
-            if (new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get()) {
-                Intent intent = new Intent(getActivity(), HomeActivity_.class);
-                startActivity(intent);
-                getActivity().finish();
-            } else {
-                Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
+
+        String emailValue = etEmail.getText().toString();
+        String passwordValue = etPassword.getText().toString();
+
+
+        if (emailValue.length() == 0) {
+            tilEmail.setError("Email Required!");
+        } else if (passwordValue.length() == 0) {
+            tilPassword.setError("Password Required!");
+        } else {
+
+            try {
+                if (new LoginTask(getActivity()).execute(etEmail.getText().toString(), etPassword.getText().toString()).get()) {
+                    Intent intent = new Intent(getActivity(), HomeActivity_.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(getActivity(), "Error Logging in", Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-
     }
 
     /*

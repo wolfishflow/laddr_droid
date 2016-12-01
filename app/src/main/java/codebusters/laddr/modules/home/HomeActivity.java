@@ -11,6 +11,7 @@ import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -143,5 +144,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(IconicsContextWrapper.wrap(newBase));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 }

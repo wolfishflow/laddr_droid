@@ -3,12 +3,14 @@ package codebusters.laddr.modules.login;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -48,6 +50,8 @@ public class SignUpFragment extends Fragment {
     TextInputLayout tilPassword;
     @BindView(R.id.til_confirmpassword)
     TextInputLayout tilConfirmpassword;
+    @BindView(R.id.tv_loginLogo)
+    TextView tvLoginLogo;
 
     public boolean validateEmail(String email) {
         matcher = pattern.matcher(email);
@@ -58,17 +62,6 @@ public class SignUpFragment extends Fragment {
         return password.length() > 5;
     }
 
-    @AfterViews
-    void setVars() {
-        etEmail = (EditText) getActivity().findViewById(R.id.et_email);
-        //etEmail.requestFocus(1);
-        etPassword = (EditText) getActivity().findViewById(R.id.et_password);
-        etConfirmpassword = (EditText) getActivity().findViewById(R.id.et_confirmpassword);
-        tilEmail = (TextInputLayout) getActivity().findViewById(R.id.til_email);
-        tilPassword = (TextInputLayout) getActivity().findViewById(R.id.til_password);
-        tilConfirmpassword = (TextInputLayout) getActivity().findViewById(R.id.til_confirmpassword);
-    }
-
     @Click(R.id.btn_next)
     void nextClicked() {
         String emailValue = etEmail.getText().toString();
@@ -77,13 +70,15 @@ public class SignUpFragment extends Fragment {
 
         if (emailValue.length() == 0) {
             tilEmail.setError("Email Required!");
-        } else if (!validateEmail(etEmail.getText().toString())) {
+        } else if (!validateEmail(emailValue)) {
             tilEmail.setError("Email Format InCorrect!");
         } else if (passwordValue.length() == 0) {
             tilPassword.setError("Password Required!");
+        }    else if (!validatePassword(passwordValue)) {
+                tilPassword.setError("Password length must greater than 5!");
         } else if (confirmPasswordValue.length() == 0) {
             tilConfirmpassword.setError("Confirmation Password Required!");
-        } else if (!confirmPasswordValue.equals(etPassword.getText().toString())) {
+        } else if (!confirmPasswordValue.equals(passwordValue)) {
             tilConfirmpassword.setError("Passwords Must Match!");
         } else {
 
@@ -100,6 +95,25 @@ public class SignUpFragment extends Fragment {
             ft.replace(R.id.frlt_fragment_container_login, fr).addToBackStack("SignUp");
             ft.commit();
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        String fontPath = "fonts/lobster1point4.otf";
+        // Loading Font Face
+        Typeface m_typeFace = Typeface.createFromAsset(getActivity().getAssets(), fontPath);
+        tvLoginLogo = (TextView) view.findViewById(R.id.tv_loginLogo);
+        // Applying font
+        tvLoginLogo.setTypeface(m_typeFace);
+
+        etEmail = (EditText) getActivity().findViewById(R.id.et_email);
+        //etEmail.requestFocus(1);
+        etPassword = (EditText) getActivity().findViewById(R.id.et_password);
+        etConfirmpassword = (EditText) getActivity().findViewById(R.id.et_confirmpassword);
+        tilEmail = (TextInputLayout) getActivity().findViewById(R.id.til_email);
+        tilPassword = (TextInputLayout) getActivity().findViewById(R.id.til_password);
+        tilConfirmpassword = (TextInputLayout) getActivity().findViewById(R.id.til_confirmpassword);
     }
 
     @Override

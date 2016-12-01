@@ -35,12 +35,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingBottom="8dp"
+                android:paddingBottom="16dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:paddingTop="8dp">
+                android:paddingTop="16dp">
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -54,6 +55,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
