@@ -13,8 +13,7 @@
         android:id="@+id/iv_forum_avatar"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:layout_marginRight="16dp"
-        app:srcCompat="@drawable/profile" />
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:id="@+id/tv_forum_topic"

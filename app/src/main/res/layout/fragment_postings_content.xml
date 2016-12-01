@@ -41,28 +41,54 @@
                     android:id="@+id/tv_postingOrganizationName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_postingTitle"
-                    android:text="Sample Org Name Here" />
+                    android:layout_below="@+id/tv_postingTitle"
+                    android:text="Sample Org Name Here"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:id="@+id/divider_description1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv_postingOrganizationName"
+                    android:layout_margin="4dp"
+                    android:background="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/tv_postingLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_postingOrganizationName"
+                    android:layout_below="@+id/divider_description1"
                     android:text="Sample Location Here" />
+
+                <View
+                    android:id="@+id/divider_description2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv_postingLocation"
+                    android:layout_margin="4dp"
+                    android:background="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/tv_postingsDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_postingLocation"
+                    android:layout_below="@+id/divider_description2"
                     android:text="Sample Description Here" />
+
+                <View
+                    android:id="@+id/divider_description3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/tv_postingsDescription"
+                    android:layout_margin="4dp"
+                    android:background="@android:color/darker_gray" />
 
                 <TextView
                     android:id="@+id/tv_postingTimeStamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_postingsDescription"
+                    android:layout_below="@+id/divider_description3"
                     android:text="Sample TimeStamp Here" />
 
             </RelativeLayout>
@@ -84,7 +110,12 @@
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_below="@id/btn_postingApply"
-            android:layout_margin="8dp"></com.google.android.gms.maps.MapView>
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp">
+
+        </com.google.android.gms.maps.MapView>
 
 
     </RelativeLayout>
