@@ -19,10 +19,12 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
 
+import codebusters.laddr.data.Comment;
 import codebusters.laddr.data.GlobalState;
 import codebusters.laddr.data.Organization;
 import codebusters.laddr.data.Posting;
 import codebusters.laddr.data.SignUpUser;
+import codebusters.laddr.data.Topic;
 import codebusters.laddr.data.User;
 
 /**
@@ -410,5 +412,37 @@ public class Utility {
         JSONObject json = (JSONObject) getRequest(activity, "http://laddr.xyz/api/applications");
 
         return json;
+    }
+
+    public static boolean addTopic(Activity activity, Topic topic, Comment comment) throws IOException, JSONException {
+        AbstractMap.SimpleEntry<String, String> title = new AbstractMap.SimpleEntry<String, String>("Title", topic.getTitle());
+        AbstractMap.SimpleEntry<String, String> body = new AbstractMap.SimpleEntry<String, String>("Body", comment.getBody());
+
+        JSONObject json = (JSONObject)postRequest(activity, "http://laddr.xyz/api/topic", title, body);
+
+        Log.d("LADDER_DEBUG", json.toString());
+
+        String result = json.getString("success");
+        if (result.equals("true")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean addComment(Activity activity, Comment comment) throws IOException, JSONException{
+        AbstractMap.SimpleEntry<String, String> topicID = new AbstractMap.SimpleEntry<String, String>("Title", comment.getTopicId());
+        AbstractMap.SimpleEntry<String, String> body = new AbstractMap.SimpleEntry<String, String>("Body", comment.getBody());
+
+        JSONObject json = (JSONObject)postRequest(activity, "http://laddr.xyz/api/comment", topicID, body);
+
+        Log.d("LADDER_DEBUG", json.toString());
+
+        String result = json.getString("success");
+        if (result.equals("true")) {
+            return true;
+        }
+
+        return false;
     }
 }
