@@ -398,4 +398,17 @@ public class Utility {
 
         return json;
     }
+
+    /**
+     * Gets the user's applications.
+     * @param activity
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
+    public static JSONObject getApplications(Activity activity) throws IOException, JSONException {
+        JSONObject json = (JSONObject) getRequest(activity, "http://laddr.xyz/api/applications");
+
+        return json;
+    }
 }
