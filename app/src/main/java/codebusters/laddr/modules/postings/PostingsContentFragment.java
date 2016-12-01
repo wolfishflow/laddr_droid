@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import butterknife.ButterKnife;
@@ -52,6 +59,8 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     private MapView mapView;
     private GoogleMap googleMap;
     private Toolbar toolbar;
+    final static long MILLIS_PER_DAY = 24 * 3600 * 1000;
+
 
 
     private final String TAG = "POSTINGS CONTENT";
@@ -93,7 +102,8 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         tvPostingOrganizationName.setText(singlePosting.getOrganizerName());
         tvPostingLocation.setText(singlePosting.getLocation());
         tvPostingsDescription.setText(singlePosting.getJobDescription());
-        //tvPostingTimeStamp.setText(singlePosting);
+
+        tvPostingTimeStamp.setText(deadlineCalc(singlePosting.getDeadline(), singlePosting.getEventDate()));
 
         /*
         Assign MapView, enable it and initialize it.
@@ -123,6 +133,39 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
             }
         });
 
+    }
+
+
+    public String deadlineCalc(String deadline, String event){
+        String dateString = "Due Today!";
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+        Calendar dateToday = Calendar.getInstance();
+        Calendar deadlineDate = Calendar.getInstance();
+        Calendar dateEvent = Calendar.getInstance();
+
+
+
+        try {
+            deadlineDate.setTime(format.parse(deadline));
+            dateEvent.setTime(format.parse(event));
+
+
+            long msDiff = deadlineDate.getTimeInMillis() - dateToday.getTimeInMillis();
+            long daysDiff = Math.round(msDiff / ((double)MILLIS_PER_DAY));
+
+            if (daysDiff == 0){
+                return dateString;
+            } else {
+                return  String.valueOf(daysDiff)+" days to apply!";
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return dateString;
     }
 
     @Override

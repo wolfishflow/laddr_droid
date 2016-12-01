@@ -18,6 +18,9 @@ public class Posting implements Parcelable {
     private Double latitude;
     private Double longitude;
     private String pictureLink;
+    private String timeStamp;
+    private String eventDate;
+    private String deadline;
 
     public Posting() {
 
@@ -131,6 +134,30 @@ public class Posting implements Parcelable {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 
     @Override

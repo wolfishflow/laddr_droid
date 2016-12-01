@@ -54,6 +54,9 @@ public class GetPostingTask extends AsyncTask <String, Void, Posting> {
             posting.setLocation(json.getString("Location"));
             posting.setJobDescription(json.getString("Description"));
             posting.setOrganizerName(json.getString("OrganizationName"));
+            posting.setTimeStamp(json.getString("Timestamp"));
+            posting.setEventDate(json.getString("EventDate"));
+            posting.setDeadline(json.getString("Deadline"));
 
         } catch (IOException e) {
             e.printStackTrace();

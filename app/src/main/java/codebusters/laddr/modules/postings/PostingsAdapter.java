@@ -9,7 +9,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
+
 import codebusters.laddr.R;
 import codebusters.laddr.data.Posting;
 
@@ -19,11 +24,12 @@ import codebusters.laddr.data.Posting;
 
 public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHolder> {
 
+    final static long MILLIS_PER_DAY = 24 * 3600 * 1000;
     ArrayList<Posting> postingsList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView title, orgName,location;
+        public TextView title, orgName,location,timeStamp;
         public ImageView logo;
         public ViewHolder(View v) {
             super(v);
@@ -31,6 +37,7 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
             orgName = (TextView) v.findViewById(R.id.tv_posting_organization_name);
             location = (TextView) v.findViewById(R.id.tv_posting_location);
             logo = (ImageView) v.findViewById(R.id.iv_organization_logo);
+            timeStamp = (TextView) v.findViewById(R.id.tv_posting_time);
         }
     }
 
@@ -53,9 +60,46 @@ public class PostingsAdapter extends RecyclerView.Adapter<PostingsAdapter.ViewHo
         holder.title.setText(post.getJobTitle());
         holder.orgName.setText(post.getOrganizerName());
         holder.location.setText(post.getLocation());
+
+
+
+        holder.timeStamp.setText(deadlineCalc(post.getDeadline(), post.getEventDate() ));
         Picasso.with(holder.itemView.getContext())
                 .load("http://www.laddr.xyz/"+post.getPictureLink())
                 .into(holder.logo);
+    }
+
+
+    public String deadlineCalc(String deadline, String event){
+        String dateString = "Due Today!";
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+        Calendar dateToday = Calendar.getInstance();
+        Calendar deadlineDate = Calendar.getInstance();
+        Calendar dateEvent = Calendar.getInstance();
+
+
+
+        try {
+            deadlineDate.setTime(format.parse(deadline));
+            dateEvent.setTime(format.parse(event));
+
+
+            long msDiff = deadlineDate.getTimeInMillis() - dateToday.getTimeInMillis();
+            long daysDiff = Math.round(msDiff / ((double)MILLIS_PER_DAY));
+
+            if (daysDiff == 0){
+                return dateString;
+            } else {
+                return  String.valueOf(daysDiff)+" days to apply!";
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return dateString;
     }
 
     @Override
