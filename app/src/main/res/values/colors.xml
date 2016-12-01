@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#424B54</color>
-    <color name="colorPrimaryDark">#363D44</color>
-    <color name="colorAccent">#879BAF</color>
-    <!-- Material DEFAULT colors -->
-    <color name="material_drawer_primary">#424B54</color>
-    <color name="material_drawer_primary_dark">#363D44</color>
-    <color name="material_drawer_primary_light">#586470</color>
-    <color name="material_drawer_accent">#DDDDDD</color>
+    <color name="colorPrimary">#A57278</color>
+    <color name="colorPrimaryDark">#873260</color>
+    <color name="colorAccent">#65655F</color>
 </resources>

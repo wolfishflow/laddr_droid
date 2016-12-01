@@ -1,11 +1,10 @@
 package codebusters.laddr.modules.postings;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,24 +13,27 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EFragment;
-
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import codebusters.laddr.R;
 import codebusters.laddr.data.Posting;
 import codebusters.laddr.utility.ApplyPosting;
-import codebusters.laddr.utility.GetAllPostingsTask;
 
 /**
  * Created by alansimon on 2016-10-15.
@@ -56,6 +58,9 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     private FragmentActivity myContext;
     private MapView mapView;
     private GoogleMap googleMap;
+    private Toolbar toolbar;
+    final static long MILLIS_PER_DAY = 24 * 3600 * 1000;
+
 
 
     private final String TAG = "POSTINGS CONTENT";
@@ -73,6 +78,19 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         super.onActivityCreated(savedInstanceState);
         Bundle bundle = this.getArguments();
         singlePosting = bundle.getParcelable("posting");
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
+
 
         TextView tvPostingTitle = (TextView) getActivity().findViewById(R.id.tv_postingTitle);
         TextView tvPostingOrganizationName = (TextView) getActivity().findViewById(R.id.tv_postingOrganizationName);
@@ -84,7 +102,8 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         tvPostingOrganizationName.setText(singlePosting.getOrganizerName());
         tvPostingLocation.setText(singlePosting.getLocation());
         tvPostingsDescription.setText(singlePosting.getJobDescription());
-        //tvPostingTimeStamp.setText(singlePosting);
+
+        tvPostingTimeStamp.setText(deadlineCalc(singlePosting.getDeadline(), singlePosting.getEventDate()));
 
         /*
         Assign MapView, enable it and initialize it.
@@ -97,11 +116,9 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         Assign Button, initialize it, and assign a listener to it.
          */
         Button button = (Button) getActivity().findViewById(R.id.btn_postingApply);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 try {
                     Toast.makeText(getActivity(), "sending posting", Toast.LENGTH_SHORT).show();
                     new ApplyPosting(getActivity()).execute(singlePosting).get();
@@ -118,38 +135,53 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
 
     }
 
+
+    public String deadlineCalc(String deadline, String event){
+        String dateString = "Due Today!";
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+        Calendar dateToday = Calendar.getInstance();
+        Calendar deadlineDate = Calendar.getInstance();
+        Calendar dateEvent = Calendar.getInstance();
+
+
+
+        try {
+            deadlineDate.setTime(format.parse(deadline));
+            dateEvent.setTime(format.parse(event));
+
+
+            long msDiff = deadlineDate.getTimeInMillis() - dateToday.getTimeInMillis();
+            long daysDiff = Math.round(msDiff / ((double)MILLIS_PER_DAY));
+
+            if (daysDiff == 0){
+                return dateString;
+            } else {
+                return  String.valueOf(daysDiff)+" days to apply!";
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return dateString;
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
     }
 
-//    @Click(R.id.btn_postingApply)
-//     void applyToPosting(){
-//        try {
-//            Toast.makeText(getActivity(), "sending posting", Toast.LENGTH_SHORT).show();
-//            new ApplyPosting(getActivity()).execute(singlePosting).get();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//        Toast.makeText(getActivity(), "success posting", Toast.LENGTH_SHORT).show();
-//
-//    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-
         MapsInitializer.initialize(this.getActivity());
         mapQuest();
-        //googleMap.setMyLocationEnabled(true);
-
     }
 
-
-    public void mapQuest(){
+    public void mapQuest() {
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         LatLng coordinate = new LatLng(singlePosting.getLatitude(), singlePosting.getLongitude());
@@ -165,18 +197,35 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // back button pressed
+                getActivity().onBackPressed();
+            }
+        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+        toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
 }

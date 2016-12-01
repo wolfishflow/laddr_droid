@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import codebusters.laddr.R;
 import codebusters.laddr.data.Comment;
-import codebusters.laddr.data.Topic;
 
 /**
  * Created by alansimon on 2016-11-26.

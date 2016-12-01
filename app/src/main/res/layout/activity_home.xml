@@ -12,37 +12,24 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:elevation="5dp"
+        android:titleTextColor="@color/md_white_1000"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/AppTheme" />
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/frlt_fragment_container_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar" />
-    <!--android:fitsSystemWindows="true"-->
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-
-
-    <!--<it.sephiroth.android.library.bottomnavigation.BottomNavigation-->
-    <!--android:id="@+id/BottomNavigation"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="bottom"-->
-    <!--app:bbn_badgeProvider="@string/bbn_badgeProvider"-->
-    <!--app:bbn_entries="@menu/bottombar_menu_4items"-->
-    <!--app:bbn_scrollEnabled="true"-->
-    <!--app:layout_behavior="@string/bbn_phone_view_behavior" />-->
-
+    
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="bottom"
         app:bb_activeTabColor="@color/md_white_1000"
-        app:bb_behavior="shy"
         app:bb_showShadow="true"
         app:bb_tabXmlResource="@xml/bottombar_tabs" />
 
