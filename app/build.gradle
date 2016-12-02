@@ -4,16 +4,28 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "codebusters.laddr"
+        applicationId "com.laddr.android"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.3"
     }
+    signingConfigs {
+        configRelease {
+            keyAlias 'LaddrKey'
+            keyPassword 'password'
+            storeFile file('../keystore/laddrkey.jks')
+            storePassword 'password'
+        }
+    }
     buildTypes {
         release {
+            shrinkResources false
+            debuggable false
+            zipAlignEnabled true
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.configRelease
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {
