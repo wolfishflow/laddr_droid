@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.laddr.android.R;
+import com.laddr.android.data.Application;
 import com.laddr.android.data.GlobalState;
 import com.laddr.android.data.Posting;
 import com.laddr.android.modules.postings.PostingsContentFragment;

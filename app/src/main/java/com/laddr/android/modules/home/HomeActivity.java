@@ -15,6 +15,9 @@ import android.view.Menu;
 
 import com.laddr.android.R;
 import com.laddr.android.data.GlobalState;
+import com.laddr.android.modules.forums.ForumsFragment_;
+import com.laddr.android.modules.postings.PostingsFragment_;
+import com.laddr.android.modules.profile.ProfileFragment_;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.context.IconicsContextWrapper;
