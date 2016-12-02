@@ -47,7 +47,11 @@ public class GetAllTopicsTask extends AsyncTask<Void, Void, ArrayList<Topic>> {
                 topic.setTopicId(obj.getString("TopicID"));
                 topic.setTitle(obj.getString("Title"));
                 topic.setProfileId(obj.getString("ProfileID"));
-                topic.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrUser").getString("FirstName"));
+                if (obj.getJSONObject("LdrProfile").isNull("LdrUsr") && !obj.getJSONObject("LdrProfile").isNull("LdrOrganization")){
+                    topic.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrOrganization").getString("OrganizationName"));
+                }else{
+                    topic.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrUser").getString("FirstName"));
+                }
                 topic.setPicture(obj.getJSONObject("LdrProfile").getString("PictureURL"));
                 topic.setTimestamp(obj.getString("Timestamp"));
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);

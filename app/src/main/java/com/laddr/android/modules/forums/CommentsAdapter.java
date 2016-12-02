@@ -30,6 +30,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
             super(v);
             title = (TextView) v.findViewById(R.id.tv_forum_topic);
             picture = (ImageView) v.findViewById(R.id.iv_forum_avatar);
+            firstName = (TextView) v.findViewById(R.id.tv_forum_user_name);
         }
     }
 
@@ -53,6 +54,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
         Picasso.with(holder.itemView.getContext())
                 .load("http://www.laddr.xyz/"+comment.getPictureURL())
                 .into(holder.picture);
+        holder.firstName.setText(comment.getBody());
     }
 
     @Override

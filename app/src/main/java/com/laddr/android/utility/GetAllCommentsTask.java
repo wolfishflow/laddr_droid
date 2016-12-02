@@ -61,7 +61,11 @@ public class GetAllCommentsTask extends AsyncTask<String, Void, ArrayList<Commen
                 comment.setBody(obj.getString("Body"));
                 comment.setTimeStamp(obj.getString("Timestamp"));
                 comment.setPictureURL(obj.getJSONObject("LdrProfile").getString("PictureURL"));
-                comment.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrUser").getString("FirstName"));
+                if (obj.getJSONObject("LdrProfile").isNull("LdrUsr") && !obj.getJSONObject("LdrProfile").isNull("LdrOrganization")){
+                    comment.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrOrganization").getString("OrganizationName"));
+                }else{
+                    comment.setFirstName(obj.getJSONObject("LdrProfile").getJSONObject("LdrUser").getString("FirstName"));
+                }
                 comments.add(comment);
             }
         } catch (IOException e) {

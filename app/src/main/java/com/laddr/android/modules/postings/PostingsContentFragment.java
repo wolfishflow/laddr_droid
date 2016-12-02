@@ -141,16 +141,11 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
         Calendar deadlineDate = Calendar.getInstance();
         Calendar dateEvent = Calendar.getInstance();
 
-
-
         try {
             deadlineDate.setTime(format.parse(deadline));
             dateEvent.setTime(format.parse(event));
-
-
             long msDiff = deadlineDate.getTimeInMillis() - dateToday.getTimeInMillis();
             long daysDiff = Math.round(msDiff / ((double)MILLIS_PER_DAY));
-
             if (daysDiff == 0){
                 return dateString;
             } else {
@@ -159,6 +154,8 @@ public class PostingsContentFragment extends Fragment implements OnMapReadyCallb
 
 
         } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e){
             e.printStackTrace();
         }
 

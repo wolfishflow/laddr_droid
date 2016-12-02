@@ -55,6 +55,24 @@ public class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationsAdapte
                 .load("http://www.laddr.xyz/"+application.getOrganizationPhoto())
                 .into(holder.picture);
         holder.appStatus.setText(application.getStatusString());
+        switch (application.getStatusString()){
+            case "Approved":
+                holder.itemView.setBackgroundResource(R.color.md_green_200);
+                holder.itemView.setAlpha(0.9f);
+                break;
+            case "Declined":
+                holder.itemView.setBackgroundResource(R.color.md_red_200);
+                holder.itemView.setAlpha(0.9f);
+                break;
+            case "Pending":
+                holder.itemView.setBackgroundResource(R.color.md_orange_200);
+                holder.itemView.setAlpha(0.9f);
+                break;
+            case "Posting Cancelled":
+                holder.itemView.setBackgroundResource(R.color.md_blue_200);
+                holder.itemView.setAlpha(0.4f);
+                break;
+        }
     }
 
     @Override

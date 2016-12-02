@@ -89,40 +89,37 @@ public class HomeFragment extends Fragment {
                 mRecyclerView.setAdapter(mAdapter);
 
                 //Add a listener to each list object
-                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener4(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-
-                        Application singleApplication = allApplications.get(position);
-
-                        String singlePostingID = singleApplication.getPostingId();
-
-                        Posting singlePosting = null;
-                        try {
-                            singlePosting = new GetPostingTask(getActivity()).execute(singlePostingID).get();
-                            Bundle bundle = new Bundle();
-                            bundle.putParcelable("posting", singlePosting);
-                            Fragment fr = new PostingsContentFragment();
-                            fr.setArguments(bundle);
-                            FragmentManager fm = getFragmentManager();
-                            FragmentTransaction ft = fm.beginTransaction();
-                            ft.replace(R.id.frlt_fragment_container_home, fr);
-                            ft.addToBackStack(null);
-                            ft.commit();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        } catch (ExecutionException e) {
-                            e.printStackTrace();
-                        }
-
-
-
-                    }
-
-                    @Override
-                    public void onLongClick(View view, int position) {
-                    }
-                }));
+//                mRecyclerView.addOnItemTouchListener(new RecyclerTouchListener4(getActivity().getApplicationContext(), mRecyclerView, new ClickListener() {
+//                    @Override
+//                    public void onClick(View view, int position) {
+//
+//                        Application singleApplication = allApplications.get(position);
+//
+//                        String singlePostingID = singleApplication.getPostingId();
+//
+//                        Posting singlePosting = null;
+//                        try {
+//                            singlePosting = new GetPostingTask(getActivity()).execute(singlePostingID).get();
+//                            Bundle bundle = new Bundle();
+//                            bundle.putParcelable("posting", singlePosting);
+//                            Fragment fr = new PostingsContentFragment();
+//                            fr.setArguments(bundle);
+//                            FragmentManager fm = getFragmentManager();
+//                            FragmentTransaction ft = fm.beginTransaction();
+//                            ft.replace(R.id.frlt_fragment_container_home, fr);
+//                            ft.addToBackStack(null);
+//                            ft.commit();
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        } catch (ExecutionException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onLongClick(View view, int position) {
+//                    }
+//                }));
             }
 
         } catch (Exception e) {

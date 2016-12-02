@@ -30,6 +30,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
             super(v);
             title = (TextView) v.findViewById(R.id.tv_forum_topic);
             picture = (ImageView) v.findViewById(R.id.iv_forum_avatar);
+            firstName = (TextView) v.findViewById(R.id.tv_forum_user_name);
         }
     }
 
@@ -53,6 +54,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.ViewHolder
         Picasso.with(holder.itemView.getContext())
                 .load("http://www.laddr.xyz/"+topic.getPicture())
                 .into(holder.picture);
+        holder.firstName.setText(topic.getFirstName());
     }
 
     @Override
