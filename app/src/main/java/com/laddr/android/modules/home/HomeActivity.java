@@ -12,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.laddr.android.R;
 import com.laddr.android.data.GlobalState;
@@ -57,36 +58,35 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
         globalState = (GlobalState) getApplication();
 
+
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_home) {
                     //Toast.makeText(HomeActivity.this, "Home", Toast.LENGTH_SHORT).show();
-                    Fragment fr = new HomeFragment_();
-                    FragmentManager fm = getFragmentManager();
-                    FragmentTransaction ft = fm.beginTransaction();
+                    fr = new HomeFragment_();
+                    fm = getFragmentManager();
+                    ft = fm.beginTransaction();
                     ft.replace(R.id.frlt_fragment_container_home, fr);
+                    ft.commit();
                 } else if (tabId == R.id.tab_profile){
                     fr = new ProfileFragment_();
                     fm = getFragmentManager();
                     ft = fm.beginTransaction();
                     ft.replace(R.id.frlt_fragment_container_home, fr);
-                    ft.addToBackStack(null);
                     ft.commit();
                 } else if (tabId == R.id.tab_forums){
                     fr = new ForumsFragment_();
                     fm = getFragmentManager();
                     ft = fm.beginTransaction();
                     ft.replace(R.id.frlt_fragment_container_home, fr);
-                    ft.addToBackStack(null);
                     ft.commit();
                 } else if (tabId == R.id.tab_postings){
                     fr = new PostingsFragment_();
                     fm = getFragmentManager();
                     ft = fm.beginTransaction();
                     ft.replace(R.id.frlt_fragment_container_home, fr);
-                    ft.addToBackStack(null);
                     ft.commit();
                 }
             }
@@ -151,5 +151,17 @@ public class HomeActivity extends AppCompatActivity {
         //return super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_logout:
+                onBackPressed();
+                return false;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
