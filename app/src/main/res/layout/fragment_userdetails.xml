@@ -97,7 +97,7 @@
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
-        s
+
         <Button
             android:id="@+id/btn_signup_add_user"
             android:layout_width="match_parent"
